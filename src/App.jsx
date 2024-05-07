@@ -1,7 +1,19 @@
 import "./App.css";
-
+import { User , Link} from "@nextui-org/react";
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <User   
+    name="Junior Garcia"
+    description={(
+      <Link href="https://twitter.com/jrgarciadev" size="sm" isExternal>
+        @jrgarciadev
+      </Link>
+    )}
+    avatarProps={{
+      src: "https://avatars.githubusercontent.com/u/30373425?v=4"
+    }}
+  />
+  );
 }
 
 export default App;
