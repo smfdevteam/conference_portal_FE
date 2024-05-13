@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Header() {
     return <>
-    <div className="bg-white w-full h-16 p-4 fixed top-0 flex justify-between items-center border-b-1 border-slate-100">
+    <div className="bg-white w-full h-16 p-4 fixed top-0 z-50 flex justify-between items-center border-b-1 border-slate-100">
         <Image src="Images/smf logo.png" className="w-11 h-11"/>
 
         <div className="flex items-center ">
