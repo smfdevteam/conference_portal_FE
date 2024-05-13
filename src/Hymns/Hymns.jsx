@@ -88,15 +88,31 @@ export default function Hymns() {
             {hymnDetails[0].chorus?<>
             <h2 className='text-foreground-900 font-bold my-2'>القرار</h2>
             <div>
-                {hymnDetails[0].chorus.map(item =>{
-                    return item.map((line , index)=><p key={index} className='text-foreground-500 p-1'>{line}</p>)
+                {hymnDetails[0].chorus.map((item , chorusIndex) =>{
+                    if (Array.isArray(item)) {
+                        return item.map((line, index) => (
+                            <p key={index} className='text-foreground-500 p-1'>{line}</p>
+                        ));
+                    } else {
+                        return (
+                            <p key={chorusIndex} className='text-foreground-500 p-1'>{item}</p>
+                        );
+                    }                
                 })}
             </div>
             </>:<></>}
             <h2 className='text-foreground-900 font-bold my-2'>الكلمات</h2>
             <div>
-                {hymnDetails[0].verses.map((item)=>{
-                    return item.map((line , index) => <p key={index} className='text-foreground-500 p-1'>{line}</p>)
+                {hymnDetails[0].verses.map((item , index)=>{
+                    if (Array.isArray(item)) {
+                        return item.map((line, index) => (
+                            <p key={index} className='text-foreground-500 p-1'>{line}</p>
+                        ));
+                    } else {
+                        return (
+                            <p key={index} className='text-foreground-500 p-1'>{item}</p>
+                        );
+                    }
                 })}
             </div>
         </div>
