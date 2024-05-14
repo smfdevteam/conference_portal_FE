@@ -4,6 +4,8 @@ import { User , Link} from "@nextui-org/react";
 import Home from "./Home/Home";
 import Hymns from "./Hymns/Hymns";
 import Layout from "./Layout/Layout";
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 function App() {
   // Function to check if the user agent is for a mobile device
@@ -17,6 +19,8 @@ function App() {
         <Layout>
           <Routes>
             <Route path='/' element={<Home/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/register' element={<Register/>}/>
             <Route path='hymns' element={<Hymns/>}/>
             <Route path='*' element={<h2>404</h2>}/>
           </Routes>
