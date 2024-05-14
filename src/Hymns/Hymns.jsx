@@ -6,6 +6,7 @@ export default function Hymns() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [hymnDetails, setHymnDetails] = useState();
+    
     // Function to handle user input
     const handleInputChange = (event) => {
         console.log("event====>" , event.target.value)
@@ -34,20 +35,21 @@ export default function Hymns() {
     }
 
     const fetchHymns = async () => {
-        try {
-        // Your API call to fetch search results based on searchQuery
-        const response = await fetch(`${apiKey}/hymns`);
-        console.log("response" , response)
-        const data = await response.json();
-        console.log("=====data",data)
-        localStorage.setItem("hymns" ,JSON.stringify(data.hymns))
-        // setSearchResults(()=>{
-        //     const results = data.hymns.filter(item => item.title.startsWith(searchQuery))
-        //     return results;
-        // });
-        } catch (error) {
-            console.error('Error fetching search results:', error);
+        if(!localStorage.getItem("hymns")){
+            try {
+                // Your API call to fetch search results based on searchQuery
+                const response = await fetch(`${apiKey}/hymns`);
+                console.log("response" , response)
+                const data = await response.json();
+                console.log("=====data",data)
+                localStorage.setItem("hymns" ,JSON.stringify(data.hymns))
+                } catch (error) {
+                    console.error('Error fetching search results:', error);
+                }
+        }else{
+            return;
         }
+        
     };
 
     useEffect(() => {
@@ -77,7 +79,7 @@ export default function Hymns() {
         <div className='my-2'>
             <SmartSearch searchQuery={searchQuery} handleInputChange={handleInputChange}/>
             {searchResults.length > 0?<>
-                <ul className='text-right bg-white rounded-lg shadow-md p-2 mt-1'>
+                <ul className='text-right bg-white rounded-lg shadow-md p-2 mt-1 max-h-[300px] overflow-y-scroll'>
                     {searchResults.map((result , index) => <li key={index} onClick={()=>getHymnDetails(index)} className='p-2 text-foreground-600 text-small hover:bg-foreground-100 transition duration-300 ease-in-out rounded-md'>{result.title}</li>)}
                 </ul>
             </>:<></>}
