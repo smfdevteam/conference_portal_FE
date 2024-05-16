@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'arabic-regular';
+    src: url('../fonts/29LTAzer-Regular.ttf');
+}
+@font-face {
+    font-family: 'arabic-medium';
+    src: url('../fonts/29LTAzer-Medium.ttf');
+}
+@font-face {
+    font-family: 'arabic-bold';
+    src: url('../fonts/29LTAzer-Bold.ttf');
+}

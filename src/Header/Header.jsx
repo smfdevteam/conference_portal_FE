@@ -1,18 +1,52 @@
-import { Avatar, Image } from '@nextui-org/react'
-import React from 'react'
-
+import smf_tech_logo from "../assets/images/brand/familyLogo-removebg-preview (1).png";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  DropdownItem,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
+  Avatar,
+} from "@nextui-org/react";
 export default function Header() {
-    return <>
-    <div className="bg-white w-full h-16 p-4 fixed top-0 z-50 flex justify-between items-center border-b-1 border-slate-100">
-        <Image src="Images/smf logo.png" className="w-11 h-11"/>
+  return (
+    <Navbar>
+      <NavbarBrand>
+        <Avatar src={smf_tech_logo} />
+      </NavbarBrand>
 
-        <div className="flex items-center ">
-            <Avatar color="default" className="w-10 h-10" src="https://i.pravatar.cc/150?u=a042581f4e29026704d"/>
-            <div className="ms-2 leading-none">
-                <h5 className="text-small text-foreground">mariam</h5>
-                <p className= "text-tiny text-foreground-400">Student</p>
-            </div>
-        </div>
-    </div>
-    </>
+
+      <NavbarContent as="div" justify="end">
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Avatar
+              isBordered
+              as="button"
+              className="transition-transform"
+              color="warning"
+              name="Jason Hughes"
+              size="sm"
+              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold">zoey@example.com</p>
+            </DropdownItem>
+            <DropdownItem key="settings">My Settings</DropdownItem>
+            <DropdownItem key="team_settings">Team Settings</DropdownItem>
+            <DropdownItem key="analytics">Analytics</DropdownItem>
+            <DropdownItem key="system">System</DropdownItem>
+            <DropdownItem key="configurations">Configurations</DropdownItem>
+            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="logout" color="danger">
+              Log Out
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </NavbarContent>
+    </Navbar>
+  );
 }
