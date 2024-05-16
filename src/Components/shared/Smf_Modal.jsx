@@ -33,9 +33,9 @@ const Smf_Modal = ({
       ) : (
         <Button
           variant="flat"
-          color="warning"
+          color="default"
           onPress={handleOpen}
-          className="capitalize"
+          className="capitalize w-full"
         >
           {btnTitle}
         </Button>
