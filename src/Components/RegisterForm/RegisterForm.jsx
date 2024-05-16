@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input, Button } from "@nextui-org/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,9 +6,8 @@ import AvatarUploader from "../AvatarUploader/AvatarUploader";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
 import CustomToolTip from "../CustomToolTip/CustomToolTip";
-
-const REGISTER_URL = "https://conference-portal-be.onrender.com/register";
-
+import { api } from "../../Api/api";
+import { register } from "../../Api/api";
 const initialValues = {
   name: "",
   phone: "",
@@ -26,6 +25,8 @@ const onSubmit = async ({ name, phone, email, password, profileImage }) => {
   formData.append("password", password);
   formData.append("profileImage", profileImage);
   console.log(Object.fromEntries(formData));
+  const response = await register(formData)
+  console.log("response",response)
 };
 
 const validationSchema = Yup.object({
@@ -35,18 +36,22 @@ const validationSchema = Yup.object({
   confirmPassword: Yup.string()
     .required("الباسوورد مطلوب")
     .oneOf([Yup.ref("password")], "الاتنين لازم يكونوا شبه بعض"),
+  phone: Yup.string().required("مطلوب الموبايل"),
 });
 
 const RegisterForm = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const toggleVisibility = () => setIsVisible(!isVisible);
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
   });
+  
   formik.values.profileImage = avatarImage;
+
   return (
     <div className="font-semibold">
       <h1 className="text-center">يلا نعمل حساب جديد</h1>
@@ -56,6 +61,11 @@ const RegisterForm = () => {
             setAvatarImage={setAvatarImage}
             avatarImage={avatarImage}
           />
+          {errorMessage ? (
+            <div className="text-red-400 text-center border rounded-md ">
+              <h1>error message</h1>
+            </div>
+          ) : null}
           <Input
             variant="faded"
             name="name"
@@ -138,6 +148,10 @@ const RegisterForm = () => {
                 highLightedMessge="(+20100XXXX)"
               />
             }
+            isInvalid={
+              formik.touched.phone && (formik.errors.phone ? true : false)
+            }
+            errorMessage={formik.errors.phone}
           />
           <Button type="submit" color="primary" className="w-full">
             يلا بينا
