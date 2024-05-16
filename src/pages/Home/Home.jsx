@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { stateProvider } from "../App_Context";
+import { stateProvider } from "../../App_Context";
 
 export default function Home() {
   const { app_state , setAppState } = useContext(stateProvider);

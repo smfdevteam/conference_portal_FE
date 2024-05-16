@@ -1,4 +1,4 @@
-import smf_tech_logo from "../assets/images/brand/familyLogo-removebg-preview (1).png";
+import smf_tech_logo from "../../assets/images/brand/smftech.png";
 import {
   Navbar,
   NavbarBrand,
