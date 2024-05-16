@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { Image } from "@nextui-org/react";
 import { SmfTechTeam } from "../../assets/data/team";
-import Smf_Modal from "../../Components/shared/Smf_Modal";
 import smf_tech_logo from "../../assets/images/brand/smftech.png";
 import smf_tech_logo_type from "../../assets/images/brand/smftecttypo.png";
-import { Image } from "@nextui-org/react";
-import Member from "./Member";
+import { lazy, Suspense } from "react";
+import Skeleton_Loader from "../../Components/shared/Skeleton_Loader";
+const Member = lazy(() => import("./Member"));
 
 const gradientStyle = {
   background: "radial-gradient(circle at 50% 50%, #8255f1, #0d2486)",
@@ -23,7 +23,9 @@ const Team = () => {
         </p>
         <div className="w-[80%] grid grid-cols-2 gap-3 m-auto">
           {SmfTechTeam.map((member) => (
-            <Member key={member.name} member={member} />
+            <Suspense key={member.name} fallback={Skeleton_Loader}>
+              <Member  member={member} />
+            </Suspense>
           ))}
         </div>
       </div>

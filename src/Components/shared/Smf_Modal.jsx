@@ -35,7 +35,7 @@ const Smf_Modal = ({
           variant="flat"
           color="default"
           onPress={handleOpen}
-          className="capitalize w-full"
+          className="w-fit"
         >
           {btnTitle}
         </Button>
