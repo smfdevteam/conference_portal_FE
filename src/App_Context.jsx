@@ -6,7 +6,9 @@ export const stateProvider = createContext()
 
 const App_Context = ({children}) => {
     const [app_state , setAppState] = useState({
-        name : "abanoub"
+        isLogged:false,
+        isLoading:false,
+        user:{}
     })
   return (
     <stateProvider.Provider value={{
