@@ -1,0 +1,9 @@
+.member:hover .layer {
+  transform: scale(1);
+}
+.layer {
+    transition: all 1s;
+    transform: scale(0);
+    background-color: white;
+    opacity: .3;
+}
