@@ -16,7 +16,6 @@ const Member = ({ member }) => {
           src={image}
           loading="lazy"
           isBlurred
-          isZoomed
         />
         <div className="layer w-[100%] top-0  h-[100%]  absolute">
           <div>

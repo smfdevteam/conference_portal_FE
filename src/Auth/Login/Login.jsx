@@ -1,7 +1,12 @@
 import React from 'react'
+import { resetClientPassword } from '../services/auth.service'
 
-export default function Login() {
+const Login = () => {
   return (
-    <div>Login</div>
+    <div>
+      <button  className='border-1 w-fit px-2 py-3' onClick={()=> resetClientPassword('smfdevteam@gmail.com')}>RESET</button>
+    </div>
   )
 }
+
+export default Login
