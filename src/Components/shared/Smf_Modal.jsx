@@ -31,12 +31,7 @@ const Smf_Modal = ({
           className={btnImgClassNames}
         />
       ) : (
-        <Button
-          variant="flat"
-          color="default"
-          onPress={handleOpen}
-          className="w-fit"
-        >
+        <Button variant="ghost" color="default" onPress={handleOpen}>
           {btnTitle}
         </Button>
       )}
