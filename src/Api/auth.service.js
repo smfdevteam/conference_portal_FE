@@ -1,4 +1,4 @@
-import { CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER } from "../../firebase/firebase.config";
+import { CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER } from "../firebase/firebase.config";
 import { sendPasswordResetEmail } from "firebase/auth";
 const resetClientPassword = async (email) => {
   try {

@@ -9,9 +9,10 @@ import NotMobile from "./pages/NotMobile";
 import NotFound from "./pages/NotFound";
 import { isMobile } from "./utils/client";
 import App_Context from "./App_Context";
+import { getConferenceSpeakers } from "./Api/conference_meta.service";
 function App() {
   // Redirect if not a mobile device
-  // if (isMobile()) {
+  if (isMobile()) {
     return (
       <App_Context>
         <Layout>
@@ -25,10 +26,9 @@ function App() {
         </Layout>
       </App_Context>
     );
-  // } else {
-  //   return <NotMobile />;
-  //   // window.location.replace("not_mobile.html"); // Redirect to a page indicating that the site is not accessible on non-mobile devices
-  // }
+  } else {
+    return <NotMobile />;
+  }
 }
 
 export default App;

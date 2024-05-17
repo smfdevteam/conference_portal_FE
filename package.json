@@ -11,12 +11,9 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.3.6",
-<<<<<<< HEAD
     "firebase": "^10.12.0",
-=======
     "axios": "^1.6.8",
     "formik": "^2.4.6",
->>>>>>> 64ef196158f3d73a25f03dd0bb642eb7d78a8c1c
     "framer-motion": "^11.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
