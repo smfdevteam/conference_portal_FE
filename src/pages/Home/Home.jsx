@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Alert from "../../Components/Alert/Alert";
 import { getAlertsandHappenNow } from "../../Api/conference_meta.service";
+import SMF_Tech from "../../Components/SMF_Tech";
 
 export default function Home() {
   const [homeState, setHomeState] = useState({
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <>
       <Alert alert={homeState.alert} />
+      <SMF_Tech/>
     </>
   );
 }

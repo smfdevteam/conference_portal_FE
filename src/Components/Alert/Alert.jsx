@@ -1,12 +1,12 @@
 import {
-    Badge,
-    Button,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    useDisclosure,
+  Badge,
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
 const Alert = ({ alert }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,18 +26,23 @@ const Alert = ({ alert }) => {
           i
         </span>
       </Badge>
-      <Modal backdrop={"blur"}  isOpen={isOpen} onClose={onClose}>
+      <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 font-bold text-3xl">تنبيه</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 font-bold text-3xl">
+                تنبيه
+              </ModalHeader>
               <ModalBody>
                 <div className="max-h-[200px] text-2xl overflow-y-scroll">
-                  {alert}
+                  {alert ? alert : <>
+                    <p>لو فيه تنبيه هنبعت ليك هنا علطول</p>
+                    <p dir="ltr" className="text-left text-2xl font-bold">SMF Tech.</p>
+                  </>}
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="warning" variant="light" onPress={onClose}>
+                <Button color="danger" variant="shadow" onPress={onClose}>
                   تمام
                 </Button>
               </ModalFooter>
