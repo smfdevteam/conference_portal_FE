@@ -27,7 +27,7 @@ const getLookups = async () => {
     const lookups = await api.get("conference/lookups", {
       headers: skipInterceptor_header,
     });
-    console.log(lookups.data);
+    return lookups.data
   } catch (error) {
     console.log(error);
   }

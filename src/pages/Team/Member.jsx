@@ -9,7 +9,7 @@ const Member = ({ member }) => {
   const handleImageLoading = (isLoaded) => setIsImageLoaded(isLoaded);
   const { image, name, position, unit, description } = member;
   return (
-    <div className="member grid relative overflow-hidden grid-cols-2 items-center justify-between border-3 border-warning-100 rounded-2xl">
+    <div  className="member grid relative overflow-hidden grid-cols-2 items-center justify-between border-3 border-warning-100 rounded-2xl">
       <div className="cursor-pointer">
         <Image
           onLoad={() => handleImageLoading(true)}
@@ -17,7 +17,7 @@ const Member = ({ member }) => {
           loading="lazy"
           isBlurred
         />
-        <div className="layer w-[100%] top-0  h-[100%]  absolute">
+        <div  className="layer w-[100%] top-0  h-[100%]  absolute">
           <div>
             {isImageLoaded && (
               <Suspense fallback={Skeleton_Loader}>
@@ -29,7 +29,7 @@ const Member = ({ member }) => {
                     isClose
                     modalTitle={name}
                   >
-                    <div>
+                    <div dir="ltr">
                       <Image src={image} width={150} loading="lazy" isBlurred />
                       <div className="px-1 py-2 h-[400px] overflow-y-scroll">
                         <div className="text-3xl font-bold">{name}</div>

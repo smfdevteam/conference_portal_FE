@@ -8,7 +8,9 @@ const App_Context = ({children}) => {
     const [app_state , setAppState] = useState({
         isLogged:false,
         isLoading:false,
-        user:{}
+        user:{} , 
+        conference :{} ,
+        isAsideOpen : true
     })
   return (
     <stateProvider.Provider value={{

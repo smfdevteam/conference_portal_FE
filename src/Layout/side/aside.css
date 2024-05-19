@@ -1,0 +1,89 @@
+.smf_aside {
+  width: 100%;
+  height: auto;
+  overflow-y: scroll;
+  z-index: 40;
+  left: 0;
+  right: -100%;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  background: red;
+  background: radial-gradient(circle at 50% 50%, #8255f1, #0d2486);
+  transition: all 0.5s;
+}
+.show_side {
+  right: 0;
+}
+.close {
+  position: relative;
+}
+.x_line {
+  width: 50px;
+  height: 5px;
+  background: #d8bfd8;
+  margin: 10px 0;
+  transition: all 0.5s;
+}
+.close:hover .line1 {
+  transform: rotate(45deg) translate(10%);
+}
+.close:hover .line2 {
+  transform: rotate(-45deg) translate(19%, -111%);
+}
+.close::after {
+  content: "";
+  transition: all 0.5s;
+  background: #d8bfd8;
+  top: 0;
+  z-index: -10;
+  opacity: 0.2;
+  border-radius: 50%;
+  position: absolute;
+}
+.close:hover:after {
+  padding: 100%;
+  transform: scale(1.5) translate(10%);
+}
+
+.items li {
+  padding: 0.1rem;
+  font-size: 3rem;
+  color: #fff;
+  position: relative;
+  transition: all 0.5s;
+  left: -150%;
+}
+.items li:hover {
+  transform: scale(1.1);
+}
+.items:hover li:not(:hover) {
+  transform: scale(0.8);
+  margin: .2rem;
+}
+.items li::after {
+  content: "";
+  position: absolute;
+  background: #add8e6;
+  width: 50%;
+  height: 2px;
+  bottom: 0;
+  left: -150%;
+  transform: translate(-50%);
+  transition: left 0.5s;
+}
+.items li:hover::after {
+  left: 50%;
+}
+
+@keyframes entering {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 0;
+  }
+}
+.enter-animation {
+  animation: entering 2s 1 forwards;
+}

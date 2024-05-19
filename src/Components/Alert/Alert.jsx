@@ -34,7 +34,7 @@ const Alert = ({ alert }) => {
                 تنبيه
               </ModalHeader>
               <ModalBody>
-                <div className="max-h-[200px] text-2xl overflow-y-scroll">
+                <div className="max-h-[200px] text-2xl overflow-y-scroll mb-10">
                   {alert ? alert : <>
                     <p>لو فيه تنبيه هنبعت ليك هنا علطول</p>
                     <p dir="ltr" className="text-left text-2xl font-bold">SMF Tech.</p>

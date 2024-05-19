@@ -29,8 +29,21 @@ export default function Home() {
         <Now now={homeState.now} />
       </div>
       <SMF_Tech />
-      <User_Card/> 
-      <SMF_QR/> 
+      <User_Card />
+      <iframe
+        title="map"
+        className="my-3"
+        src='https://www.youtube.com/embed/6aUhm9YNtE0?si=k1Pq2Nk10lBBWl9Q'
+        style={{
+          borderRadius: "21px",
+          height: "250px",
+          width: "100%",
+        }}
+        allowFullScreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
+        loading="lazy"
+      ></iframe>
+      {/* <SMF_QR/>  */}
     </>
   );
 }

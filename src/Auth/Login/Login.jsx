@@ -2,11 +2,13 @@ import React from 'react'
 import { Button, user } from '@nextui-org/react'
 import { login } from '../../Api/api'
 import { useContext } from 'react';
-import { stateProvider } from "../../App_Context"; 
+import { stateProvider } from '../../Context/App_Context';
+ 
 export default function Login() {
   const { app_state , setAppState } = useContext(stateProvider);
   
   const handleClick = async ()=>{
+    //!! Wrap in try catch and handle errors from backend
     const response = await login({email:"test2@gmail.com",password:"123123"})
     localStorage.setItem("X-ACCESS-TOKEN", response.idToken);
     localStorage.setItem("X-REFRESH-TOKEN", response.refreshToken);

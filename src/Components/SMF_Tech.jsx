@@ -1,21 +1,19 @@
-import smfTechLogo from "../assets/images/brand/smftech.png";
-import smfTechTypo from "../assets/images/brand/smftecttypo.png";
 import {
-  Badge,
-  Button,
+  LinkIcon,
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
+  useDisclosure , 
 } from "@nextui-org/react";
+import smfTechLogo from "../assets/images/brand/smftech.png";
+import smfTechTypo from "../assets/images/brand/smftecttypo.png";
+import { useNavigate } from "react-router-dom";
 const gradient = {
   background: "radial-gradient(circle at 50% 50%, #8255f1, #0d2486)",
 };
 const SMF_Tech = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const navigate = useNavigate()
   return (
     <>
       <div
@@ -33,13 +31,22 @@ const SMF_Tech = () => {
               <ModalBody style={gradient} className="rounded-4xl">
                 <img src={smfTechTypo} className="w-[70%] m-auto" alt="" />
                 <div className="grid grid-cols-2 gap-5">
-                  <div className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
-                    <h1 className="text-3xl">About us </h1>
+                  <div onClick={()=> navigate('/team')} className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
+                    <p className="text-3xl">About us </p>
                   </div>
-                  <div className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
-                    <h1 className="text-3xl">Contact </h1>
+                  <div onClick={()=>window.open('https://wa.me/201201891349' , '_blank')} className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
+                    <p className="text-3xl">Contact </p>
                   </div>
                 </div>
+                  <div className="hover:bg-white w-full hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
+                    <a
+                      className="text-3xl"
+                      href="tel:201201891349"
+                    >
+                      Technical Support
+                    </a>
+                    <LinkIcon />
+                  </div>
               </ModalBody>
             </>
           )}
