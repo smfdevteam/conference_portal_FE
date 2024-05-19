@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Alert from "../../Components/Alert/Alert";
 import { getAlertsandHappenNow } from "../../Api/conference_meta.service";
 import SMF_Tech from "../../Components/SMF_Tech";
+import Now from "../../Components/happen_now/Now";
+import User_Card from "../../Components/user/User_Card";
 
 export default function Home() {
   const [homeState, setHomeState] = useState({
@@ -17,12 +19,16 @@ export default function Home() {
     });
   };
   useEffect(() => {
-    getHomeState()
+    getHomeState();
   }, []);
   return (
     <>
-      <Alert alert={homeState.alert} />
-      <SMF_Tech/>
+      <div className="flex justify-between items-center mb-4">
+        <Alert alert={homeState.alert} />
+        <Now now={homeState.now} />
+      </div>
+      <SMF_Tech />
+      <User_Card/>  
     </>
   );
 }

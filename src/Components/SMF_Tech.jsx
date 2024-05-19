@@ -21,7 +21,7 @@ const SMF_Tech = () => {
       <div
         style={gradient}
         onClick={onOpen}
-        className="flex justify-around w-[95%] items-center my-3 hover:translate-y-[-5px] hover:shadow-xl active:shadow-none active:translate-y-0 transition-all duration-500 mx-auto border-2 shadow-md bg-slate-400 rounded-xl"
+        className="flex justify-around items-center my-3 hover:translate-y-[-5px] hover:shadow-xl active:shadow-none active:translate-y-0 transition-all duration-500 mx-auto border-2 shadow-md bg-slate-400 rounded-xl"
       >
         <img src={smfTechLogo} alt="" style={{ height: "100px" }} />
         <img src={smfTechTypo} alt="" style={{ height: "50px" }} />
@@ -33,7 +33,7 @@ const SMF_Tech = () => {
               <ModalHeader className="flex flex-col gap-1 text-center items-center   font-bold text-3xl">
                 SMF Technology
               </ModalHeader>
-              <ModalBody style={gradient} className="rounded-3xl ">
+              <ModalBody style={gradient} className="rounded-3xl   ">
                 <img src={smfTechLogo} className="w-[70%] m-auto" alt="" />
                 <div className="grid grid-cols-2 gap-5">
                   <div className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
