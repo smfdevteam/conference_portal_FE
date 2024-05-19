@@ -41,11 +41,6 @@ const Alert = ({ alert }) => {
                   </>}
                 </div>
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="shadow" onPress={onClose}>
-                  تمام
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>

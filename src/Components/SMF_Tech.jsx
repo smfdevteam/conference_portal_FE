@@ -28,13 +28,10 @@ const SMF_Tech = () => {
       </div>
       <Modal backdrop={"blur"} dir="ltr" isOpen={isOpen} onClose={onClose}>
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-center items-center   font-bold text-3xl">
-                SMF Technology
-              </ModalHeader>
-              <ModalBody style={gradient} className="rounded-3xl   ">
-                <img src={smfTechLogo} className="w-[70%] m-auto" alt="" />
+              <ModalBody style={gradient} className="rounded-4xl">
+                <img src={smfTechTypo} className="w-[70%] m-auto" alt="" />
                 <div className="grid grid-cols-2 gap-5">
                   <div className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
                     <h1 className="text-3xl">About us </h1>
@@ -44,11 +41,6 @@ const SMF_Tech = () => {
                   </div>
                 </div>
               </ModalBody>
-              <ModalFooter>
-                <Button color="primary" variant="shadow" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>
