@@ -24,7 +24,7 @@ export default function Home() {
   }, []);
   return (
     <>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center ms-[1rem]">
         <Alert alert={homeState.alert} />
         <Now now={homeState.now} />
       </div>
