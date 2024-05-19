@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 const User_Card = () => {
   return (
-    <Card className="max-w-[400px]" dir="ltr">
+    <Card dir="ltr">
       <CardHeader className="flex gap-3">
         <Image
           alt="nextui logo"
