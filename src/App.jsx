@@ -1,28 +1,31 @@
+import { onMessage } from "firebase/messaging";
+import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home/Home";
-import Hymns from "./pages/Hymns/Hymns";
-import Layout from "./Layout/Layout";
+import App_Context from "./App_Context";
 import Login from "./Auth/Login/Login";
 import Register from "./Auth/Register/Register";
-import NotMobile from "./pages/NotMobile";
-import NotFound from "./pages/NotFound";
-import { handleNotifications, isMobile } from "./utils/client";
-import App_Context from "./App_Context";
-import { useEffect, useState } from "react";
+import Layout from "./Layout/Layout";
 import { CONFERENCE_FIREBASE_MESSAGEING_HANDLER } from "./firebase/firebase.config";
-import { getToken, onMessage } from "firebase/messaging";
-import toast, { Toaster } from "react-hot-toast";
+import Home from "./pages/Home/Home";
+import Hymns from "./pages/Hymns/Hymns";
+import NotFound from "./pages/NotFound";
+import NotMobile from "./pages/NotMobile";
+import { handleNotifications, isMobile } from "./utils/client";
+
 function App() {
+
   onMessage(CONFERENCE_FIREBASE_MESSAGEING_HANDLER, (payload) => {
     console.log(payload, "NOTIFICATION");
   });
+
   useEffect(() => {
     handleNotifications();
   }, []);
 
   // Redirect if not a mobile device
-  // if (isMobile()) {
+  if (isMobile()) {
   return (
     <App_Context>
       <Toaster
@@ -53,9 +56,9 @@ function App() {
       </Layout>
     </App_Context>
   );
-  // } else {
-  //   return <></>;
-  // }
+  } else {
+    return <NotMobile/>;
+  }
 }
 
 export default App;

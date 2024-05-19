@@ -11,14 +11,13 @@ import {
 } from "@nextui-org/react";
 export default function Header() {
   return (
-    <Navbar>
+    <Navbar dir="ltr" className="m-auto my-2 border-2 rounded-xl">
       <NavbarBrand>
         <Avatar src={smf_tech_logo} />
       </NavbarBrand>
 
-
       <NavbarContent as="div" justify="end">
-        <Dropdown placement="bottom-end">
+        <Dropdown placement="right-end">
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -31,12 +30,12 @@ export default function Header() {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
+            <DropdownItem key="profile" className="h-14 gap-2" dir="">
+              <p className="font-normal">تم تسجيل الدخول بالإيميل : </p>
+              <p className="font-semibold text-left" >zoey@example.com</p>
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
+            <DropdownItem key="team_settings">Data</DropdownItem>
             <DropdownItem key="analytics">Analytics</DropdownItem>
             <DropdownItem key="system">System</DropdownItem>
             <DropdownItem key="configurations">Configurations</DropdownItem>
