@@ -15,6 +15,7 @@ const initialValues = {
   password: "",
   confirmPassword: "",
   profileImage: "",
+  notificationToken:localStorage.getItem('notification_token')
 };
 
 const onSubmit = async ({ name, phone, email, password, profileImage }) => {
@@ -24,6 +25,7 @@ const onSubmit = async ({ name, phone, email, password, profileImage }) => {
   formData.append("email", email);
   formData.append("password", password);
   formData.append("profileImage", profileImage);
+  formData.append("notificationToken", localStorage.getItem('notification_token'));
   console.log(Object.fromEntries(formData));
   const response = await register(formData)
   console.log("response",response)

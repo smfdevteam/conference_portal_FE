@@ -17,7 +17,7 @@ const getAlertsandHappenNow = async () => {
     const alertsAndHappenNow = await api.get("conference/alert_happen", {
       headers: skipInterceptor_header,
     });
-    console.log(alertsAndHappenNow.data);
+    return alertsAndHappenNow.data;
   } catch (error) {
     console.log(error);
   }
@@ -33,4 +33,4 @@ const getLookups = async () => {
   }
 };
 
-export { getConferenceSpeakers, getAlertsandHappenNow , getLookups };
+export { getConferenceSpeakers, getAlertsandHappenNow, getLookups };
