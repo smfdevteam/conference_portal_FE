@@ -4,6 +4,7 @@ import { getAlertsandHappenNow } from "../../Api/conference_meta.service";
 import SMF_Tech from "../../Components/SMF_Tech";
 import Now from "../../Components/happen_now/Now";
 import User_Card from "../../Components/user/User_Card";
+import SMF_QR from "../../Components/QR/SMF_QR";
 
 export default function Home() {
   const [homeState, setHomeState] = useState({
@@ -28,7 +29,8 @@ export default function Home() {
         <Now now={homeState.now} />
       </div>
       <SMF_Tech />
-      <User_Card/>  
+      <User_Card/> 
+      <SMF_QR/> 
     </>
   );
 }
