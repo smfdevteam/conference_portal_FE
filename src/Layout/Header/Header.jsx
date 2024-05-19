@@ -25,8 +25,8 @@ export default function Header() {
         <Avatar isBordered color="primary" src={app_state.conference.logoUrl} />
       </NavbarBrand>
 
-      <NavbarContent as="div" justify="end">
-        <Dropdown placement="bottom-start">
+      {/* <NavbarContent as="div" justify="end"> */}
+        {/* <Dropdown placement="bottom-start">
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -37,9 +37,9 @@ export default function Header() {
               size="sm"
               src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
-          </DropdownTrigger>
+          </DropdownTrigger> */}
 
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
+          {/* <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2" dir="">
               <p className="font-normal">تم تسجيل الدخول بالإيميل : </p>
               <p className="font-semibold text-left">zoey@example.com</p>
@@ -52,10 +52,10 @@ export default function Header() {
             <DropdownItem key="logout" color="danger">
               تسجيل الخروج
             </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+          </DropdownMenu> */}
+        {/* </Dropdown> */}
         <Image onClick={handleIsSideOpen} src={burgerMenuIcon} width={45} />
-      </NavbarContent>
+      {/* </NavbarContent> */}
     </Navbar>
   );
 }

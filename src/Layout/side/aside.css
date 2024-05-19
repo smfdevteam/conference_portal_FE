@@ -1,7 +1,7 @@
 .smf_aside {
   width: 100%;
-  height: 140vh;
-  overflow: hidden;
+  height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
   z-index: 40;
   left: 0;
@@ -90,6 +90,17 @@
 .enter-animation {
   animation: entering 2s 1 forwards;
 }
+@keyframes outing {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 150%;
+  }
+}
+.outing-animation {
+  animation: outing 2s 1 forwards;
+}
 
 @keyframes rotateTop {
   0% {
@@ -123,4 +134,13 @@
     padding: 100%;
     transform: scale(1.5) translate(10%);
   }
+}
+
+.smf_user {
+  position: fixed;
+  bottom: 1%;
+  right: 3%;
+  outline: 50px solid #504EAE;
+  border-radius: 100%;
+  transition: all .5s;
 }

@@ -1,9 +1,9 @@
 import { Image } from "@nextui-org/react";
-import { Suspense, lazy, useState } from "react";
+import { lazy, useState } from "react";
 import Skeleton_Loader from "../../Components/shared/Skeleton_Loader";
 import arrowIcon from "../../assets/images/icons/arrowright.png";
-const Smf_Modal = lazy(() => import("../../Components/shared/Smf_Modal"));
 import "./member.css";
+const Smf_Modal = lazy(() => import("../../Components/shared/Smf_Modal"));
 const Member = ({ member }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const handleImageLoading = (isLoaded) => setIsImageLoaded(isLoaded);
@@ -19,8 +19,7 @@ const Member = ({ member }) => {
         />
         <div  className="layer w-[100%] top-0  h-[100%]  absolute">
           <div>
-            {isImageLoaded && (
-              <Suspense fallback={Skeleton_Loader}>
+            {isImageLoaded ? (
                 <div className="translate-x-[60%] translate-y-10">
                   <Smf_Modal
                     isBtnImage
@@ -41,8 +40,7 @@ const Member = ({ member }) => {
                     </div>
                   </Smf_Modal>
                 </div>
-              </Suspense>
-            )}
+            ) : <Skeleton_Loader/>}
           </div>
         </div>
       </div>

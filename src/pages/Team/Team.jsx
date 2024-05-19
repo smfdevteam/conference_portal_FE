@@ -2,8 +2,6 @@ import { Image } from "@nextui-org/react";
 import { SmfTechTeam } from "../../assets/data/team";
 import smf_tech_logo from "../../assets/images/brand/smftech.png";
 import smf_tech_logo_type from "../../assets/images/brand/smftecttypo.png";
-import { lazy, Suspense } from "react";
-import Skeleton_Loader from "../../Components/shared/Skeleton_Loader";
 import Member from "./Member";
 
 const gradientStyle = {
@@ -11,7 +9,11 @@ const gradientStyle = {
 };
 const Team = () => {
   return (
-    <div dir="ltr" className="rounded-md pb-10 text-white" style={gradientStyle}>
+    <div
+      dir="ltr"
+      className="rounded-md pb-10 text-white"
+      style={gradientStyle}
+    >
       <div className="grid grid-cols-2 items-center justify-center">
         <Image src={smf_tech_logo_type} />
         <Image src={smf_tech_logo} />
@@ -23,7 +25,7 @@ const Team = () => {
         </p>
         <div className="w-[80%] grid grid-cols-2 gap-3 m-auto">
           {SmfTechTeam.map((member) => (
-              <Member key={member.name} member={member} />
+            <Member key={member.name} member={member} />
           ))}
         </div>
       </div>

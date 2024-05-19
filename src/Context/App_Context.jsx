@@ -10,7 +10,7 @@ const App_Context = ({children}) => {
         isLoading:false,
         user:{} , 
         conference :{} ,
-        isAsideOpen : false
+        isAsideOpen : true
     })
   return (
     <stateProvider.Provider value={{
