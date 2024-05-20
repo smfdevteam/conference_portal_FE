@@ -140,7 +140,39 @@
   position: fixed;
   bottom: 1%;
   right: 3%;
-  outline: 50px solid #504EAE;
+  outline: 50px solid #504eae;
   border-radius: 100%;
-  transition: all .5s;
+  transition: all 0.5s;
 }
+
+.tabs {
+  position: relative;
+  overflow: hidden;
+}
+
+.tabs span {
+  font-size: 2rem;
+  margin: 0px 20px;
+  transition: all 1s;
+}
+.tabs span.active {
+  color: #0d2486;
+}
+.tabs .selector {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  z-index: -1;
+  transition: all 1s;
+}
+.selector.left {
+  left: -10%;
+
+}
+.selector.right {
+  left: 40%;
+}
+
+
+

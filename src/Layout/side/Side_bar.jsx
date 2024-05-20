@@ -13,21 +13,22 @@ const links = [
   "Messages",
   "Material",
 ];
-const userLinks = [
-  "My Profile",
-  "Settings",
-  "Logout",
-
-];
+const userLinks = ["My Profile", "Settings", "Logout"];
 const Side_bar = () => {
   const { app_state, setAppState } = useContext(stateProvider);
+  const [isUserActive, setIsUserActive] = useState(false);
+  const handleUserActive = () => setIsUserActive(!isUserActive)
   const handleIsSideOpen = () => {
     setAppState({ ...app_state, isAsideOpen: !app_state.isAsideOpen });
   };
-  const [isUserActive, setIsUserActive] = useState(false);
   return (
     <aside className={`smf_aside ${app_state.isAsideOpen && " show_side"} `}>
-      <div className="flex justify-end m-10">
+      <div className="flex justify-between m-10">
+        <div className="tabs flex gap-10 py-1 border-1 font-semibold rounded-xl justify-between items-center text-white">
+          <span onClick={handleUserActive} className={`${isUserActive&&'active'}`}>Me</span>
+          <span onClick={handleUserActive} className={`${!isUserActive&&'active'}`}>SMF</span>
+          <span className={`selector rounded-xl ${isUserActive ? ' right' : 'left'}`}></span>
+        </div>
         <div className="close" onClick={handleIsSideOpen}>
           <div
             className={`x_line line1 ${app_state.isAsideOpen && " rotateTop"}`}
@@ -74,16 +75,29 @@ const Side_bar = () => {
               );
             })}
       </ul>
-      {app_state.isAsideOpen && 
-      
-      <div className="smf_user" style={{
-        outlineColor : isUserActive && '#0d2486'
-      }}>
-        <div onClick={()=>setIsUserActive(!isUserActive)} className={`smf_user-avatar  border-2 flex justify-center items-center w-[100px] shadow-lg object-fill h-[100px] rounded-full ${app_state.isAsideOpen && "enter-animation"}`}>
-          <Avatar src={person} size="lg"  className="relative w-full h-full" isBordered color={isUserActive ? "warning" : 'default'} />
+      {app_state.isAsideOpen && (
+        <div
+          className="smf_user"
+          style={{
+            outlineColor: isUserActive && "#0d2486",
+          }}
+        >
+          <div
+            onClick={handleUserActive}
+            className={`smf_user-avatar  border-2 flex justify-center items-center w-[100px] shadow-lg object-fill h-[100px] rounded-full ${
+              app_state.isAsideOpen && "enter-animation"
+            }`}
+          >
+            <Avatar
+              src={person}
+              size="lg"
+              className="relative w-full h-full"
+              isBordered
+              color={isUserActive ? "warning" : "default"}
+            />
+          </div>
         </div>
-      </div>
-      }
+      )}
     </aside>
   );
 };
