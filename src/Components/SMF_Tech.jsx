@@ -3,11 +3,11 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  useDisclosure , 
+  useDisclosure,
 } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 import smfTechLogo from "../assets/images/brand/smftech.png";
 import smfTechTypo from "../assets/images/brand/smftecttypo.png";
-import { useNavigate } from "react-router-dom";
 const gradient = {
   background: "radial-gradient(circle at 50% 50%, #8255f1, #0d2486)",
 };
@@ -19,10 +19,11 @@ const SMF_Tech = () => {
       <div
         style={gradient}
         onClick={onOpen}
-        className="flex justify-around items-center my-3 hover:translate-y-[-5px] hover:shadow-xl active:shadow-none active:translate-y-0 transition-all duration-500 mx-auto border-2 shadow-md bg-slate-400 rounded-xl"
+        className="flex animate-fly relative justify-around items-center my-3 hover:translate-y-[-5px] hover:shadow-xl active:shadow-none active:translate-y-0 transition-all duration-500 mx-auto border-2 shadow-md bg-slate-400 rounded-xl"
       >
         <img src={smfTechLogo} alt="" style={{ height: "100px" }} />
         <img src={smfTechTypo} alt="" style={{ height: "50px" }} />
+
       </div>
       <Modal backdrop={"blur"} dir="ltr" isOpen={isOpen} onClose={onClose}>
         <ModalContent>

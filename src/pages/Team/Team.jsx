@@ -11,7 +11,7 @@ const Team = () => {
   return (
     <div
       dir="ltr"
-      className="rounded-md pb-10 text-white"
+      className="rounded-md pb-10 text-white "
       style={gradientStyle}
     >
       <div className="grid grid-cols-2 items-center justify-center">
@@ -23,10 +23,10 @@ const Team = () => {
         <p className="text-xl w-[85%] mx-auto mb-3 text-center">
           Home of Brilliant Minds Crafting Creativity
         </p>
-        <div className="w-[80%] grid grid-cols-2 gap-3 m-auto">
-          {SmfTechTeam.map((member) => (
-            <Member key={member.name} member={member} />
-          ))}
+          <div className="w-[80%] grid grid-cols-2 gap-3 m-auto ">
+            {SmfTechTeam.map((member) => (
+              <Member key={member.name} member={member} />
+            ))}
         </div>
       </div>
     </div>

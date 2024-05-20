@@ -1,0 +1,19 @@
+.req_help {
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+.req_help:hover .req_help-layer {
+   left: 0;
+}
+.req_help-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #F31260;
+    top: 0;
+    left: -150%;
+    transition: all .5s;
+}
+
+
