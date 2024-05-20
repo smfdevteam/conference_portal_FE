@@ -8,4 +8,8 @@
 
 body {
     font-family: 'arabic-regular';
+    -ms-user-select: none;    
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    user-select: none;
 }

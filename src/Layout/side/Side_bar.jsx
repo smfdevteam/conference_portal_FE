@@ -6,14 +6,14 @@ import person from "../../assets/images/team/samaan.png";
 import editIcon from "../../assets/images/icons/edit.png";
 import "./aside.css";
 const links = [
-  "Home",
-  "Profile",
-  "Speakers",
-  "Location",
-  "Messages",
-  "Material",
+  "الرئيسية",
+  "المتكلمين",
+  "مكاننا",
+  "ملفات",
+  "قواعد هامة",
+  "الشعار",
 ];
-const userLinks = ["My Profile", "Settings", "Logout"];
+const userLinks = ["بروفايلي", "الإعدادات", "أسرة مارمرقس" , "تسجيل الخروج"];
 const Side_bar = () => {
   const { app_state, setAppState } = useContext(stateProvider);
   const [isUserActive, setIsUserActive] = useState(false);
@@ -24,9 +24,9 @@ const Side_bar = () => {
   return (
     <aside className={`smf_aside ${app_state.isAsideOpen && " show_side"} `}>
       <div className="flex justify-between m-10">
-        <div className="tabs flex gap-10 py-1 border-1 font-semibold rounded-xl justify-between items-center text-white">
-          <span onClick={handleUserActive} className={`${isUserActive&&'active'}`}>Me</span>
-          <span onClick={handleUserActive} className={`${!isUserActive&&'active'}`}>SMF</span>
+        <div className=" tabs flex gap-10 py-1 border-1 font-semibold rounded-xl justify-between items-center text-white">
+          <span onClick={handleUserActive} className={`${isUserActive&&'active'}`}>أنا</span>
+          <span onClick={handleUserActive} className={`${!isUserActive&&'active'}`}>المؤتمر</span>
           <span className={`selector rounded-xl ${isUserActive ? ' right' : 'left'}`}></span>
         </div>
         <div className="close" onClick={handleIsSideOpen}>
