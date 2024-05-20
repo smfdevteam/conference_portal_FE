@@ -36,7 +36,7 @@ export default function Home() {
         src='https://www.youtube.com/embed/6aUhm9YNtE0?si=k1Pq2Nk10lBBWl9Q'
         style={{
           borderRadius: "21px",
-          height: "130px",
+          height: "200px",
           width: "100%",
         }}
         allowFullScreen
