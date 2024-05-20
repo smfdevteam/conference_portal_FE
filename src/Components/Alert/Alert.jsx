@@ -1,12 +1,10 @@
 import {
   Badge,
-  Button,
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
-  useDisclosure,
+  useDisclosure
 } from "@nextui-org/react";
 const Alert = ({ alert }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
