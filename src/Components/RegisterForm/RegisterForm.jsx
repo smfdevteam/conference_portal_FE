@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input, Button } from "@nextui-org/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,7 +6,6 @@ import AvatarUploader from "../AvatarUploader/AvatarUploader";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
 import CustomToolTip from "../CustomToolTip/CustomToolTip";
-import { api } from "../../Api/api";
 import { register } from "../../Api/api";
 const initialValues = {
   name: "",
@@ -15,20 +14,37 @@ const initialValues = {
   password: "",
   confirmPassword: "",
   profileImage: "",
-  notificationToken:localStorage.getItem('notification_token')
+  notificationToken: localStorage.getItem("notification_token"),
 };
 
-const onSubmit = async ({ name, phone, email, password, profileImage }) => {
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("phone", phone);
-  formData.append("email", email);
-  formData.append("password", password);
-  formData.append("profileImage", profileImage);
-  formData.append("notificationToken", localStorage.getItem('notification_token'));
-  console.log(Object.fromEntries(formData));
-  const response = await register(formData)
-  console.log("response",response)
+const onSubmit = async ({
+  name,
+  phone,
+  email,
+  password,
+  profileImage,
+  setIsSubmiting,
+}) => {
+  try {
+    setIsSubmiting(true);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("profileImage", profileImage);
+    formData.append(
+      "notificationToken",
+      localStorage.getItem("notification_token")
+    );
+    console.log(Object.fromEntries(formData));
+    const response = await register(formData);
+    console.log("response", response);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setIsSubmiting(false);
+  }
 };
 
 const validationSchema = Yup.object({
@@ -42,6 +58,7 @@ const validationSchema = Yup.object({
 });
 
 const RegisterForm = () => {
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -51,9 +68,9 @@ const RegisterForm = () => {
     onSubmit,
     validationSchema,
   });
-  
-  formik.values.profileImage = avatarImage;
 
+  formik.values.profileImage = avatarImage;
+  formik.values.setIsSubmiting = setIsSubmiting;
   return (
     <div className="font-semibold">
       <h1 className="text-center">يلا نعمل حساب جديد</h1>
@@ -113,9 +130,9 @@ const RegisterForm = () => {
                 onClick={toggleVisibility}
               >
                 {isVisible ? (
-                  <EyeSlashFilledIcon className="text-2xl text-primary pointer-events-none" />
-                ) : (
                   <EyeFilledIcon className="text-2xl text-primary pointer-events-none" />
+                ) : (
+                  <EyeSlashFilledIcon className="text-2xl text-primary pointer-events-none" />
                 )}
               </button>
             }
@@ -147,7 +164,7 @@ const RegisterForm = () => {
                 toolTipHeader="لية رقم الموبايل ؟"
                 toolTipContent="عشان لو حصل حاجة نقدر نوصل ليك بسرعة من
                     فضللك ادخل رقم الموبيل ذى "
-                highLightedMessge="(+20100XXXX)"
+                highLightedMessge="(20100XXXX+)"
               />
             }
             isInvalid={
@@ -155,7 +172,12 @@ const RegisterForm = () => {
             }
             errorMessage={formik.errors.phone}
           />
-          <Button type="submit" color="primary" className="w-full">
+          <Button
+            type="submit"
+            color="primary"
+            className="w-full"
+            isLoading={isSubmiting}
+          >
             يلا بينا
           </Button>
         </div>

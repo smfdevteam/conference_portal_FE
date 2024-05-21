@@ -8,9 +8,8 @@ api.interceptors.request.use(
   function (config) {
     console.log("config = ", config);
     if (config.headers.skipInterceptors) return config;
-    // Do something before the request is sent
-    // For example, add an Authorization header
-    const token = localStorage.getItem("X-ACCESS-TOKEN"); // Replace with your actual token
+
+    const token = localStorage.getItem("X-ACCESS-TOKEN");
 
     if (token) {
       config.headers["authorization"] = `Bearer ${token}`;
@@ -20,7 +19,6 @@ api.interceptors.request.use(
     }
   },
   function (error) {
-    // Do something with request error
     return Promise.reject(error);
   }
 );
@@ -32,7 +30,7 @@ export const register = async (userData) => {
       headers,
     });
     console.log(response.data);
-    
+
     return response.data;
   } catch (error) {
     console.log(error);
@@ -48,12 +46,14 @@ export const login = async (credentials) => {
     const response = await api.post("/guest/auth/login", credentials, {
       headers,
     });
-    console.log(response.data);
-    
-    return response.data;
+    console.log("response.data", response);
+
+    return response;
   } catch (error) {
+    console.log(error)
     if (!error?.response) {
       return "No Server Response";
     }
+    return error.response.data.message
   }
 };
