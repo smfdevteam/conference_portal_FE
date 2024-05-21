@@ -1,15 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
-@import url('./assets/styles/fonts.css');
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+@import url("./assets/styles/fonts.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
-    font-family: 'arabic-regular';
-    -ms-user-select: none;    
-    -webkit-user-select: none; 
-    -moz-user-select: none;    
-    user-select: none;
+  font-family: "arabic-regular";
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+
+
+
+
+/* Animations */
+@keyframes fly {
+  0% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  50% {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+.animate-fly {
+  animation: fly 4s ease-in-out infinite;
+}
+.animate-fly:hover {
+    animation-play-state: paused;
 }

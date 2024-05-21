@@ -1,6 +1,6 @@
 .smf_aside {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
   z-index: 40;
@@ -51,7 +51,7 @@
 
 .items li {
   padding: 0.1rem;
-  font-size: 3rem;
+  font-size: 2rem ; 
   color: #fff;
   position: relative;
   transition: all 0.5s;
@@ -176,3 +176,13 @@
 
 
 
+
+
+@media screen and (max-width:320px) {
+  .items li  {
+    font-size: 1rem;
+  }
+  .tabs span {
+    font-size: 1rem;
+  }
+}
