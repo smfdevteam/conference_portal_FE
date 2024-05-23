@@ -1,15 +1,17 @@
 import {
+  Accordion,
+  AccordionItem,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
-  Skeleton,
   useDisclosure,
+  Autocomplete,
+  AutocompleteItem,
 } from "@nextui-org/react";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { useState } from "react";
 import { BIBLE_MAP, BOOK_TYPES } from "../bible_constants";
 import "./book_selector.css";
-import { useState } from "react";
 const Book_selector = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [bookType, setBookType] = useState("old");
@@ -32,28 +34,48 @@ const Book_selector = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex justify-evenly items-center">
-                <p className="font-bold text-3xl">Bible Books</p>
-                <div className="book_type  border-3 p-2 rounded-xl">
-                  <span
-                    className={`${bookType === BOOK_TYPES.OLD && "active"}`}
-                    onClick={() => handleBookType(BOOK_TYPES.OLD)}
-                  >
-                    Old
-                  </span>
-                  <span
-                    className={`${bookType === BOOK_TYPES.NEW && "active"}`}
-                    onClick={() => handleBookType(BOOK_TYPES.NEW)}
-                  >
-                    New
-                  </span>
-                  <div
-                    className="book_type_active"
-                    style={{
-                      left: bookType === BOOK_TYPES.OLD ? "-10%" : "50%",
-                    }}
-                  ></div>
+              <ModalHeader className="flex flex-col gap-3">
+                <div className="flex justify-evenly items-center w-full">
+                  <p className="font-bold text-3xl">Bible Books</p>
+                  <div className="book_type  border-3 p-2 rounded-xl">
+                    <span
+                      className={`${bookType === BOOK_TYPES.OLD && "active"}`}
+                      onClick={() => handleBookType(BOOK_TYPES.OLD)}
+                    >
+                      Old
+                    </span>
+                    <span
+                      className={`${bookType === BOOK_TYPES.NEW && "active"}`}
+                      onClick={() => handleBookType(BOOK_TYPES.NEW)}
+                    >
+                      New
+                    </span>
+                    <div
+                      className="book_type_active"
+                      style={{
+                        left: bookType === BOOK_TYPES.OLD ? "-10%" : "50%",
+                      }}
+                    ></div>
+                  </div>
                 </div>
+                <Autocomplete
+                  label="Books"
+                  placeholder="Search a Book"
+                  defaultItems={BIBLE_MAP.books.filter(
+                    (book) => book.type === bookType
+                  )}
+                  className="w-full"
+                >
+                  {(item) => (
+                    <AutocompleteItem
+                      dir="ltr"
+                      className="text-black"
+                      key={item.passage}
+                    >
+                      {item.passage}
+                    </AutocompleteItem>
+                  )}
+                </Autocomplete>
               </ModalHeader>
               <ModalBody className="overflow-y-scroll relative">
                 {BIBLE_MAP.books.map((book, index) => {
