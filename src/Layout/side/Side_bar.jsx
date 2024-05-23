@@ -14,6 +14,7 @@ const links = [
   { name: "ملفات", link: "/material" },
   { name: "الشعار", link: "/song" },
   { name: "البرنامج", link: "/program" },
+  { name: "الكتاب المقدس", link: "/bible" },
 ];
 const userLinks = ["بروفايلي", "الإعدادات", "أسرة مارمرقس", "تسجيل الخروج"];
 const Side_bar = () => {

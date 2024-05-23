@@ -1,0 +1,27 @@
+.book_type {
+  position: relative;
+  overflow: hidden;
+}
+.book_type span {
+    margin: 0 .8rem;
+}
+.book_type span.active {
+  color: #fafafa;
+}
+
+.book_type .book_type_active {
+  position: absolute;
+  background-color: #18181b;
+  width: 60%;
+  height: 100%;
+  border-radius: 12px;
+  right: -10%;
+  top: 0;
+  z-index: -1;
+  transition: all .5s;
+}
+
+.bible_accordion_item {
+    opacity: 0;
+}
+
