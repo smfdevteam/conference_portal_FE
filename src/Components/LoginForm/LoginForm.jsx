@@ -7,6 +7,7 @@ import { login } from "../../Api/api";
 import { stateProvider } from "../../Context/App_Context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -25,18 +26,17 @@ const onSubmit = async ({
       email: email,
       password: password,
     });
+    console.log("response = ===", response);
     if (response.status === 200) {
+      setErrorMessage(null);
       localStorage.setItem("X-ACCESS-TOKEN", response.headers.get("Token"));
       localStorage.setItem("X-REFRESH-TOKEN", response.headers.get("Refresh"));
       setAppState((prev) => {
         return { ...prev, user: response.data };
       });
     } else {
-      throw new Error(response);
+      setErrorMessage(response);
     }
-  } catch (error) {
-    console.log("errror==========", error);
-    setErrorMessage("error");
   } finally {
     setIsSubmiting(false);
   }
@@ -47,6 +47,7 @@ const validationSchema = Yup.object({
 });
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -63,8 +64,14 @@ export default function LoginForm() {
   formik.values.setErrorMessage = setErrorMessage;
   return (
     <div className="font-semibold font-[Cairo]">
+      <div
+        className="text-blue-600 border-2 w-fit rounded-md p-1 hover:bg-blue-600 hover:text-white duration-400"
+        onClick={() => navigate("/register")}
+      >
+        <p>إنشاء حساب</p>
+      </div>
       <form
-        className="flex flex-col gap-8 justify-center items-center h-full"
+        className="flex flex-col gap-4 justify-center items-center h-full"
         onSubmit={formik.handleSubmit}
       >
         <Image
@@ -73,7 +80,7 @@ export default function LoginForm() {
           alt="NextUI Album Cover"
           className="animate-pulse"
         />
-        <h1>يلا اعمل حساب</h1>
+        <h1>تسجيل الدخول</h1>
         {errorMessage ? (
           <div className="text-red-800  border-2 border-red-600 w-full text-center rounded-md animate-bounce">
             <h2>{errorMessage}</h2>
@@ -118,6 +125,13 @@ export default function LoginForm() {
           }
           errorMessage={formik.errors.password}
         />
+
+        <div
+          className="w-full text-blue-600"
+          onClick={() => navigate("/resetpassword")}
+        >
+          <p> نسيت كلمة المرور؟</p>
+        </div>
         <Button
           color="primary"
           className="w-full"
