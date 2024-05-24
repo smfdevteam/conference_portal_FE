@@ -1,4 +1,7 @@
+import { useContext } from "react";
+import { stateProvider } from "../../Context/App_Context";
 import smf_tech_logo from "../../assets/images/brand/smftech.png";
+import burgerMenuIcon from "../../assets/images/icons/burgermenu.png";
 import {
   Navbar,
   NavbarBrand,
@@ -8,17 +11,22 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
+  Image,
 } from "@nextui-org/react";
 export default function Header() {
+  const { app_state , setAppState } = useContext(stateProvider);
+  const handleIsSideOpen = () => {
+    setAppState({...app_state , isAsideOpen : !app_state.isAsideOpen})
+  }
   return (
-    <Navbar>
+    <Navbar dir="ltr" className="m-auto my-2 border-2 rounded-xl">
+
       <NavbarBrand>
-        <Avatar src={smf_tech_logo} />
+        <Avatar isBordered color="primary" src={app_state.conference.logoUrl} />
       </NavbarBrand>
 
-
-      <NavbarContent as="div" justify="end">
-        <Dropdown placement="bottom-end">
+      {/* <NavbarContent as="div" justify="end"> */}
+        {/* <Dropdown placement="bottom-start">
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -29,24 +37,25 @@ export default function Header() {
               size="sm"
               src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
+          </DropdownTrigger> */}
+
+          {/* <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2" dir="">
+              <p className="font-normal">تم تسجيل الدخول بالإيميل : </p>
+              <p className="font-semibold text-left">zoey@example.com</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="settings">إعداداتي</DropdownItem>
+            <DropdownItem key="help_and_feedback">البروفايل</DropdownItem>
+            <DropdownItem key="help_and_feedback" className="text-white font-bold" style={{
+              background: "radial-gradient(circle at 50% 50%, #8255f1, #0d2486"
+            }} dir="ltr">SMF Tech.</DropdownItem>
             <DropdownItem key="logout" color="danger">
-              Log Out
+              تسجيل الخروج
             </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </NavbarContent>
+          </DropdownMenu> */}
+        {/* </Dropdown> */}
+        <Image onClick={handleIsSideOpen} src={burgerMenuIcon} width={45} />
+      {/* </NavbarContent> */}
     </Navbar>
   );
 }
