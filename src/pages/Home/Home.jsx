@@ -45,7 +45,6 @@ export default function Home() {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
         loading="lazy"
       ></iframe>
-      {/* <SMF_QR/>  */}
     </>
   );
 }
