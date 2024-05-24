@@ -5,12 +5,10 @@ import * as Yup from "yup";
 import AvatarUploader from "../AvatarUploader/AvatarUploader";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
-import CustomToolTip from "../CustomToolTip/CustomToolTip";
 import { register } from "../../Api/api";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+import CustomPhoneInput from "../CustomPhoneInput/CustomPhoneInput";
 import { isValidPhoneNumber } from "react-phone-number-input";
-
+import { useNavigate } from "react-router-dom";
 const initialValues = {
   name: "",
   phone: "",
@@ -28,6 +26,8 @@ const onSubmit = async ({
   password,
   profileImage,
   setIsSubmiting,
+  setErrorMessage,
+  navigate
 }) => {
   try {
     setIsSubmiting(true);
@@ -44,8 +44,12 @@ const onSubmit = async ({
     console.log(Object.fromEntries(formData));
     const response = await register(formData);
     console.log("response", response);
-  } catch (error) {
-    console.log(error);
+    if (response != "created") {
+      setErrorMessage(response);
+    } else {
+      setErrorMessage(null);
+      navigate('/login')
+    }
   } finally {
     setIsSubmiting(false);
   }
@@ -54,18 +58,20 @@ const onSubmit = async ({
 const validationSchema = Yup.object({
   name: Yup.string().required("اسمك مطلوب"),
   email: Yup.string().email("الايميل مش مظبوط").required("الايميل مطلوب"),
-  password: Yup.string().required("الباسوورد مطلوب"),
+  password: Yup.string()
+    .required("الباسوورد مطلوب")
+    .min(6, "كلمة المرور يجب أن تكون أكثر من 6 أحرف"),
   confirmPassword: Yup.string()
     .required("الباسوورد مطلوب")
+
     .oneOf([Yup.ref("password")], "الاتنين لازم يكونوا شبه بعض"),
   phone: Yup.string()
     .required("مطلوب الموبايل")
-    .test("phone", "الموبايل مش مظبوط", (phone) =>
-      isValidPhoneNumber(phone)
-    ),
+    .test("phone", "الموبايل مش مظبوط", (phone) => isValidPhoneNumber(phone)),
 });
 
 const RegisterForm = () => {
+  const navigate = useNavigate()
   const [phoneNumber, setPhoneNumer] = useState("");
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -85,8 +91,10 @@ const RegisterForm = () => {
   console.log("touched ==", formik.touched.phone);
   formik.values.profileImage = avatarImage;
   formik.values.setIsSubmiting = setIsSubmiting;
+  formik.values.setErrorMessage = setErrorMessage;
+  formik.values.navigate = navigate;
   return (
-    <div className="font-semibold">
+    <div className="font-semibold font-[Cairo]">
       <h1 className="text-center">يلا نعمل حساب جديد</h1>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex flex-col gap-3 py-4">
@@ -95,8 +103,8 @@ const RegisterForm = () => {
             avatarImage={avatarImage}
           />
           {errorMessage ? (
-            <div className="text-red-400 text-center border rounded-md ">
-              <h1>error message</h1>
+            <div className="text-red-800  border-2 border-red-600 w-full text-center rounded-md animate-bounce">
+              <h2>{errorMessage}</h2>
             </div>
           ) : null}
           <Input
@@ -165,24 +173,11 @@ const RegisterForm = () => {
             }
             errorMessage={formik.errors.confirmPassword}
           />
-          <PhoneInput
-            className={
-              "border-2  rounded-xl h-14   p-5 text-right hover:border-[#A1A1AA] " +
-              (formik.errors.phone && formik.touched.phone
-                ? "border-[#F31763] hover:border-[#F31763] "
-                : null)
-            }
-            name="phone"
-            placeholder="الموبايل"
-            defaultCountry="EG"
-            value={phoneNumber}
-            onChange={setPhoneNumer}
-            onBlur={formik.handleBlur}
-            international
+          <CustomPhoneInput
+            phoneNumber={phoneNumber}
+            setPhoneNumer={setPhoneNumer}
+            formik={formik}
           />
-          {formik.errors.phone && formik.touched.phone ? (
-            <div className="text-[#F31763] text-sm">{formik.errors.phone}</div>
-          ) : null}
           <Button
             type="submit"
             color="primary"

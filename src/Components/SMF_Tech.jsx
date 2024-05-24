@@ -48,7 +48,6 @@ const SMF_Tech = () => {
                   احنا شباب مارمرقس
                 </p>
                 <p className="text-center text-xl text-white ">
-                  {" "}
                   احنا اول خدمة متخصصة في التكنولوجيا و البرمجيات في الكنيسة
                   القبطية
                 </p>

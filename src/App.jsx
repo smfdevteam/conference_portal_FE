@@ -16,6 +16,10 @@ import { handleNotifications, isMobile } from "./utils/client";
 import Team from "./pages/Team/Team";
 import { getLookups } from "./Api/conference_meta.service";
 import Location from "./pages/Location";
+import Bible from "./pages/Bible/Bible";
+import Bible_main from "./Components/bible/Bible_main";
+import Bible_content from "./Components/bible/Bible_content";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 function App() {
   const { app_state, setAppState } = useContext(stateProvider);
 
@@ -65,6 +69,13 @@ function App() {
             <Route path="/hymns" element={<Hymns />} />
             <Route path="/team" element={<Team />} />
             <Route path="/location" element={<Location />} />
+            <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/bible" element={<Bible />}>
+            
+            
+              <Route index element={<Bible_main />} />
+              <Route path=":language" element={<Bible_content />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

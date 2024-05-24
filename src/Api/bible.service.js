@@ -1,0 +1,1 @@
+const api = 'https://api.biblia.com/v1/bible/content/asv.html?passage=Exodus1&fullText=true&style=orationOneVersePerLine&key=18e1aef45cf119afe94336aaba5dca53'
