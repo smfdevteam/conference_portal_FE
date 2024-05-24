@@ -7,6 +7,10 @@ import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
 import CustomToolTip from "../CustomToolTip/CustomToolTip";
 import { register } from "../../Api/api";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { isValidPhoneNumber } from "react-phone-number-input";
+
 const initialValues = {
   name: "",
   phone: "",
@@ -54,10 +58,15 @@ const validationSchema = Yup.object({
   confirmPassword: Yup.string()
     .required("الباسوورد مطلوب")
     .oneOf([Yup.ref("password")], "الاتنين لازم يكونوا شبه بعض"),
-  phone: Yup.string().required("مطلوب الموبايل"),
+  phone: Yup.string()
+    .required("مطلوب الموبايل")
+    .test("phone", "الموبايل مش مظبوط", (phone) =>
+      isValidPhoneNumber(phone)
+    ),
 });
 
 const RegisterForm = () => {
+  const [phoneNumber, setPhoneNumer] = useState("");
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState(null);
@@ -69,6 +78,11 @@ const RegisterForm = () => {
     validationSchema,
   });
 
+  formik.values.phone = phoneNumber;
+
+  console.log("phone ==", formik.values.phone);
+  console.log("error ==", formik.errors);
+  console.log("touched ==", formik.touched.phone);
   formik.values.profileImage = avatarImage;
   formik.values.setIsSubmiting = setIsSubmiting;
   return (
@@ -86,7 +100,7 @@ const RegisterForm = () => {
             </div>
           ) : null}
           <Input
-            variant="faded"
+            variant="bordered"
             name="name"
             type="text"
             label="الاسم"
@@ -99,7 +113,7 @@ const RegisterForm = () => {
             errorMessage={formik.errors.name}
           />
           <Input
-            variant="faded"
+            variant="bordered"
             name="email"
             type="text"
             label="الايميل"
@@ -112,7 +126,7 @@ const RegisterForm = () => {
             errorMessage={formik.errors.email}
           />
           <Input
-            variant="faded"
+            variant="bordered"
             name="password"
             type={isVisible ? "text" : "password"}
             label="الباسوورد"
@@ -138,7 +152,7 @@ const RegisterForm = () => {
             }
           />
           <Input
-            variant="faded"
+            variant="bordered"
             name="confirmPassword"
             type="password"
             label="أكد الباسوورد"
@@ -151,27 +165,24 @@ const RegisterForm = () => {
             }
             errorMessage={formik.errors.confirmPassword}
           />
-          <Input
-            variant="faded"
+          <PhoneInput
+            className={
+              "border-2  rounded-xl h-14   p-5 text-right hover:border-[#A1A1AA] " +
+              (formik.errors.phone && formik.touched.phone
+                ? "border-[#F31763] hover:border-[#F31763] "
+                : null)
+            }
             name="phone"
-            type="tel"
-            label="الموبايل"
-            onChange={formik.handleChange}
-            value={formik.values.phone}
-            endContent={
-              <CustomToolTip
-                customStyle=" bg-blue-400 my-4 -ml-4"
-                toolTipHeader="لية رقم الموبايل ؟"
-                toolTipContent="عشان لو حصل حاجة نقدر نوصل ليك بسرعة من
-                    فضللك ادخل رقم الموبيل ذى "
-                highLightedMessge="(20100XXXX+)"
-              />
-            }
-            isInvalid={
-              formik.touched.phone && (formik.errors.phone ? true : false)
-            }
-            errorMessage={formik.errors.phone}
+            placeholder="الموبايل"
+            defaultCountry="EG"
+            value={phoneNumber}
+            onChange={setPhoneNumer}
+            onBlur={formik.handleBlur}
+            international
           />
+          {formik.errors.phone && formik.touched.phone ? (
+            <div className="text-[#F31763] text-sm">{formik.errors.phone}</div>
+          ) : null}
           <Button
             type="submit"
             color="primary"
