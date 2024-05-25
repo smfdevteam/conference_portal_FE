@@ -4,7 +4,7 @@ import Bible_context from "../../Context/Bible_context";
 const Bible = () => {
   return (
     <Bible_context>
-      <Outlet/>
+      <Outlet />
     </Bible_context>
   );
 };

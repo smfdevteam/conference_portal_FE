@@ -4,6 +4,7 @@
   position: relative;
   margin: 30px auto;
   overflow: hidden;
+  z-index: 100;
 }
 
 .spinner {

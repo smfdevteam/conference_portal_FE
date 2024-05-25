@@ -11,6 +11,7 @@ import { newBooks, oldBooks, BOOK_TYPES } from "../bible_constants";
 import Books_Types from "./Books_Types";
 import "./book_selector.css";
 import { BibleStateProvider } from "../../../Context/Bible_context";
+import { BIBLE_STRINGS } from "../en_ar";
 
 const Book_selector = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,10 +30,10 @@ const Book_selector = () => {
       >
         {bible_state.selectedPassage
           ? bible_state.selectedPassage
-          : "Choose Chapter"}
+          : BIBLE_STRINGS.ChooseChapter[bible_state.selectedLang]}
       </div>
       <Modal
-        dir="ltr"
+        dir={bible_state.selectedLang === "en" ? "ltr" : "rtl"}
         className="h-[70vh]"
         backdrop={"blur"}
         isOpen={isOpen}
@@ -43,24 +44,27 @@ const Book_selector = () => {
             <>
               <ModalHeader className="flex flex-col gap-3">
                 <div className="flex justify-evenly items-center w-full">
-                  <p className="font-bold text-3xl">Bible Books</p>
+                  <p className="font-bold text-3xl">
+                    {BIBLE_STRINGS.BibleBooks[bible_state.selectedLang]}
+                  </p>
                   <div className="book_type  border-3 p-2 rounded-xl">
                     <span
                       className={`${bookType === BOOK_TYPES.OLD && "active"}`}
                       onClick={() => handleBookType(BOOK_TYPES.OLD)}
                     >
-                      Old
+                      {bible_state.selectedLang === "en" ? "Old" : "قديم"}
                     </span>
                     <span
                       className={`${bookType === BOOK_TYPES.NEW && "active"}`}
                       onClick={() => handleBookType(BOOK_TYPES.NEW)}
                     >
-                      New
+                      {bible_state.selectedLang === "en" ? "New" : "جديد"}
                     </span>
                     <div
                       className="book_type_active"
                       style={{
-                        left: bookType === BOOK_TYPES.OLD ? "-10%" : "50%",
+                        [bible_state.selectedLang === "en" ? "left" : "right"]:
+                          bookType === BOOK_TYPES.OLD ? "-10%" : "50%",
                       }}
                     ></div>
                   </div>
@@ -76,9 +80,9 @@ const Book_selector = () => {
               </ModalHeader>
               <ModalBody className="overflow-y-scroll relative">
                 {bookType === BOOK_TYPES.OLD ? (
-                  <Books_Types books={oldBooks} />
+                  <Books_Types lang={bible_state.selectedLang} books={oldBooks} />
                 ) : (
-                  <Books_Types books={newBooks} />
+                  <Books_Types lang={bible_state.selectedLang} books={newBooks} />
                 )}
               </ModalBody>
             </>

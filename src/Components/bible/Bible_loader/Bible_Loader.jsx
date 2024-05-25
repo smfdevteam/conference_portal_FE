@@ -2,14 +2,11 @@ import { useContext } from "react";
 import "./Bible_loader.css";
 import { BibleStateProvider } from "../../../Context/Bible_context";
 const Bible_Loader = () => {
-  const { bible_state } = useContext(BibleStateProvider); 
-  // const bible_state = {
-  //   isLoading : true
-  // }
+  const { bible_state } = useContext(BibleStateProvider);
   return (
     <>
       {bible_state.isLoading && (
-        <div className="absolute inset-0 rounded-2xl z-[1000] bg-white flex items-center">
+        <div className="bg-white  absolute z-[1000] rounded-xl shadow-xl h-full w-full top-0 left-0 right-0">
           <div className="spinner-container">
             <div className="spinner">
               <div className="spinner">
@@ -23,6 +20,7 @@ const Bible_Loader = () => {
               </div>
             </div>
           </div>
+          <p className="text-center text-2xl font-bold ">بنحمل ليك الإصحاح المطلوب </p>
         </div>
       )}
     </>

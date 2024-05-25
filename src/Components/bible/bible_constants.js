@@ -4042,5 +4042,11 @@ export const BIBLE_MAP = {
   ],
 };
 
-export const oldBooks = BIBLE_MAP.books.filter((book) => book.type == BOOK_TYPES.OLD);
-export const newBooks = BIBLE_MAP.books.filter((book) => book.type == BOOK_TYPES.NEW);
+export const oldBooks = BIBLE_MAP.books.filter(
+  (book) => book.type == BOOK_TYPES.OLD
+);
+export const newBooks = BIBLE_MAP.books.filter(
+  (book) => book.type == BOOK_TYPES.NEW
+);
+export const getEnglishPassage = (arabic_passage) =>
+  BIBLE_MAP.books.find((book) => book.arabic_passage === arabic_passage);

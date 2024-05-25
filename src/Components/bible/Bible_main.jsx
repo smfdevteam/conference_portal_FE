@@ -1,11 +1,21 @@
 import { Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { BIBLES } from "./bible_constants";
+import { useContext } from "react";
+import { BibleStateProvider } from "../../Context/Bible_context";
 
 const Bible_main = () => {
-  
+  const { _, setBible_state } = useContext(BibleStateProvider);
   const navigate = useNavigate();
-  const navigateTo = (link) => navigate(link);
+  const navigateTo = (link) => {
+    setBible_state((prev) => ({
+      ...prev,
+      selectedPassage: "",
+      selectedLang: "",
+      passageContent: "",
+    }));
+    navigate(link);
+  };
   return (
     <>
       <h2 className="text-5xl font-bold text-center">الكتاب المقدس</h2>
