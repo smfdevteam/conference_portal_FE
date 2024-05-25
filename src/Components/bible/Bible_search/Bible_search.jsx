@@ -1,15 +1,24 @@
-import { Select, SelectItem, Input, Button } from "@nextui-org/react";
+import { Select, SelectItem, Input, Button, Spinner } from "@nextui-org/react";
 import { useState } from "react";
 import { BIBLE_SEARCH, getArabicPassage } from "../bible_constants";
 import axios from "axios";
+import toast from "react-hot-toast";
 const Bible_search = () => {
   const [bibleState, setBibleState] = useState(null);
   const [wordState, setwordState] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);
   const getSearch = async () => {
-    const url = `https://api.biblia.com/v1/bible/search/${"ar-vandyke"}.js?query=${wordState}&mode=verse&start=0&&key=18e1aef45cf119afe94336aaba5dca53`;
-    const result = await axios.get(url);
-    setResults(result.data.results);
+    try {
+      setIsLoading(true);
+      const url = `https://api.biblia.com/v1/bible/search/${"ar-vandyke"}.js?query=${wordState}&mode=verse&start=0&&key=18e1aef45cf119afe94336aaba5dca53`;
+      const result = await axios.get(url);
+      setResults(result.data.results);
+    } catch (e) {
+      toast.error(e.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <>
@@ -35,8 +44,13 @@ const Bible_search = () => {
           label="الكلمة "
           onChange={(e) => setwordState(e.target.value)}
         />
-        <Button variant="solid" color="primary" onPress={getSearch}>
-          إبحث
+        <Button
+          variant="solid"
+          color={isLoading ? "default" : "primary"}
+          onPress={getSearch}
+        >
+          <p>إبحث</p>
+          {isLoading && <Spinner size="sm" color={"warning"} />}
         </Button>
       </div>
       {results.length > 0 && (
@@ -53,9 +67,14 @@ const Bible_search = () => {
           results.map(({ title, preview }) => {
             if (title && preview) {
               return (
-                <div key={title} className="border-2 rounded-lg p-3 animate-fly">
+                <div
+                  key={title}
+                  className="border-2 rounded-lg p-3 animate-fly"
+                >
                   <p className="text-xl">{preview}</p>
-                  <p className="font-bold" dir="ltr">{title}</p>
+                  <p className="font-bold" dir="ltr">
+                    {title}
+                  </p>
                 </div>
               );
             }
