@@ -8,10 +8,25 @@ const Bible_search = () => {
   const [wordState, setwordState] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);
+  const getArabicRefrence = (text) => {
+    let textSplitted = text.split(" ");
+    if (textSplitted.length === 3) {
+      let mainPassage = `${textSplitted[0]} ${textSplitted[1]}`;
+      let rtlLabel = textSplitted[2].split(":").reverse().join(":");
+      let arabicPassage = getArabicPassage(mainPassage).arabic_passage;
+      return `${arabicPassage} ${rtlLabel}`;
+    } else {
+      let mainPassage = textSplitted[0];
+      let rtlLabel = textSplitted[1].split(":").reverse().join(":");
+      let arabicPassage = getArabicPassage(mainPassage).arabic_passage;
+
+      return `${arabicPassage} ${rtlLabel}`;
+    }
+  };
   const getSearch = async () => {
     try {
       setIsLoading(true);
-      const url = `https://api.biblia.com/v1/bible/search/${"ar-vandyke"}.js?query=${wordState}&mode=verse&start=0&&key=18e1aef45cf119afe94336aaba5dca53`;
+      const url = `https://api.biblia.com/v1/bible/search/${bibleState.currentKey}.js?query=${wordState}&mode=verse&start=0&&key=18e1aef45cf119afe94336aaba5dca53`;
       const result = await axios.get(url);
       setResults(result.data.results);
     } catch (e) {
@@ -68,12 +83,15 @@ const Bible_search = () => {
             if (title && preview) {
               return (
                 <div
+                  dir={bibleState.currentKey === "asv" ? "ltr" : "rtl"}
                   key={title}
                   className="border-2 rounded-lg p-3 animate-fly"
                 >
                   <p className="text-xl">{preview}</p>
                   <p className="font-bold" dir="ltr">
-                    {title}
+                    {bibleState.currentKey === "asv"
+                      ? title
+                      : getArabicRefrence(title)}
                   </p>
                 </div>
               );
