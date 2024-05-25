@@ -4,9 +4,9 @@ export const BIBLES = {
 };
 
 export const BOOK_TYPES = {
-  OLD:'old' , 
-  NEW : 'new'
-}
+  OLD: "old",
+  NEW: "new",
+};
 
 export const BIBLE_MAP = {
   books: [
@@ -4041,3 +4041,6 @@ export const BIBLE_MAP = {
     },
   ],
 };
+
+export const oldBooks = BIBLE_MAP.books.filter((book) => book.type == BOOK_TYPES.OLD);
+export const newBooks = BIBLE_MAP.books.filter((book) => book.type == BOOK_TYPES.NEW);
