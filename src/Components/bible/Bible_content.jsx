@@ -15,7 +15,7 @@ const Bible_content = () => {
       ...prev,
       selectedLang: language === "asv" ? "en" : "ar",
     }));
-  });
+  } , []);
   return (
     <>
       <Bible_Loader />

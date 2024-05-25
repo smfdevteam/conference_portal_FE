@@ -89,9 +89,7 @@ const Bible_search = () => {
                 >
                   <p className="text-xl">{preview}</p>
                   <p className="font-bold" dir="ltr">
-                    {bibleState.currentKey === "asv"
-                      ? title
-                      : getArabicRefrence(title)}
+                    {title}
                   </p>
                 </div>
               );
