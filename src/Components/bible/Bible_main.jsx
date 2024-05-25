@@ -20,7 +20,7 @@ const Bible_main = () => {
     <>
       <h2 className="text-5xl font-bold text-center">الكتاب المقدس</h2>
       <div className="flex font-bold gap-10 my-5 justify-center items-center">
-        <div className="w-[50%]">
+        <div className="w-[45%]">
           <Image
             onClick={() => navigateTo(BIBLES["ar-vandyke"])}
             isBlurred
@@ -33,7 +33,7 @@ const Bible_main = () => {
             <p>النسخة العربية </p>
           </div>
         </div>
-        <div className="w-[50%]">
+        <div className="w-[45%]">
           <Image
             onClick={() => navigateTo(BIBLES.asv)}
             isBlurred
@@ -43,9 +43,15 @@ const Bible_main = () => {
           />
           <div className="bible_meta text-center my-3">
             <p className="text-lg">Bible </p>
-            <p className="text-md">American Standard Version </p>
+            <p className="text-sm">American Standard Version </p>
           </div>
         </div>
+      </div>
+      <div
+        onClick={() => navigateTo('search')}
+        className="border-4 transition hover:bg-zinc-800 hover:text-white animate-fly h-[20vh] flex items-center justify-center text-3xl font-bold shadow-lg rounded-3xl "
+      >
+        <p>ابحث في الكتاب المقدس</p>
       </div>
     </>
   );

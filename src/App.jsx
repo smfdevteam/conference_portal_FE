@@ -19,6 +19,7 @@ import Location from "./pages/Location";
 import Bible from "./pages/Bible/Bible";
 import Bible_main from "./Components/bible/Bible_main";
 import Bible_content from "./Components/bible/Bible_content";
+import Bible_search from "./Components/bible/Bible_search/Bible_search";
 function App() {
   const { app_state, setAppState } = useContext(stateProvider);
 
@@ -71,6 +72,7 @@ function App() {
             <Route path="/bible" element={<Bible />}>
               <Route index element={<Bible_main />} />
               <Route path=":language" element={<Bible_content />} />
+              <Route path="search" element={<Bible_search />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

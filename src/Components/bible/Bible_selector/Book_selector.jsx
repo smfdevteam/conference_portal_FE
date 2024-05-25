@@ -34,7 +34,7 @@ const Book_selector = () => {
       </div>
       <Modal
         dir={bible_state.selectedLang === "en" ? "ltr" : "rtl"}
-        className="h-[70vh]"
+        className="h-[60vh]"
         backdrop={"blur"}
         isOpen={isOpen}
         onClose={onClose}

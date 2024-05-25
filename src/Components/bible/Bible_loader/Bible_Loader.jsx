@@ -6,7 +6,7 @@ const Bible_Loader = () => {
   return (
     <>
       {bible_state.isLoading && (
-        <div className="bg-white  absolute z-[1000] rounded-xl shadow-xl h-full w-full top-0 left-0 right-0">
+        // <div className="bg-white absolute z-[1000] rounded-xl shadow-xl h-full w-full top-0 left-0 right-0">
           <div className="spinner-container">
             <div className="spinner">
               <div className="spinner">
@@ -20,8 +20,8 @@ const Bible_Loader = () => {
               </div>
             </div>
           </div>
-          <p className="text-center text-2xl font-bold ">بنحمل ليك الإصحاح المطلوب </p>
-        </div>
+          // <p className="text-center text-2xl font-bold ">بنحمل ليك الإصحاح المطلوب </p>
+        // </div>
       )}
     </>
   );

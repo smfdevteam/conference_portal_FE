@@ -3219,7 +3219,7 @@ export const BIBLE_MAP = {
     {
       passage: "Luke",
       type: "new",
-      arabic_passage: "لوق",
+      arabic_passage: "لوقا",
       chapters: [
         {
           passage: "Luke 1",
@@ -4042,6 +4042,18 @@ export const BIBLE_MAP = {
   ],
 };
 
+export const BIBLE_SEARCH = [
+  {
+    lang : 'english' , 
+    bible : BIBLES.asv
+  } , 
+  {
+    lang : 'عربي' , 
+    bible : BIBLES["ar-vandyke"]
+  } , 
+]
+
+
 export const oldBooks = BIBLE_MAP.books.filter(
   (book) => book.type == BOOK_TYPES.OLD
 );
@@ -4050,3 +4062,8 @@ export const newBooks = BIBLE_MAP.books.filter(
 );
 export const getEnglishPassage = (arabic_passage) =>
   BIBLE_MAP.books.find((book) => book.arabic_passage === arabic_passage);
+export const getArabicPassage = (passage) =>
+  BIBLE_MAP.books.find((book) => book.passage === passage);
+
+
+
