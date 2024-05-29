@@ -1,10 +1,11 @@
+import { Progress } from "@nextui-org/react";
+import { Suspense, lazy, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Bible_Passage_viewer from "./Bible_Passage_viewer";
-import Book_selector from "./Bible_selector/Book_selector";
-import { BIBLES } from "./bible_constants";
-import { useContext, useEffect } from "react";
 import { BibleStateProvider } from "../../Context/Bible_context";
+import Bible_Passage_viewer from "./Bible_Passage_viewer";
 import Bible_Loader from "./Bible_loader/Bible_Loader";
+import { BIBLES } from "./bible_constants";
+const Book_selector = lazy(() => import("./Bible_selector/Book_selector"));
 const Bible_content = () => {
   const { setBible_state } = useContext(BibleStateProvider);
   const { language } = useParams();
@@ -15,12 +16,24 @@ const Bible_content = () => {
       ...prev,
       selectedLang: language === "asv" ? "en" : "ar",
     }));
-  } , []);
+  }, []);
   return (
     <>
       <Bible_Loader />
       <div dir={language === "asv" ? "ltr" : "rtl"}>
-        <Book_selector />;
+        <Suspense
+          fallback={
+            <Progress
+              size="lg"
+              isIndeterminate
+              color="warning"
+              aria-label="Loading..."
+              className="w-full"
+            />
+          }
+        >
+          <Book_selector />
+        </Suspense>
         <Bible_Passage_viewer />
       </div>
     </>

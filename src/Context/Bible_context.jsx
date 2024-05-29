@@ -7,7 +7,8 @@ const Bible_context = ({ children }) => {
     selectedPassage: "",
     selectedLang:"" ,
     passageContent:"" , 
-    closeModalAction :null
+    closeModalAction :null ,
+    isSearchViewerLoading:false 
   });
   return (
     <BibleStateProvider.Provider

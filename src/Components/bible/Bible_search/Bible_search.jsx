@@ -1,28 +1,29 @@
-import { Select, SelectItem, Input, Button, Spinner } from "@nextui-org/react";
-import { useState } from "react";
-import { BIBLE_SEARCH, getArabicPassage } from "../bible_constants";
+import { Button, Input, Select, SelectItem } from "@nextui-org/react";
 import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { BIBLE_SEARCH, getArabicPassage } from "../bible_constants";
+import Full_Screen_Skeleton_Loader from '../../shared/Full_Screen_Skeleton_Loader'
 const Bible_search = () => {
   const [bibleState, setBibleState] = useState(null);
   const [wordState, setwordState] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);
-  const getArabicRefrence = (text) => {
-    let textSplitted = text.split(" ");
-    if (textSplitted.length === 3) {
-      let mainPassage = `${textSplitted[0]} ${textSplitted[1]}`;
-      let rtlLabel = textSplitted[2].split(":").reverse().join(":");
-      let arabicPassage = getArabicPassage(mainPassage).arabic_passage;
-      return `${arabicPassage} ${rtlLabel}`;
-    } else {
-      let mainPassage = textSplitted[0];
-      let rtlLabel = textSplitted[1].split(":").reverse().join(":");
-      let arabicPassage = getArabicPassage(mainPassage).arabic_passage;
+  // const getArabicRefrence = (text) => {
+  //   let textSplitted = text.split(" ");
+  //   if (textSplitted.length === 3) {
+  //     let mainPassage = `${textSplitted[0]} ${textSplitted[1]}`;
+  //     let rtlLabel = textSplitted[2].split(":").reverse().join(":");
+  //     let arabicPassage = getArabicPassage(mainPassage).arabic_passage;
+  //     return `${arabicPassage} ${rtlLabel}`;
+  //   } else {
+  //     let mainPassage = textSplitted[0];
+  //     let rtlLabel = textSplitted[1].split(":").reverse().join(":");
+  //     let arabicPassage = getArabicPassage(mainPassage).arabic_passage;
 
-      return `${arabicPassage} ${rtlLabel}`;
-    }
-  };
+  //     return `${arabicPassage} ${rtlLabel}`;
+  //   }
+  // };
   const getSearch = async () => {
     try {
       setIsLoading(true);
@@ -65,9 +66,9 @@ const Bible_search = () => {
           onPress={getSearch}
         >
           <p>إبحث</p>
-          {isLoading && <Spinner size="sm" color={"warning"} />}
         </Button>
       </div>
+      {isLoading && <Full_Screen_Skeleton_Loader/>}
       {results.length > 0 && (
         <p className="text-2xl my-5">
           لقد تم ايجاد
