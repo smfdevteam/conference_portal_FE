@@ -5,14 +5,14 @@ import * as Yup from "yup";
 import { Input, Button, Link } from "@nextui-org/react";
 import { resetClientPassword } from "../../Api/auth.service";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const initialValues = {
   email: "",
 };
-const onSubmit = ({ email, setIsSubmiting, setEmailSent }) => {
+const onSubmit = async ({ email, setIsSubmiting }) => {
   try {
     setIsSubmiting(true);
     resetClientPassword(email);
-    setEmailSent(true);
   } finally {
     setIsSubmiting(false);
   }
@@ -23,17 +23,12 @@ const validationSchema = Yup.object({
 const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const [isSubmiting, setIsSubmiting] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
-  const handleClick = () => {
-    setEmailSent(false);
-  };
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
   });
   formik.values.setIsSubmiting = setIsSubmiting;
-  formik.values.setEmailSent = setEmailSent;
 
   return (
     <div className="flex flex-col gap-6 font-[Cairo] font-semibold ">
@@ -49,11 +44,7 @@ const ResetPasswordForm = () => {
         className="flex flex-col w-full gap-4"
       >
         <h1>تغيير كلمة المرور أو إعادة ضبطها</h1>
-        {emailSent ? (
-          <div className="text-green-600 w-full text-center  border-t-2 border-b-2">
-            <h2>تم إرسال البريد الإلكتروني إلى {formik.values.email}</h2>
-          </div>
-        ) : null}
+
         <Input
           name="email"
           type="email"
@@ -61,7 +52,6 @@ const ResetPasswordForm = () => {
           label="الايميل"
           value={formik.values.email}
           onChange={formik.handleChange}
-          onClick={handleClick}
           onBlur={formik.handleBlur}
           isInvalid={
             formik.touched.email && (formik.errors.email ? true : false)

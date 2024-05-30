@@ -26,7 +26,6 @@ const onSubmit = async ({
   password,
   profileImage,
   setIsSubmiting,
-  setErrorMessage,
   navigate
 }) => {
   try {
@@ -45,9 +44,7 @@ const onSubmit = async ({
     const response = await register(formData);
     console.log("response", response);
     if (response != "created") {
-      setErrorMessage(response);
     } else {
-      setErrorMessage(null);
       navigate('/login')
     }
   } finally {
@@ -76,7 +73,6 @@ const RegisterForm = () => {
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const toggleVisibility = () => setIsVisible(!isVisible);
   const formik = useFormik({
     initialValues,
@@ -91,7 +87,6 @@ const RegisterForm = () => {
   console.log("touched ==", formik.touched.phone);
   formik.values.profileImage = avatarImage;
   formik.values.setIsSubmiting = setIsSubmiting;
-  formik.values.setErrorMessage = setErrorMessage;
   formik.values.navigate = navigate;
   return (
     <div className="font-semibold font-[Cairo]">
@@ -102,11 +97,6 @@ const RegisterForm = () => {
             setAvatarImage={setAvatarImage}
             avatarImage={avatarImage}
           />
-          {errorMessage ? (
-            <div className="text-red-800  border-2 border-red-600 w-full text-center rounded-md animate-bounce">
-              <h2>{errorMessage}</h2>
-            </div>
-          ) : null}
           <Input
             variant="bordered"
             name="name"

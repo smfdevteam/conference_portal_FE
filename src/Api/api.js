@@ -1,17 +1,25 @@
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 export const api = axios.create({
   baseURL: "https://conference-portal-be.onrender.com",
 });
 
 api.interceptors.request.use(
-  function (config) {
-    console.log("config = ", config);
+  async function (config) {
     if (config.headers.skipInterceptors) return config;
 
     const token = localStorage.getItem("X-ACCESS-TOKEN");
 
     if (token) {
+      const isValid = await verifyToken(token);
+      if (!isValid) {
+        token = await refreshToken();
+        if (!token) {
+          clearTokens();
+          useNavigate("/login");
+        }
+      }
       config.headers["authorization"] = `Bearer ${token}`;
       return config;
     } else {
@@ -19,6 +27,28 @@ api.interceptors.request.use(
     }
   },
   function (error) {
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const token = await refreshToken();
+      if (token) {
+        api.defaults.headers["Authorization"] = `Bearer ${token}`;
+        originalRequest.headers["Authorization"] = `Bearer ${token}`;
+        return api(originalRequest);
+      } else {
+        clearTokens();
+        useNavigate("/login");
+      }
+    }
     return Promise.reject(error);
   }
 );
@@ -35,20 +65,23 @@ export const register = async (userData) => {
   } catch (error) {
     console.log("error api ===", error);
     if (!error?.response) {
-      return "No Server Response";
+      toast.error("No Server Response");
     } else if (
       error?.response.data.message === "TOO_SHORT" ||
       error?.response.data.message === "TOO_LONG"
     ) {
-      return "الموبايل مش مظبوط";
+      toast.error("الموبايل مش مظبوط");
     } else if (error?.response.data.message === "user already exist") {
-      return "البريد الإلكتروني مسجل بالفعل من قبل";
+      toast.error("البريد الإلكتروني مسجل بالفعل من قبل");
     } else if (
       error?.response.data.message ===
       "The user with the provided phone number already exists."
     ) {
-      return "رقم الهاتف مسجل بالفعل من قبل";
-    }
+      toast.error("رقم الهاتف مسجل بالفعل من قبل");
+    }else if(error?.response.data.message ===
+      "The email address is improperly formatted."){
+        toast.error("الايميل مش مظبوط")
+      }
   }
 };
 
@@ -58,16 +91,53 @@ export const login = async (credentials) => {
     const response = await api.post("/guest/auth/login", credentials, {
       headers,
     });
-    console.log("response.data", response);
-
+    toast.success("Welcome")
     return response;
   } catch (error) {
-    console.log("error api ===",error)
+    console.log("error api ===", error);
     if (!error?.response) {
-      return "No Server Response";
-    }else if(error?.response.data.message === "Firebase: Error (auth/invalid-credential)."){
-      return "خطأ في اسم المستخدم أو كلمة السر"
+      toast.error( "الرجاء معاودة المحاولة في وقت لاحق");
+    } else if (
+      error?.response.data.message ===
+      "Firebase: Error (auth/invalid-credential)."
+    ) {
+      toast.error( "خطأ في اسم المستخدم أو كلمة السر");
     }
-    
+  }
+};
+
+const getRefreshToken = () => localStorage.getItem("X-REFRESH-TOKEN");
+const clearTokens = () => {
+  localStorage.removeItem("X-ACCESS-TOKEN");
+  localStorage.removeItem("X-REFRESH-TOKEN");
+};
+const setTokens = (accessToken, refreshToken) => {
+  localStorage.setItem("X-ACCESS-TOKEN", accessToken);
+  localStorage.setItem("X-REFRESH-TOKEN", refreshToken);
+};
+
+const verifyToken = async (token) => {
+  try {
+    await api.post("/guest/auth/verify_token", { token });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+const refreshToken = async () => {
+  const refreshToken = getRefreshToken();
+  if (!refreshToken) return null;
+
+  try {
+    const response = await api.post("/guest/auth/refresh-token", {
+      token: refreshToken,
+    });
+    const { id_token, refresh_token } = response.data;
+    setTokens(id_token, refresh_token);
+    return id_token;
+  } catch (error) {
+    clearTokens();
+    return null;
   }
 };
