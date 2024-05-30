@@ -5,7 +5,7 @@ import { BibleStateProvider } from "../../Context/Bible_context";
 const Bible_Passage_viewer = () => {
   const { bible_state } = useContext(BibleStateProvider);
   return (
-    <div className="text-xl">
+    <div className="text-xl my-5">
       <Safe_HTML html={bible_state.passageContent} />
     </div>
   );

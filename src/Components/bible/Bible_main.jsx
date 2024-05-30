@@ -52,7 +52,7 @@ const Bible_main = () => {
         className="border-4 transition justify-evenly hover:bg-zinc-800 hover:text-white animate-fly h-[15vh] flex items-center text-xl font-bold shadow-lg rounded-3xl "
       >
         <p>ابحث في الكتاب المقدس</p>
-        <Image src={bibleIcon} className="h-[7.5vh]"/>
+        <Image src={bibleIcon} isBlurred className="h-[7.5vh]"/>
       </div>
     </>
   );

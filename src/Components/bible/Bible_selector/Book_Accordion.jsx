@@ -16,19 +16,21 @@ const Book_Accordion = ({ passage, chapters_length }) => {
       });
     } else {
       try {
-        const bible = bible_state.selectedLang === 'en' ? BIBLES.asv : BIBLES["ar-vandyke"]
-        let style = 'orationOneVersePerLine'
-        if(bible_state.selectedLang === 'ar') {
-          chapter = getEnglishPassage(chapter).passage
+        const bible =
+          bible_state.selectedLang === "en" ? BIBLES.asv : BIBLES["ar-vandyke"];
+        let style = "orationOneVersePerLine";
+        if (bible_state.selectedLang === "ar") {
+          chapter = getEnglishPassage(chapter).passage;
         }
         setBible_state((prev) => ({ ...prev, isLoading: true }));
         const url = `https://api.biblia.com/v1/bible/content/${bible}.html?passage=${
           chapter + (index + 1)
         }&fullText=true&style=${style}&key=18e1aef45cf119afe94336aaba5dca53`;
-        const content = await axios.get(url);
+        const content = await axios.get(url)
+
         setBible_state((prev) => ({
           ...prev,
-          passageContent: content.data,
+          passageContent: content.data.split('</p>').slice(1).join(),
           selectedPassage: `${passage} ${index + 1}`,
         }));
         bible_state.closeModalAction();
@@ -45,7 +47,9 @@ const Book_Accordion = ({ passage, chapters_length }) => {
       <AccordionItem
         className="font-bold"
         aria-label={passage}
-        subtitle={`${chapters_length} ${bible_state.selectedLang === 'en' ? 'Chapters' : 'إصحاح'}`}
+        subtitle={`${chapters_length} ${
+          bible_state.selectedLang === "en" ? "Chapters" : "إصحاح"
+        }`}
         title={passage}
       >
         <div className="grid grid-cols-5 gap-4">

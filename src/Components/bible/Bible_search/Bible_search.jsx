@@ -1,12 +1,13 @@
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { BIBLE_SEARCH, getArabicPassage } from "../bible_constants";
-import Full_Screen_Skeleton_Loader from '../../shared/Full_Screen_Skeleton_Loader'
+import Full_Screen_Skeleton_Loader from "../../shared/Full_Screen_Skeleton_Loader";
 const Bible_search = () => {
   const [bibleState, setBibleState] = useState(null);
-  const [wordState, setwordState] = useState(null);
+  const [wordState, setwordState] = useState("");
+  const searchRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);
   // const getArabicRefrence = (text) => {
@@ -25,15 +26,20 @@ const Bible_search = () => {
   //   }
   // };
   const getSearch = async () => {
-    try {
-      setIsLoading(true);
-      const url = `https://api.biblia.com/v1/bible/search/${bibleState.currentKey}.js?query=${wordState}&mode=verse&start=0&&key=18e1aef45cf119afe94336aaba5dca53`;
-      const result = await axios.get(url);
-      setResults(result.data.results);
-    } catch (e) {
-      toast.error(e.message);
-    } finally {
-      setIsLoading(false);
+    if (searchRef.current.value && searchRef.current.value !== wordState) {
+      try {
+        setwordState(searchRef.current.value);
+        setResults([]);
+        setIsLoading(true);
+        const url = `https://api.biblia.com/v1/bible/search/${bibleState.currentKey}.js?query=${searchRef.current.value}&mode=verse&start=0&&key=18e1aef45cf119afe94336aaba5dca53`;
+        const result = await axios.get(url);
+        setResults(result.data.results);
+      } catch (e) {
+        setwordState("");
+        toast.error(e.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
   return (
@@ -55,11 +61,7 @@ const Bible_search = () => {
             </SelectItem>
           ))}
         </Select>
-        <Input
-          type="text"
-          label="الكلمة "
-          onChange={(e) => setwordState(e.target.value)}
-        />
+        <Input type="text" label="الكلمة " ref={searchRef} />
         <Button
           variant="solid"
           color={isLoading ? "default" : "primary"}
@@ -68,7 +70,7 @@ const Bible_search = () => {
           <p>إبحث</p>
         </Button>
       </div>
-      {isLoading && <Full_Screen_Skeleton_Loader/>}
+      {isLoading && <Full_Screen_Skeleton_Loader />}
       {results.length > 0 && (
         <p className="text-2xl my-5">
           لقد تم ايجاد

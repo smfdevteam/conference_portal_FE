@@ -51,7 +51,7 @@
 
 .items li {
   padding: 0.1rem;
-  font-size: 2rem ; 
+  font-size: 2rem;
   color: #fff;
   position: relative;
   transition: all 0.5s;
@@ -132,7 +132,7 @@
   }
   100% {
     padding: 100%;
-    transform: scale(1.5) translate(10%);
+    transform: scale(1.1) translate(10%, -20%);
   }
 }
 
@@ -143,16 +143,21 @@
   outline: 50px solid #504eae;
   border-radius: 100%;
   transition: all 0.5s;
+  width: 20vw;
+  height: 20vw;
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .tabs {
   position: relative;
   overflow: hidden;
+  width: 60vw;
 }
 
 .tabs span {
-  font-size: 2rem;
-  margin: 0px 20px;
+  font-size: 1.5em;
+  margin: 0px 3vw;
   transition: all 1s;
 }
 .tabs span.active {
@@ -168,18 +173,13 @@
 }
 .selector.left {
   left: -10%;
-
 }
 .selector.right {
   left: 50%;
 }
 
-
-
-
-
-@media screen and (max-width:320px) {
-  .items li  {
+@media screen and (max-width: 320px) {
+  .items li {
     font-size: 1rem;
   }
   .tabs span {
