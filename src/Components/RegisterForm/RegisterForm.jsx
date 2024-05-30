@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input, Button } from "@nextui-org/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import AvatarUploader from "../AvatarUploader/AvatarUploader";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
-import CustomToolTip from "../CustomToolTip/CustomToolTip";
-import { api } from "../../Api/api";
 import { register } from "../../Api/api";
+import CustomPhoneInput from "../CustomPhoneInput/CustomPhoneInput";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { useNavigate } from "react-router-dom";
 const initialValues = {
   name: "",
   phone: "",
@@ -15,33 +16,64 @@ const initialValues = {
   password: "",
   confirmPassword: "",
   profileImage: "",
-  notificationToken:localStorage.getItem('notification_token')
+  notificationToken: localStorage.getItem("notification_token"),
 };
 
-const onSubmit = async ({ name, phone, email, password, profileImage }) => {
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("phone", phone);
-  formData.append("email", email);
-  formData.append("password", password);
-  formData.append("profileImage", profileImage);
-  formData.append("notificationToken", localStorage.getItem('notification_token'));
-  console.log(Object.fromEntries(formData));
-  const response = await register(formData)
-  console.log("response",response)
+const onSubmit = async ({
+  name,
+  phone,
+  email,
+  password,
+  profileImage,
+  setIsSubmiting,
+  setErrorMessage,
+  navigate
+}) => {
+  try {
+    setIsSubmiting(true);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("profileImage", profileImage);
+    formData.append(
+      "notificationToken",
+      localStorage.getItem("notification_token")
+    );
+    console.log(Object.fromEntries(formData));
+    const response = await register(formData);
+    console.log("response", response);
+    if (response != "created") {
+      setErrorMessage(response);
+    } else {
+      setErrorMessage(null);
+      navigate('/login')
+    }
+  } finally {
+    setIsSubmiting(false);
+  }
 };
 
 const validationSchema = Yup.object({
   name: Yup.string().required("اسمك مطلوب"),
   email: Yup.string().email("الايميل مش مظبوط").required("الايميل مطلوب"),
-  password: Yup.string().required("الباسوورد مطلوب"),
+  password: Yup.string()
+    .required("الباسوورد مطلوب")
+    .min(6, "كلمة المرور يجب أن تكون أكثر من 6 أحرف"),
   confirmPassword: Yup.string()
     .required("الباسوورد مطلوب")
+
     .oneOf([Yup.ref("password")], "الاتنين لازم يكونوا شبه بعض"),
-  phone: Yup.string().required("مطلوب الموبايل"),
+  phone: Yup.string()
+    .required("مطلوب الموبايل")
+    .test("phone", "الموبايل مش مظبوط", (phone) => isValidPhoneNumber(phone)),
 });
 
 const RegisterForm = () => {
+  const navigate = useNavigate()
+  const [phoneNumber, setPhoneNumer] = useState("");
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -51,11 +83,18 @@ const RegisterForm = () => {
     onSubmit,
     validationSchema,
   });
-  
-  formik.values.profileImage = avatarImage;
 
+  formik.values.phone = phoneNumber;
+
+  console.log("phone ==", formik.values.phone);
+  console.log("error ==", formik.errors);
+  console.log("touched ==", formik.touched.phone);
+  formik.values.profileImage = avatarImage;
+  formik.values.setIsSubmiting = setIsSubmiting;
+  formik.values.setErrorMessage = setErrorMessage;
+  formik.values.navigate = navigate;
   return (
-    <div className="font-semibold">
+    <div className="font-semibold font-[Cairo]">
       <h1 className="text-center">يلا نعمل حساب جديد</h1>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex flex-col gap-3 py-4">
@@ -64,12 +103,12 @@ const RegisterForm = () => {
             avatarImage={avatarImage}
           />
           {errorMessage ? (
-            <div className="text-red-400 text-center border rounded-md ">
-              <h1>error message</h1>
+            <div className="text-red-800  border-2 border-red-600 w-full text-center rounded-md animate-bounce">
+              <h2>{errorMessage}</h2>
             </div>
           ) : null}
           <Input
-            variant="faded"
+            variant="bordered"
             name="name"
             type="text"
             label="الاسم"
@@ -82,7 +121,7 @@ const RegisterForm = () => {
             errorMessage={formik.errors.name}
           />
           <Input
-            variant="faded"
+            variant="bordered"
             name="email"
             type="text"
             label="الايميل"
@@ -95,7 +134,7 @@ const RegisterForm = () => {
             errorMessage={formik.errors.email}
           />
           <Input
-            variant="faded"
+            variant="bordered"
             name="password"
             type={isVisible ? "text" : "password"}
             label="الباسوورد"
@@ -113,15 +152,15 @@ const RegisterForm = () => {
                 onClick={toggleVisibility}
               >
                 {isVisible ? (
-                  <EyeSlashFilledIcon className="text-2xl text-primary pointer-events-none" />
-                ) : (
                   <EyeFilledIcon className="text-2xl text-primary pointer-events-none" />
+                ) : (
+                  <EyeSlashFilledIcon className="text-2xl text-primary pointer-events-none" />
                 )}
               </button>
             }
           />
           <Input
-            variant="faded"
+            variant="bordered"
             name="confirmPassword"
             type="password"
             label="أكد الباسوورد"
@@ -134,28 +173,17 @@ const RegisterForm = () => {
             }
             errorMessage={formik.errors.confirmPassword}
           />
-          <Input
-            variant="faded"
-            name="phone"
-            type="tel"
-            label="الموبايل"
-            onChange={formik.handleChange}
-            value={formik.values.phone}
-            endContent={
-              <CustomToolTip
-                customStyle=" bg-blue-400 my-4 -ml-4"
-                toolTipHeader="لية رقم الموبايل ؟"
-                toolTipContent="عشان لو حصل حاجة نقدر نوصل ليك بسرعة من
-                    فضللك ادخل رقم الموبيل ذى "
-                highLightedMessge="(+20100XXXX)"
-              />
-            }
-            isInvalid={
-              formik.touched.phone && (formik.errors.phone ? true : false)
-            }
-            errorMessage={formik.errors.phone}
+          <CustomPhoneInput
+            phoneNumber={phoneNumber}
+            setPhoneNumer={setPhoneNumer}
+            formik={formik}
           />
-          <Button type="submit" color="primary" className="w-full">
+          <Button
+            type="submit"
+            color="primary"
+            className="w-full"
+            isLoading={isSubmiting}
+          >
             يلا بينا
           </Button>
         </div>
