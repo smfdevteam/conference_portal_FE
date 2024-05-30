@@ -40,7 +40,6 @@ const Skeleton_Loader = () => {
         </div>
         <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
       </div>
-      <span className="sr-only">Loading...</span>
     </div>
   );
 };

@@ -1,22 +1,26 @@
 import { Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { BIBLES } from "./bible_constants";
-// BIBLE_API_KEY = "18e1aef45cf119afe94336aaba5dca53"
-// Arabic
-// BIBLE_TITLE = "ar-vandyke"
-// IMAGE_URL = https://covers.logoscdn.com/lls_1.0.290/cover.jpg
-// English
-// BIBLE_TITLE = "asv"
-// IMAGE_URL = https://covers.logoscdn.com/lls_1.0.60/cover.jpg
+import { useContext } from "react";
+import { BibleStateProvider } from "../../Context/Bible_context";
+import bibleIcon from '../../assets/images/icons/bible.png'
 const Bible_main = () => {
-  
+  const { _, setBible_state } = useContext(BibleStateProvider);
   const navigate = useNavigate();
-  const navigateTo = (link) => navigate(link);
+  const navigateTo = (link) => {
+    setBible_state((prev) => ({
+      ...prev,
+      selectedPassage: "",
+      selectedLang: "",
+      passageContent: "",
+    }));
+    navigate(link);
+  };
   return (
     <>
       <h2 className="text-5xl font-bold text-center">الكتاب المقدس</h2>
       <div className="flex font-bold gap-10 my-5 justify-center items-center">
-        <div>
+        <div className="w-[45%] flex flex-col justify-center items-center">
           <Image
             onClick={() => navigateTo(BIBLES["ar-vandyke"])}
             isBlurred
@@ -29,7 +33,7 @@ const Bible_main = () => {
             <p>النسخة العربية </p>
           </div>
         </div>
-        <div>
+        <div className="w-[45%] flex flex-col justify-center items-center">
           <Image
             onClick={() => navigateTo(BIBLES.asv)}
             isBlurred
@@ -39,9 +43,16 @@ const Bible_main = () => {
           />
           <div className="bible_meta text-center my-3">
             <p className="text-lg">Bible </p>
-            <p className="text-md">American Standard Version </p>
+            <p className="text-sm">American Standard Version </p>
           </div>
         </div>
+      </div>
+      <div
+        onClick={() => navigateTo('search')}
+        className="border-4 transition justify-evenly hover:bg-zinc-800 hover:text-white animate-fly h-[15vh] flex items-center text-xl font-bold shadow-lg rounded-3xl "
+      >
+        <p>ابحث في الكتاب المقدس</p>
+        <Image src={bibleIcon} isBlurred className="h-[7.5vh]"/>
       </div>
     </>
   );

@@ -13,13 +13,7 @@ const initialValues = {
   email: "",
   password: "",
 };
-const onSubmit = async ({
-  email,
-  password,
-  setIsSubmiting,
-  setAppState,
-  setErrorMessage,
-}) => {
+const onSubmit = async ({ email, password, setIsSubmiting, setAppState }) => {
   try {
     setIsSubmiting(true);
     const response = await login({
@@ -28,14 +22,12 @@ const onSubmit = async ({
     });
     console.log("response = ===", response);
     if (response.status === 200) {
-      setErrorMessage(null);
       localStorage.setItem("X-ACCESS-TOKEN", response.headers.get("Token"));
       localStorage.setItem("X-REFRESH-TOKEN", response.headers.get("Refresh"));
+      console.log("data ====", response.data);
       setAppState((prev) => {
-        return { ...prev, user: response.data };
+        return { ...prev, user: response.data, isLogged: true };
       });
-    } else {
-      setErrorMessage(response);
     }
   } finally {
     setIsSubmiting(false);
@@ -48,7 +40,6 @@ const validationSchema = Yup.object({
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState(null);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const { app_state, setAppState } = useContext(stateProvider);
@@ -61,7 +52,6 @@ export default function LoginForm() {
 
   formik.values.setIsSubmiting = setIsSubmiting;
   formik.values.setAppState = setAppState;
-  formik.values.setErrorMessage = setErrorMessage;
   return (
     <div className="font-semibold font-[Cairo]">
       <div
@@ -81,11 +71,7 @@ export default function LoginForm() {
           className="animate-pulse"
         />
         <h1>تسجيل الدخول</h1>
-        {errorMessage ? (
-          <div className="text-red-800  border-2 border-red-600 w-full text-center rounded-md animate-bounce">
-            <h2>{errorMessage}</h2>
-          </div>
-        ) : null}
+
         <Input
           name="email"
           type="email"
