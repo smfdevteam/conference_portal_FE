@@ -16,7 +16,7 @@ const links = [
   { name: "البرنامج", link: "/program" },
   { name: "الكتاب المقدس", link: "/bible" },
 ];
-const userLinks = ["بروفايلي", "الإعدادات", "أسرة مارمرقس", "تسجيل الخروج"];
+const userLinks = ["بروفايلي", "الإعدادات", "أسرة مارمرقس", "ملاحظاتي" , "تسجيل الخروج"];
 const Side_bar = () => {
   const navigate = useNavigate()
   const { app_state, setAppState } = useContext(stateProvider);
@@ -34,18 +34,18 @@ const Side_bar = () => {
   return (
     <aside className={`smf_aside ${app_state.isAsideOpen && " show_side"} `}>
       <div className="flex justify-between m-10">
-        <div className=" tabs flex gap-10 py-1 border-1 font-semibold rounded-xl justify-between items-center text-white">
+        <div className=" tabs flex py-4 me-5 border-1 font-semibold rounded-xl justify-between items-center text-white">
           <span
             onClick={handleUserActive}
             className={`${isUserActive && "active"}`}
           >
-            أنا
+            Abanoub
           </span>
           <span
             onClick={handleUserActive}
             className={`${!isUserActive && "active"}`}
           >
-            المؤتمر
+          Cashback
           </span>
           <span
             className={`selector rounded-xl ${
@@ -108,7 +108,7 @@ const Side_bar = () => {
         >
           <div
             onClick={handleUserActive}
-            className={`smf_user-avatar  border-2 flex justify-center items-center w-[100px] shadow-lg object-fill h-[100px] rounded-full ${
+            className={`smf_user-avatar  border-2 flex justify-center items-center w-full h-full shadow-lg object-fill rounded-full ${
               app_state.isAsideOpen && "enter-animation"
             }`}
           >

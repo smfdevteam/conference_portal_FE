@@ -1,25 +1,30 @@
 import { onMessage } from "firebase/messaging";
-import { useContext, useEffect } from "react";
+import { Suspense, lazy, useContext, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
+import { getLookups } from "./Api/conference_meta.service";
 import "./App.css";
-import { stateProvider } from "./Context/App_Context";
 import Login from "./Auth/Login/Login";
 import Register from "./Auth/Register/Register";
+import Full_Screen_Skeleton_Loader from "./Components/shared/Full_Screen_Skeleton_Loader";
+import { stateProvider } from "./Context/App_Context";
 import Layout from "./Layout/Layout";
 import { CONFERENCE_FIREBASE_MESSAGEING_HANDLER } from "./firebase/firebase.config";
 import Home from "./pages/Home/Home";
 import Hymns from "./pages/Hymns/Hymns";
 import NotFound from "./pages/NotFound";
 import NotMobile from "./pages/NotMobile";
-import { handleNotifications, isMobile } from "./utils/client";
 import Team from "./pages/Team/Team";
-import { getLookups } from "./Api/conference_meta.service";
-import Location from "./pages/Location";
-import Bible from "./pages/Bible/Bible";
-import Bible_main from "./Components/bible/Bible_main";
-import Bible_content from "./Components/bible/Bible_content";
-import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import { handleNotifications, isMobile } from "./utils/client";
+
+const Location = lazy(() => import("./pages/Location"));
+const Bible = lazy(() => import("./pages/Bible/Bible"));
+const Bible_main = lazy(() => import("./Components/bible/Bible_main"));
+const Bible_content = lazy(() => import("./Components/bible/Bible_content"));
+const Bible_search = lazy(() =>
+  import("./Components/bible/Bible_search/Bible_search")
+);
+
 function App() {
   const { app_state, setAppState } = useContext(stateProvider);
 
@@ -61,23 +66,22 @@ function App() {
               },
             }}
           />
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/hymns" element={<Hymns />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/location" element={<Location />} />
-            <Route path="/resetpassword" element={<ResetPassword />} />
-            <Route path="/bible" element={<Bible />}>
-            
-            
-              <Route index element={<Bible_main />} />
-              <Route path=":language" element={<Bible_content />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<Full_Screen_Skeleton_Loader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/hymns" element={<Hymns />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/location" element={<Location />} />
+              <Route path="/bible" element={<Bible />}>
+                <Route index element={<Bible_main />} />
+                <Route path=":language" element={<Bible_content />} />
+                <Route path="search" element={<Bible_search />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </Layout>
       </>
     );

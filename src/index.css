@@ -6,12 +6,8 @@
 
 body {
   font-family: "arabic-regular";
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
 
+}
 
 
 
@@ -38,3 +34,8 @@ body {
 .animate-fly:hover {
     animation-play-state: paused;
 }
+
+
+
+
+/* in bible delete english refrence */ 

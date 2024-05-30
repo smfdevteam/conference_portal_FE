@@ -1,88 +1,89 @@
 import {
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
-  Skeleton,
   useDisclosure,
 } from "@nextui-org/react";
-import { Accordion, AccordionItem } from "@nextui-org/react";
-import { BIBLE_MAP, BOOK_TYPES } from "../bible_constants";
+import { useContext, useEffect, useState } from "react";
+import { newBooks, oldBooks, BOOK_TYPES } from "../bible_constants";
+import Books_Types from "./Books_Types";
 import "./book_selector.css";
-import { useState } from "react";
+import { BibleStateProvider } from "../../../Context/Bible_context";
+import { BIBLE_STRINGS } from "../en_ar";
+
 const Book_selector = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [bookType, setBookType] = useState("old");
+  const [bookType, setBookType] = useState(BOOK_TYPES.OLD);
+  const { bible_state, setBible_state } = useContext(BibleStateProvider);
+  // const [search, setSearch] = useState("");
   const handleBookType = (type) => setBookType(type);
+  useEffect(() => {
+    setBible_state((prev) => ({ ...prev, closeModalAction: onClose }));
+  }, []);
   return (
     <>
       <div
         onClick={onOpen}
         className="book_selector border-2 shadow-md w-[85%] m-auto text-center font-bold text-xl rounded-2xl py-2 translate-y-[-5px] active:translate-y-0 transition active:shadow-none"
       >
-        John 1
+        {bible_state.selectedPassage
+          ? bible_state.selectedPassage
+          : BIBLE_STRINGS.ChooseChapter[bible_state.selectedLang]}
       </div>
       <Modal
-        dir="ltr"
-        className="h-[700px]"
+        dir={bible_state.selectedLang === "en" ? "ltr" : "rtl"}
+        className="h-[60vh]"
         backdrop={"blur"}
         isOpen={isOpen}
         onClose={onClose}
       >
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
-              <ModalHeader className="flex justify-evenly items-center">
-                <p className="font-bold text-3xl">Bible Books</p>
-                <div className="book_type  border-3 p-2 rounded-xl">
-                  <span
-                    className={`${bookType === BOOK_TYPES.OLD && "active"}`}
-                    onClick={() => handleBookType(BOOK_TYPES.OLD)}
-                  >
-                    Old
-                  </span>
-                  <span
-                    className={`${bookType === BOOK_TYPES.NEW && "active"}`}
-                    onClick={() => handleBookType(BOOK_TYPES.NEW)}
-                  >
-                    New
-                  </span>
-                  <div
-                    className="book_type_active"
-                    style={{
-                      left: bookType === BOOK_TYPES.OLD ? "-10%" : "50%",
-                    }}
-                  ></div>
+              <ModalHeader className="flex flex-col gap-3">
+                <div className="flex justify-evenly items-center w-full">
+                  <p className="font-bold text-3xl">
+                    {BIBLE_STRINGS.BibleBooks[bible_state.selectedLang]}
+                  </p>
+                  <div className="book_type  border-3 p-2 rounded-xl">
+                    <span
+                      className={`${bookType === BOOK_TYPES.OLD && "active"}`}
+                      onClick={() => handleBookType(BOOK_TYPES.OLD)}
+                    >
+                      {bible_state.selectedLang === "en" ? "Old" : "قديم"}
+                    </span>
+                    <span
+                      className={`${bookType === BOOK_TYPES.NEW && "active"}`}
+                      onClick={() => handleBookType(BOOK_TYPES.NEW)}
+                    >
+                      {bible_state.selectedLang === "en" ? "New" : "جديد"}
+                    </span>
+                    <div
+                      className="book_type_active"
+                      style={{
+                        [bible_state.selectedLang === "en" ? "left" : "right"]:
+                          bookType === BOOK_TYPES.OLD ? "-10%" : "50%",
+                      }}
+                    ></div>
+                  </div>
                 </div>
+                {/* <Input
+                  type="text"
+                  label="Email"
+                  placeholder="Enter Book Name"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                /> */}
               </ModalHeader>
               <ModalBody className="overflow-y-scroll relative">
-                {BIBLE_MAP.books.map((book, index) => {
-                  if (book.type === bookType)
-                    return (
-                      <Accordion key={book.passage}>
-                        <AccordionItem
-                          key={index}
-                          className="font-bold"
-                          aria-label={book.passage}
-                          subtitle={`${book.chapters.length} Chapters`}
-                          title={book.passage}
-                        >
-                          <div className="grid grid-cols-5 gap-4">
-                            {book.chapters.map((_, index) => {
-                              return (
-                                <div
-                                  className="hover:bg-black hover:text-white transition border-1 bg-slate-50 w-[50px] flex items-center justify-center font-bold text-2xl h-[50px] rounded-md shadow-md text-center"
-                                  key={_.passage}
-                                >
-                                  <p title={_.passage}>{index + 1}</p>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </AccordionItem>
-                      </Accordion>
-                    );
-                })}
+                {bookType === BOOK_TYPES.OLD ? (
+                  <Books_Types lang={bible_state.selectedLang} books={oldBooks} />
+                ) : (
+                  <Books_Types lang={bible_state.selectedLang} books={newBooks} />
+                )}
               </ModalBody>
             </>
           )}
