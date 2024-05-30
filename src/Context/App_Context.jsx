@@ -12,6 +12,7 @@ const App_Context = ({children}) => {
         conference :{} ,
         isAsideOpen : false
     })
+    console.log(app_state)
   return (
     <stateProvider.Provider value={{
         app_state , setAppState
