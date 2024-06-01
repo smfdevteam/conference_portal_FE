@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import NotMobile from "./pages/NotMobile";
 import Team from "./pages/Team/Team";
 import { handleNotifications, isMobile } from "./utils/client";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 const Location = lazy(() => import("./pages/Location"));
 const Bible = lazy(() => import("./pages/Bible/Bible"));
@@ -71,6 +72,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/hymns" element={<Hymns />} />
               <Route path="/team" element={<Team />} />
               <Route path="/location" element={<Location />} />
