@@ -67,6 +67,13 @@ function App() {
               },
             }}
           />
+          <div>
+            <spline-viewer
+              hint
+              loading-anim-type="spinner-small-dark"
+              url="https://prod.spline.design/FPtgk3R-fev4Sw3o/scene.splinecode"
+            ></spline-viewer>
+          </div>
           <Suspense fallback={<Full_Screen_Skeleton_Loader />}>
             <Routes>
               <Route path="/" element={<Home />} />

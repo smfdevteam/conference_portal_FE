@@ -1,6 +1,7 @@
 import { NextUIProvider } from "@nextui-org/react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "https://unpkg.com/@splinetool/viewer@1.4.7/build/spline-viewer.js"
 import { Suspense, lazy } from "react";
 import { BrowserRouter } from "react-router-dom";
 import App_Context from "./Context/App_Context.jsx";
