@@ -11,7 +11,7 @@ const links = [
   { name: "الرئيسية", link: "/" },
   { name: "المتكلمين", link: "/speakers" },
   { name: "مكاننا", link: "/location" },
-  { name: "ملفات", link: "/material" },
+  { name: "ملفات", link: "/materials" },
   { name: "الشعار", link: "/song" },
   { name: "البرنامج", link: "/program" },
   { name: "الكتاب المقدس", link: "/bible" },

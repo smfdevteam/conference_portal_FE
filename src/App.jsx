@@ -1,4 +1,4 @@
-import { onMessage } from "firebase/messaging";
+import { onMessage , } from "firebase/messaging";
 import { Suspense, lazy, useContext, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
@@ -17,6 +17,7 @@ import NotMobile from "./pages/NotMobile";
 import Team from "./pages/Team/Team";
 import { handleNotifications, isMobile } from "./utils/client";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import Material from "./pages/material/Material";
 
 const Location = lazy(() => import("./pages/Location"));
 const Bible = lazy(() => import("./pages/Bible/Bible"));
@@ -83,6 +84,7 @@ function App() {
               <Route path="/hymns" element={<Hymns />} />
               <Route path="/team" element={<Team />} />
               <Route path="/location" element={<Location />} />
+              <Route path="/materials" element={<Material />} />
               <Route path="/bible" element={<Bible />}>
                 <Route index element={<Bible_main />} />
                 <Route path=":language" element={<Bible_content />} />

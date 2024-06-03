@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://conference-portal-be.onrender.com",
+  baseURL: "https://conference-portal-be.vercel.app",
 });
 
 api.interceptors.request.use(

@@ -27,10 +27,24 @@ const getLookups = async () => {
     const lookups = await api.get("conference/lookups", {
       headers: skipInterceptor_header,
     });
-    return lookups.data
+    return lookups.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export { getConferenceSpeakers, getAlertsandHappenNow, getLookups };
+const getConferenceMaterial = async () => {
+  try {
+    const material = await api.get("/guest/materials");
+    return material.data
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+export {
+  getConferenceSpeakers,
+  getAlertsandHappenNow,
+  getLookups,
+  getConferenceMaterial,
+};
