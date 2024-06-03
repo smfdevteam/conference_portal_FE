@@ -18,7 +18,7 @@ import Team from "./pages/Team/Team";
 import { handleNotifications, isMobile } from "./utils/client";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Material from "./pages/material/Material";
-
+import User from "./pages/User/User";
 const Location = lazy(() => import("./pages/Location"));
 const Bible = lazy(() => import("./pages/Bible/Bible"));
 const Bible_main = lazy(() => import("./Components/bible/Bible_main"));
@@ -85,6 +85,7 @@ function App() {
               <Route path="/team" element={<Team />} />
               <Route path="/location" element={<Location />} />
               <Route path="/materials" element={<Material />} />
+              <Route path="/User" element={<User />} />
               <Route path="/bible" element={<Bible />}>
                 <Route index element={<Bible_main />} />
                 <Route path=":language" element={<Bible_content />} />
