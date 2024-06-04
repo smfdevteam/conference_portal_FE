@@ -77,9 +77,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (isMobile()) {
-      silentLogin();
-    }
+    silentLogin();
   }, []);
 
   // Redirect if not a mobile device
@@ -88,7 +86,6 @@ function App() {
     return (
       <>
         <Layout>
-          <h1>{localStorage.getItem("X-ACCESS-TOKEN")}</h1>
           <Toaster
             position="bottom-center"
             reverseOrder={true}
