@@ -2,6 +2,8 @@ import { CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER } from "../firebase/firebase.co
 import { sendPasswordResetEmail } from "firebase/auth";
 import { isTokenExist, setTokens } from "./utils";
 import axios from "axios";
+import toast from "react-hot-toast";
+
 const resetClientPassword = async (email) => {
   try {
     await sendPasswordResetEmail(
