@@ -51,7 +51,7 @@ function App() {
       try {
         setIsLoading(true);
         const userResponse = await axios.post(
-          "http://localhost:3000/guest/auth/verify_token",
+          "https://conference-portal-be.vercel.app/guest/auth/verify_token",
           null,
           {
             headers: {
