@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getConferenceMaterial } from "../../Api/conference_meta.service";
 import toast from "react-hot-toast";
+import { getConferenceMaterial } from "../../Api/conference_meta.service";
 import Material_Card from "../../Components/materials/Material_Card";
-import smfTechLogo from "../../assets/images/brand/smftech.png";
 import Full_Screen_Skeleton_Loader from "../../Components/shared/Full_Screen_Skeleton_Loader";
+import smfTechLogo from "../../assets/images/brand/smftech.png";
 
 const Material = () => {
   const [materials, setMaterials] = useState([]);

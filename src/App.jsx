@@ -1,7 +1,7 @@
-import { onMessage , } from "firebase/messaging";
-import { Suspense, lazy, useContext, useEffect } from "react";
+import { onMessage } from "firebase/messaging";
+import { Suspense, lazy, useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { getLookups } from "./Api/conference_meta.service";
 import "./App.css";
 import Login from "./Auth/Login/Login";
@@ -17,9 +17,12 @@ import NotMobile from "./pages/NotMobile";
 import Team from "./pages/Team/Team";
 import { handleNotifications, isMobile } from "./utils/client";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
-import Material from "./pages/material/Material";
 import User from "./pages/User/User";
+import axios from "axios";
+import { refreshToken } from "./Api/api";
+import Logout from "./Auth/Logout";
 const Location = lazy(() => import("./pages/Location"));
+const Material = lazy(() => import("./pages/material/Material"));
 const Bible = lazy(() => import("./pages/Bible/Bible"));
 const Bible_main = lazy(() => import("./Components/bible/Bible_main"));
 const Bible_content = lazy(() => import("./Components/bible/Bible_content"));
@@ -29,7 +32,8 @@ const Bible_search = lazy(() =>
 
 function App() {
   const { app_state, setAppState } = useContext(stateProvider);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   onMessage(CONFERENCE_FIREBASE_MESSAGEING_HANDLER, (payload) => {
     console.log(payload, "NOTIFICATION");
   });
@@ -41,12 +45,45 @@ function App() {
     });
   };
 
+  const silentLogin = async () => {
+    const loggedInToken = localStorage.getItem("X-ACCESS-TOKEN");
+    if (loggedInToken) {
+      try {
+        setIsLoading(true);
+        const userResponse = await axios.post(
+          "http://localhost:3000/guest/auth/verify_token",
+          null,
+          {
+            headers: {
+              token: loggedInToken,
+            },
+          }
+        );
+        setAppState((prev) => ({
+          ...prev,
+          user: userResponse.data,
+          isLogged: true,
+        }));
+        getLookUpsData();
+        // handleNotifications();
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
   useEffect(() => {
-    getLookUpsData();
-    handleNotifications();
+    if (isMobile()) {
+      silentLogin();
+    }
   }, []);
 
   // Redirect if not a mobile device
+  if (isLoading) return <Full_Screen_Skeleton_Loader />;
   if (isMobile()) {
     return (
       <>
@@ -68,29 +105,32 @@ function App() {
               },
             }}
           />
-          {/* <div>
-            <spline-viewer
-              hint
-              loading-anim-type="spinner-small-dark"
-              url="https://prod.spline.design/FPtgk3R-fev4Sw3o/scene.splinecode"
-            ></spline-viewer>
-          </div> */}
           <Suspense fallback={<Full_Screen_Skeleton_Loader />}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/resetpassword" element={<ResetPassword />} />
-              <Route path="/hymns" element={<Hymns />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/location" element={<Location />} />
-              <Route path="/materials" element={<Material />} />
-              <Route path="/User" element={<User />} />
-              <Route path="/bible" element={<Bible />}>
-                <Route index element={<Bible_main />} />
-                <Route path=":language" element={<Bible_content />} />
-                <Route path="search" element={<Bible_search />} />
-              </Route>
+              {app_state.isLogged ? (
+                <>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/resetpassword" element={<ResetPassword />} />
+                  <Route path="/hymns" element={<Hymns />} />
+                  <Route path="/team" element={<Team />} />
+                  <Route path="/location" element={<Location />} />
+                  <Route path="/materials" element={<Material />} />
+                  <Route path="/settings" element={<User />} />
+                  <Route path="/logout" element={<Logout />} />
+                  <Route path="/bible" element={<Bible />}>
+                    <Route index element={<Bible_main />} />
+                    <Route path=":language" element={<Bible_content />} />
+                    <Route path="search" element={<Bible_search />} />
+                  </Route>
+                </>
+              ) : (
+                <>
+                  <Route path="/" element={<Login />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </>
+              )}
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

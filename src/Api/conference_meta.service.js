@@ -36,6 +36,7 @@ const getLookups = async () => {
 const getConferenceMaterial = async () => {
   try {
     const material = await api.get("/guest/materials");
+    console.log(material.data);
     return material.data
   } catch (e) {
     throw new Error(e.message);

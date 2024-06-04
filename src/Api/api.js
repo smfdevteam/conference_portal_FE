@@ -2,14 +2,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 export const api = axios.create({
-  baseURL: "https://conference-portal-be.onrender.com",
+  baseURL: "https://conference-portal-be.vercel.app",
 });
 
 api.interceptors.request.use(
   async function (config) {
     if (config.headers.skipInterceptors) return config;
 
-    const token = localStorage.getItem("X-ACCESS-TOKEN");
+    let token = localStorage.getItem("X-ACCESS-TOKEN");
 
     if (token) {
       const isValid = await verifyToken(token);
@@ -78,10 +78,12 @@ export const register = async (userData) => {
       "The user with the provided phone number already exists."
     ) {
       toast.error("رقم الهاتف مسجل بالفعل من قبل");
-    }else if(error?.response.data.message ===
-      "The email address is improperly formatted."){
-        toast.error("الايميل مش مظبوط")
-      }
+    } else if (
+      error?.response.data.message ===
+      "The email address is improperly formatted."
+    ) {
+      toast.error("الايميل مش مظبوط");
+    }
   }
 };
 
@@ -91,17 +93,17 @@ export const login = async (credentials) => {
     const response = await api.post("/guest/auth/login", credentials, {
       headers,
     });
-    toast.success("Welcome")
+    toast.success("Welcome");
     return response;
   } catch (error) {
     console.log("error api ===", error);
     if (!error?.response) {
-      toast.error( "الرجاء معاودة المحاولة في وقت لاحق");
+      toast.error("الرجاء معاودة المحاولة في وقت لاحق");
     } else if (
       error?.response.data.message ===
       "Firebase: Error (auth/invalid-credential)."
     ) {
-      toast.error( "خطأ في اسم المستخدم أو كلمة السر");
+      toast.error("خطأ في اسم المستخدم أو كلمة السر");
     }
   }
 };
@@ -141,3 +143,5 @@ const refreshToken = async () => {
     return null;
   }
 };
+
+export { refreshToken };

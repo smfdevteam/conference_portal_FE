@@ -1,51 +1,53 @@
-import { Avatar, Image } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/react";
 import { useContext, useState } from "react";
-import { stateProvider } from "../../Context/App_Context";
-import logo from "../../assets/images/brand/smftecttypo.png";
-import person from "../../assets/images/team/samaan.png";
-import editIcon from "../../assets/images/icons/edit.png";
-import "./aside.css";
 import { useNavigate } from "react-router-dom";
+import { stateProvider } from "../../Context/App_Context";
+import "./aside.css";
 
 const links = [
   { name: "الرئيسية", link: "/" },
   { name: "المتكلمين", link: "/speakers" },
-  { name: "مكاننا", link: "/location" },
-  { name: "ملفات", link: "/materials" },
+  { name: "احنا فين ؟", link: "/location" },
   { name: "الشعار", link: "/song" },
   { name: "البرنامج", link: "/program" },
   { name: "الكتاب المقدس", link: "/bible" },
 ];
-const userLinks = ["بروفايلي", "الإعدادات", "أسرة مارمرقس", "ملاحظاتي" , "تسجيل الخروج"];
+const userLinks = [
+  { name: "بروفايلي", link: "/settings" },
+  { name: "ملاحظاتي", link: "/" },
+  { name: "ملفاتي", link: "/materials" },
+  { name: "أسرة مارمرقس", link: "/" },
+  { name: "تسجيل الخروج", link: "/logout" },
+];
 const Side_bar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { app_state, setAppState } = useContext(stateProvider);
   const [isUserActive, setIsUserActive] = useState(false);
   const handleUserActive = () => setIsUserActive(!isUserActive);
   const handleIsSideOpen = () => {
     setAppState({ ...app_state, isAsideOpen: !app_state.isAsideOpen });
   };
-  
+
   const navigateTo = (link) => {
-    navigate(link)
-    handleIsSideOpen()
+    navigate(link);
+    handleIsSideOpen();
   };
-  
+
   return (
     <aside className={`smf_aside ${app_state.isAsideOpen && " show_side"} `}>
       <div className="flex justify-between m-10">
         <div className=" tabs flex py-4 me-5 border-1 font-semibold rounded-xl justify-between items-center text-white">
           <span
             onClick={handleUserActive}
-            className={`${isUserActive && "active"}`}
+            className={`${isUserActive && "active"} truncate capitalize`}
           >
-            Abanoub
+            {app_state?.user?.displayName?.split(" ")[0]}
           </span>
           <span
             onClick={handleUserActive}
-            className={`${!isUserActive && "active"}`}
+            className={`${!isUserActive && "active"} w-fit`}
           >
-          Cashback
+            Conference
           </span>
           <span
             className={`selector rounded-xl ${
@@ -75,7 +77,7 @@ const Side_bar = () => {
                 <li
                   key={link.name}
                   className={app_state.isAsideOpen && "enter-animation"}
-                  onClick={()=>navigateTo(link.link)}
+                  onClick={() => navigateTo(link.link)}
                   style={{
                     animationDelay: `${app_state.isAsideOpen && index * 0.1}s`,
                   }}
@@ -87,14 +89,14 @@ const Side_bar = () => {
           : userLinks.map((link, index) => {
               return (
                 <li
-                  key={link}
+                  key={link.name}
                   className={app_state.isAsideOpen && "enter-animation"}
-                  onClick={handleIsSideOpen}
+                  onClick={() => navigateTo(link.link)}
                   style={{
                     animationDelay: `${app_state.isAsideOpen && index * 0.1}s`,
                   }}
                 >
-                  {link}
+                  {link.name}
                 </li>
               );
             })}
@@ -113,10 +115,15 @@ const Side_bar = () => {
             }`}
           >
             <Avatar
-              src={person}
+              src={app_state.user.photoURL}
               size="lg"
               className="relative w-full h-full"
               isBordered
+              imgProps={{
+                style: {
+                  objectFit: "contain",
+                },
+              }}
               color={isUserActive ? "warning" : "default"}
             />
           </div>
