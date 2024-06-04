@@ -3,7 +3,7 @@ import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
 import logo from "/smf.png";
 import { useState, useContext } from "react";
-import { login } from "../../Api/api";
+import {login} from '../../Api/auth.service'
 import { stateProvider } from "../../Context/App_Context";
 import { useFormik } from "formik";
 import * as Yup from "yup";

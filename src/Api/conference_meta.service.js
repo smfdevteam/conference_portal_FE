@@ -39,7 +39,7 @@ const getConferenceMaterial = async () => {
     console.log(material.data);
     return material.data
   } catch (e) {
-    throw new Error(e.message);
+    throw new Error('حصل حاجة غلط');
   }
 };
 
