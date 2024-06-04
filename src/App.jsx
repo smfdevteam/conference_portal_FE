@@ -68,7 +68,7 @@ function App() {
       } catch (e) {
         const refreshToken = localStorage.getItem("X-REFRESH-TOKEN");
         const refreshTokenRes = await axios.post(
-          "http://localhost:3000/guest/auth/refresh-token",
+          "https://conference-portal-be.vercel.app/guest/auth/refresh-token",
           null,
           {
             headers: {
