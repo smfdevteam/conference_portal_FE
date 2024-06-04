@@ -64,11 +64,27 @@ function App() {
           user: userResponse.data,
           isLogged: true,
         }));
+
+      } catch (e) {
+        const refreshToken = localStorage.getItem("X-REFRESH-TOKEN");
+        const refreshTokenRes = await axios.post(
+          "http://localhost:3000/guest/auth/refresh-token",
+          null,
+          {
+            headers: {
+              refresh: refreshToken,
+            },
+          }
+        );
+        const { id_token, refresh_token, user } = refreshTokenRes.data;
+        localStorage.setItem("X-ACCESS-TOKEN", id_token);
+        localStorage.setItem("X-REFRESH-TOKEN", refresh_token);
+        setAppState((prev) => {
+          return { ...prev, user, isLogged: true };
+        });
+      } finally {
         getLookUpsData();
         // handleNotifications();
-      } catch (e) {
-        console.log(e);
-      } finally {
         setIsLoading(false);
       }
     } else {

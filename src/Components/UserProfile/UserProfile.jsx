@@ -24,11 +24,14 @@ const UserProfile = () => {
         <Avatar
           isBlurred
           isZoomed
+          isBordered
+          
+          color="primary"
           imgProps={{
             style: {
               objectFit: "contain",
-              width:'80%',
-              height:'80%' 
+              width:'100%',
+              height:'100%' 
             },
           }}
           
