@@ -3,7 +3,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { isTokenExist, setTokens } from "./utils";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import {api} from './api'
 const resetClientPassword = async (email) => {
   try {
     await sendPasswordResetEmail(
