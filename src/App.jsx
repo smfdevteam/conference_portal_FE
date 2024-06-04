@@ -88,6 +88,7 @@ function App() {
     return (
       <>
         <Layout>
+          <h1>{localStorage.getItem("X-ACCESS-TOKEN")}</h1>
           <Toaster
             position="bottom-center"
             reverseOrder={true}
@@ -114,7 +115,7 @@ function App() {
                   <Route path="/hymns" element={<Hymns />} />
                   <Route path="/team" element={<Team />} />
                   <Route path="/location" element={<Location />} />
-                  <Route path="/materials" element={<Material />} />
+                  {/* <Route path="/materials" element={<Material />} /> */}
                   <Route path="/settings" element={<User />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/bible" element={<Bible />}>
