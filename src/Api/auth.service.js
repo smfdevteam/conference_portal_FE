@@ -18,7 +18,7 @@ const resetClientPassword = async (email) => {
 const register = async (userData) => {
   try {
     const headers = { skipInterceptors: true };
-    const response = await api.post("/guest/auth/register", userData, {
+    const response = await axios.post("https://conference-portal-be.vercel.app/guest/auth/register", userData, {
       headers,
     });
     console.log(response.data);

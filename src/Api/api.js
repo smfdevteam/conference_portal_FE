@@ -1,7 +1,7 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "https://conference-portal-be.vercel.app",
-  timeout: 6000,
+  baseURL: 'https://conference-portal-be.vercel.app',
+  timeout: 20000,
 });
 
 const reqCallback = (request) => {
