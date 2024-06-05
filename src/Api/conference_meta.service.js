@@ -3,12 +3,12 @@ const skipInterceptor_header = { skipInterceptors: true };
 
 const getConferenceSpeakers = async () => {
   try {
-    const speakersRes = await api.get("/conference/speaker", {
+    const { data } = await api.get("/conference/speaker", {
       headers: skipInterceptor_header,
     });
-    console.log(speakersRes.data);
+    return data;
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -37,9 +37,9 @@ const getConferenceMaterial = async () => {
   try {
     const material = await api.get("/guest/materials");
     console.log(material.data);
-    return material.data
+    return material.data;
   } catch (e) {
-    throw new Error('حصل حاجة غلط');
+    throw new Error("حصل حاجة غلط");
   }
 };
 

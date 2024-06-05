@@ -22,6 +22,7 @@ import User from "./pages/User/User";
 import { isMobile } from "./utils/client";
 import { ErrorBoundary } from "react-error-boundary";
 import UnExpected_Error from "./Components/shared/UnExpected_Error";
+import Speakers from "./pages/speakers/Speakers";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -85,6 +86,7 @@ function App() {
                   <Route path="/team" element={<Team />} />
                   <Route path="/location" element={<Location />} />
                   <Route path="/materials" element={<Material />} />
+                  <Route path="/speakers" element={<Speakers />} />
                   <Route path="/settings" element={<User />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/bible" element={<Bible />}>
