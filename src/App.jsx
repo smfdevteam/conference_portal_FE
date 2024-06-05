@@ -23,6 +23,9 @@ import { isMobile } from "./utils/client";
 import { ErrorBoundary } from "react-error-boundary";
 import UnExpected_Error from "./Components/shared/UnExpected_Error";
 import Speakers from "./pages/speakers/Speakers";
+import { api } from "./Api/api";
+import Messages from "./pages/messages/Messages";
+import { getMessagesCount } from "./Api/user.service";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -48,9 +51,18 @@ function App() {
     });
   };
 
+  const getUserMessagesCount = async () => {
+    try {
+      const count = await getMessagesCount();
+      setAppState((prev) => ({ ...prev, user_messages: count }));
+    } catch (e) {
+      setAppState((prev) => ({ ...prev, user_messages: '?' }));
+    }
+  };
   useEffect(() => {
     silentLogin(setIsLoading, setAppState, navigate);
     getLookUpsData();
+    getUserMessagesCount();
   }, []);
 
   // Redirect if not a mobile device
@@ -83,6 +95,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/resetpassword" element={<ResetPassword />} />
                   <Route path="/hymns" element={<Hymns />} />
+                  <Route path="/msgs" element={<Messages />} />
                   <Route path="/team" element={<Team />} />
                   <Route path="/location" element={<Location />} />
                   <Route path="/materials" element={<Material />} />

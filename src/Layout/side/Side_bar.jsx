@@ -41,13 +41,13 @@ const Side_bar = () => {
             onClick={handleUserActive}
             className={`${isUserActive && "active"} truncate capitalize`}
           >
-            {app_state?.user?.displayName?.split(" ")[0]}
+            الأكونت
           </span>
           <span
             onClick={handleUserActive}
             className={`${!isUserActive && "active"} w-fit`}
           >
-            Conference
+            المؤتمر
           </span>
           <span
             className={`selector rounded-xl ${
