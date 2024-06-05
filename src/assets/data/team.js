@@ -1,4 +1,4 @@
-import aikb from "../images/team/aikb.png";
+import aikb from "../images/team/aikb.jpg";
 import bishoy from "../images/team/bishoy.png";
 import bosy from "../images/team/bosy.png";
 import botros from "../images/team/botros.png";
