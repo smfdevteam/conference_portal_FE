@@ -23,7 +23,7 @@ const Team = () => {
         <p className="text-xl w-[85%] mx-auto mb-3 text-center">
           Home of Brilliant Minds Crafting Creativity
         </p>
-          <div className="w-[80%] grid grid-cols-2 gap-3 m-auto ">
+          <div className="w-[85%] grid grid-cols-1 justify-center items-center sm:grid-cols-3 gap-3 m-auto ">
             {SmfTechTeam.map((member) => (
               <Member key={member.name} member={member} />
             ))}

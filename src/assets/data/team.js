@@ -16,7 +16,7 @@ import safwat from "../images/team/safwat.png";
 import susanna from "../images/team/susanna.png";
 import youstina from "../images/team/youstina.png";
 import samaan from "../images/team/samaan.png";
-
+import sandra from "../images/team/sandra.png"
 export const SmfTechTeam = [
   {
     name: "Abanoub Kamel",
@@ -153,6 +153,14 @@ export const SmfTechTeam = [
     description:
       " Meet Susanna, our User Experience Leader in the Design Unit. She's passionate about creating designs that make our users smile! With her friendly and collaborative approach, Susanna ensures our products are easy to use and love. She fosters a creative environment where every team member's ideas shine, making our designs truly exceptional.",
     image: susanna,
+  },
+  {
+    name: "Sandra",
+    position: "Product Leader",
+    unit: "Business Unit",
+    description:
+      "",
+    image: sandra,
   },
   {
     name: "Abanoub Samaan",
