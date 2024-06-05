@@ -164,8 +164,8 @@ export const SmfTechTeam = [
   },
   {
     name: "Abanoub Samaan",
-    position: "Development Leader",
-    unit: "Engineering Unit",
+    position: "SMF Tech. Leader",
+    unit: "Founder",
     description:
       "Abanoub Samaan, our Development Leader in the Engineering Unit, is the founder of SMF Tech and a Senior Software Engineer at Link Development. With his wealth of experience and expertise, Abanoub leads our team with passion and dedication. His visionary leadership inspires innovation and drives excellence in all our development projects.",
     image: samaan,
