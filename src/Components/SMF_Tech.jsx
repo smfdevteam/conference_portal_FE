@@ -40,9 +40,9 @@ const SMF_Tech = () => {
                 style={gradient}
                 className="rounded-4xl overflow-y-scroll"
               >
-                <div className="grid grid-cols-2 items-center">
-                  <img src={smfTechTypo} className="w-[70%] m-auto" alt="" />
-                  <img src={mark} className="w-[70%] m-auto" alt="" />
+                <div className="grid grid-cols-2 my-2 justify-between items-center">
+                  <img src={smfTechTypo} className="w-max-[50px] m-auto inline-block" alt="" />
+                  <img src={mark} className="w-max-[10px] m-auto inline-block" alt="" />
                 </div>
                 <p className="text-3xl font-bold text-center text-white">
                   احنا شباب مارمرقس
@@ -52,7 +52,6 @@ const SMF_Tech = () => {
                   القبطية
                 </p>
                 <p className="text-center text-xl text-white">
-                  {" "}
                   هدفنا اننا نصنع بنفسنا التطوير الرقمي اللي هيعمل تجربة مختلفة
                   و جديدة لكنيستنا القبطية و الخدمات الخاصة بيها{" "}
                 </p>
@@ -72,7 +71,7 @@ const SMF_Tech = () => {
                     <p className="text-3xl">شات </p>
                   </div>
                 </div>
-                <div className="hover:bg-white w-full hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
+                <div className="hover:bg-white py-5 w-full hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg">
                   <a className="text-3xl" href="tel:201201891349">
                     الدعم الفني
                   </a>

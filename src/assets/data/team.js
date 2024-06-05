@@ -16,7 +16,7 @@ import safwat from "../images/team/safwat.png";
 import susanna from "../images/team/susanna.png";
 import youstina from "../images/team/youstina.png";
 import samaan from "../images/team/samaan.png";
-
+import sandra from "../images/team/sandra.png"
 export const SmfTechTeam = [
   {
     name: "Abanoub Kamel",
@@ -155,9 +155,17 @@ export const SmfTechTeam = [
     image: susanna,
   },
   {
+    name: "Sandra",
+    position: "Product Leader",
+    unit: "Business Unit",
+    description:
+      "",
+    image: sandra,
+  },
+  {
     name: "Abanoub Samaan",
-    position: "Development Leader",
-    unit: "Engineering Unit",
+    position: "SMF Tech. Leader",
+    unit: "Founder",
     description:
       "Abanoub Samaan, our Development Leader in the Engineering Unit, is the founder of SMF Tech and a Senior Software Engineer at Link Development. With his wealth of experience and expertise, Abanoub leads our team with passion and dedication. His visionary leadership inspires innovation and drives excellence in all our development projects.",
     image: samaan,

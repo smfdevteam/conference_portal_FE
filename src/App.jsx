@@ -1,10 +1,12 @@
-import { onMessage , } from "firebase/messaging";
-import { Suspense, lazy, useContext, useEffect } from "react";
+import { onMessage } from "firebase/messaging";
+import { Suspense, lazy, useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { silentLogin } from "./Api/auth.service";
 import { getLookups } from "./Api/conference_meta.service";
 import "./App.css";
 import Login from "./Auth/Login/Login";
+import Logout from "./Auth/Logout";
 import Register from "./Auth/Register/Register";
 import Full_Screen_Skeleton_Loader from "./Components/shared/Full_Screen_Skeleton_Loader";
 import { stateProvider } from "./Context/App_Context";
@@ -14,12 +16,19 @@ import Home from "./pages/Home/Home";
 import Hymns from "./pages/Hymns/Hymns";
 import NotFound from "./pages/NotFound";
 import NotMobile from "./pages/NotMobile";
-import Team from "./pages/Team/Team";
-import { handleNotifications, isMobile } from "./utils/client";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
-import Material from "./pages/material/Material";
+import Team from "./pages/Team/Team";
 import User from "./pages/User/User";
+import { isMobile } from "./utils/client";
+import { ErrorBoundary } from "react-error-boundary";
+import UnExpected_Error from "./Components/shared/UnExpected_Error";
+import Speakers from "./pages/speakers/Speakers";
+import { api } from "./Api/api";
+import Messages from "./pages/messages/Messages";
+import { getMessagesCount } from "./Api/user.service";
+
 const Location = lazy(() => import("./pages/Location"));
+const Material = lazy(() => import("./pages/material/Material"));
 const Bible = lazy(() => import("./pages/Bible/Bible"));
 const Bible_main = lazy(() => import("./Components/bible/Bible_main"));
 const Bible_content = lazy(() => import("./Components/bible/Bible_content"));
@@ -29,7 +38,8 @@ const Bible_search = lazy(() =>
 
 function App() {
   const { app_state, setAppState } = useContext(stateProvider);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   onMessage(CONFERENCE_FIREBASE_MESSAGEING_HANDLER, (payload) => {
     console.log(payload, "NOTIFICATION");
   });
@@ -41,15 +51,25 @@ function App() {
     });
   };
 
+  const getUserMessagesCount = async () => {
+    try {
+      const count = await getMessagesCount();
+      setAppState((prev) => ({ ...prev, user_messages: count }));
+    } catch (e) {
+      setAppState((prev) => ({ ...prev, user_messages: '?' }));
+    }
+  };
   useEffect(() => {
+    silentLogin(setIsLoading, setAppState, navigate);
     getLookUpsData();
-    handleNotifications();
+    getUserMessagesCount();
   }, []);
 
   // Redirect if not a mobile device
+  if (isLoading) return <Full_Screen_Skeleton_Loader />;
   if (isMobile()) {
     return (
-      <>
+      <ErrorBoundary fallbackRender={UnExpected_Error}>
         <Layout>
           <Toaster
             position="bottom-center"
@@ -63,39 +83,44 @@ function App() {
               duration: 5000,
               style: {
                 color: "black",
-                width: "150px",
+                width: "fit",
                 fontWeight: "500",
               },
             }}
           />
-          {/* <div>
-            <spline-viewer
-              hint
-              loading-anim-type="spinner-small-dark"
-              url="https://prod.spline.design/FPtgk3R-fev4Sw3o/scene.splinecode"
-            ></spline-viewer>
-          </div> */}
           <Suspense fallback={<Full_Screen_Skeleton_Loader />}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/resetpassword" element={<ResetPassword />} />
-              <Route path="/hymns" element={<Hymns />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/location" element={<Location />} />
-              <Route path="/materials" element={<Material />} />
-              <Route path="/User" element={<User />} />
-              <Route path="/bible" element={<Bible />}>
-                <Route index element={<Bible_main />} />
-                <Route path=":language" element={<Bible_content />} />
-                <Route path="search" element={<Bible_search />} />
-              </Route>
+              {app_state.isLogged ? (
+                <>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/resetpassword" element={<ResetPassword />} />
+                  <Route path="/hymns" element={<Hymns />} />
+                  <Route path="/msgs" element={<Messages />} />
+                  <Route path="/team" element={<Team />} />
+                  <Route path="/location" element={<Location />} />
+                  <Route path="/materials" element={<Material />} />
+                  <Route path="/speakers" element={<Speakers />} />
+                  <Route path="/settings" element={<User />} />
+                  <Route path="/logout" element={<Logout />} />
+                  <Route path="/bible" element={<Bible />}>
+                    <Route index element={<Bible_main />} />
+                    <Route path=":language" element={<Bible_content />} />
+                    <Route path="search" element={<Bible_search />} />
+                  </Route>
+                </>
+              ) : (
+                <>
+                  <Route path="/" element={<Login />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </>
+              )}
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </Layout>
-      </>
+      </ErrorBoundary>
     );
   } else {
     return <NotMobile />;

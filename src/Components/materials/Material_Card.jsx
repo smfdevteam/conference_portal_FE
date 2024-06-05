@@ -1,4 +1,3 @@
-import {memo} from 'react'
 import fileIcon from "../../assets/images/icons/fileIcon.png";
 import { Divider } from "@nextui-org/react";
 import smfTechLogo from "../../assets/images/brand/smftecttypo.png";
@@ -48,4 +47,4 @@ const Material_Card = ({url , fileSize , name}) => {
   );
 };
 
-export default memo(Material_Card) 
+export default Material_Card

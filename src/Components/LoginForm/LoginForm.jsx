@@ -3,17 +3,35 @@ import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
 import logo from "/smf.png";
 import { useState, useContext } from "react";
-import { login } from "../../Api/api";
+import {login} from '../../Api/auth.service'
 import { stateProvider } from "../../Context/App_Context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { getLookups } from "../../Api/conference_meta.service";
+import { getMessagesCount } from "../../Api/user.service";
 
 const initialValues = {
   email: "",
   password: "",
 };
+
 const onSubmit = async ({ email, password, setIsSubmiting, setAppState,navigate }) => {
+  const getLookUpsData = async () => {
+    const lookups = await getLookups();
+    setAppState((prev) => {
+      return { ...prev, conference: { ...lookups } };
+    });
+  };
+  
+  const getUserMessagesCount = async () => {
+    try {
+      const count = await getMessagesCount();
+      setAppState((prev) => ({ ...prev, user_messages: count }));
+    } catch (e) {
+      setAppState((prev) => ({ ...prev, user_messages: '?' }));
+    }
+  };
   try {
     setIsSubmiting(true);
     const response = await login({
@@ -25,6 +43,8 @@ const onSubmit = async ({ email, password, setIsSubmiting, setAppState,navigate 
       localStorage.setItem("X-ACCESS-TOKEN", response.headers.get("Token"));
       localStorage.setItem("X-REFRESH-TOKEN", response.headers.get("Refresh"));
       console.log("data ====", response.data);
+      getLookUpsData();
+      getUserMessagesCount();
       setAppState((prev) => {
         return { ...prev, user: response.data, isLogged: true };
       });

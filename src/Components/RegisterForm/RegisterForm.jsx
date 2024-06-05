@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import AvatarUploader from "../AvatarUploader/AvatarUploader";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
-import { register } from "../../Api/api";
+import { register } from "../../Api/auth.service";
 import CustomPhoneInput from "../CustomPhoneInput/CustomPhoneInput";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
