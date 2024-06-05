@@ -15,6 +15,9 @@ const Messages = () => {
     try {
       setIsLoading(true);
       const userMessages = await getUserMessages();
+      if (userMessages.count == 0) {
+        return ;
+      }
       setMessages(userMessages);
     } catch (e) {
       toast.error("جرب تاني");

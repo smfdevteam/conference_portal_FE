@@ -83,7 +83,7 @@ function App() {
               duration: 5000,
               style: {
                 color: "black",
-                width: "150px",
+                width: "fit",
                 fontWeight: "500",
               },
             }}
