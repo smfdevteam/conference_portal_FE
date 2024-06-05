@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { api } from "./api";
 
 const getMessagesCount = async () => {
@@ -21,4 +22,14 @@ const getUserMessages = async () => {
   }
 };
 
-export { getMessagesCount, getUserMessages };
+const sendRequestHelpMessage = async (message) => {
+  toast.loading("بنبعت الرسالة");
+  try {
+    await api.post("/guest/messages/help", message);
+    toast.dismiss();
+  } catch (error) {
+    toast.error("جرب ابعتها تاني");
+  }
+};
+
+export { getMessagesCount, getUserMessages , sendRequestHelpMessage };

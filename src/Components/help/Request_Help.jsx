@@ -8,7 +8,22 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import "./request_help.css";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { sendRequestHelpMessage } from "../../Api/user.service";
 const Request_Help = () => {
+  const request_help_form = useFormik({
+    initialValues: {
+      message: "",
+    },
+    validationSchema: Yup.object().shape({
+      message: Yup.string().required("محتاجين تكتب حاجة هنا !"),
+    }),
+    onSubmit: async ({ message }) => {
+      await sendRequestHelpMessage({ message });
+      onClose()
+    },
+  });
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -31,29 +46,32 @@ const Request_Help = () => {
                 نقدر نساعدك ازاي ؟
               </ModalHeader>
               <ModalBody>
-                <form className="my-5 flex flex-col gap-4">
-                  <Input
-                    size="lg"
-                    placeholder="الإسم ؟"
-                    type="text"
-                    variant="flat"
-                    name="name"
-                    label="الإسم"
-                  />
-                  <Input
-                    dir="rtl"
-                    size="lg"
-                    placeholder=" الموبايل ؟ "
-                    type="tel"
-                    variant="flat"
-                    name="phone"
-                    label="الموبايل"
-                  />
+                <form
+                  onSubmit={request_help_form.handleSubmit}
+                  className="my-5 flex flex-col gap-4"
+                >
                   <Textarea
+                    isRequired
+                    variant="faded"
+                    name="message"
+                    onChange={request_help_form.handleChange}
+                    onBlur={request_help_form.handleBlur}
                     label="محتاج ايه ؟"
                     placeholder="نقدر نساعدك ازاي ؟"
+                    errorMessage={request_help_form.errors.message}
+                    isInvalid={
+                      request_help_form.touched.message &&
+                      request_help_form.errors.message
+                    }
+                    description="تقدر تكتب اي حاجة انت محتاجها هنا و احنا هنتواصل معاك"
                   />
-                  <button className="w-full py-3 px-1 border-1 shadow-md rounded-lg bg-danger-500 font-bold text-xl text-white">ابعت</button>
+                  <button
+                    disabled={!request_help_form.isValid}
+                    type="submit"
+                    className="w-full py-3 px-1 border-1 shadow-md rounded-lg bg-danger-500 font-bold text-xl text-white disabled:bg-slate-500"
+                  >
+                    ابعت
+                  </button>
                 </form>
               </ModalBody>
             </>
