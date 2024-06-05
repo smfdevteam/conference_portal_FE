@@ -2,7 +2,6 @@ import React, { Suspense, lazy, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getConferenceSpeakers } from "../../Api/conference_meta.service";
 import Full_Screen_Skeleton_Loader from "../../Components/shared/Full_Screen_Skeleton_Loader";
-import Skeleton_Loader from "../../Components/shared/Skeleton_Loader";
 const Speaker_Card = lazy(() =>
   import("../../Components/speakers/Speaker_Card")
 );
@@ -26,20 +25,35 @@ const Speakers = () => {
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   return (
     <>
-      <p className="text-xl my-3 text-center">
-        عندنا في المؤتمر
-        <span className="font-bold text-warning mx-2">{speakers.length}</span>
-        متكلمين
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {speakers.map((speaker) => {
-          return (
-            <Suspense key={speaker.id} fallback={<Skeleton_Loader />}>
-              <Speaker_Card speaker={speaker} />
-            </Suspense>
-          );
-        })}
-      </div>
+      {speakers.length > 0 ? (
+        <>
+          <p className="text-xl my-3 text-center">
+            عندنا في المؤتمر
+            <span className="font-bold text-warning mx-2">
+              {speakers.length}
+            </span>
+            متكلمين
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {speakers.map((speaker) => {
+              return (
+                <Suspense
+                  key={speaker.id}
+                  fallback={<Full_Screen_Skeleton_Loader />}
+                >
+                  <Speaker_Card speaker={speaker} />
+                </Suspense>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <div className="h-full flex justify-center items-center">
+          <p className="text-xl my-3 text-center">
+            مفيش متكلمين حاليا
+          </p>
+        </div>
+      )}
     </>
   );
 };
