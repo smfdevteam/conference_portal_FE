@@ -7,16 +7,62 @@ import WavySvg from "./UserProfileAnimation/WavySvg";
 import PersonalInformation from "./PersonalInformation/PersonalInformation";
 import BasicInformation from "./BasicInformation/BasicInformation";
 import SocialMedia from "./SocialMedia/SocialMedia";
-import { useFormik } from "formik";
+import { ErrorMessage, useFormik } from "formik";
 import * as Yup from "yup";
 import { isValidPhoneNumber } from "react-phone-number-input";
-
+import { editProfile } from "../../Api/auth.service";
 const categories = [
   "Personal Information",
   "Basic Information",
   "Social Media",
 ];
 
+const onSubmit = async ({
+  X,
+  bio,
+  birthPlace,
+  birthday,
+  church,
+  college,
+  company,
+  country,
+  emergency_contact_name,
+  emergency_contact_number,
+  facebook,
+  gender,
+  instagram,
+  isGrad,
+  isSharable,
+  job,
+  notificationToken,
+  tiktok,
+  university,
+  youtube,
+}) => {
+  const response = await editProfile({
+    X,
+    bio,
+    birthPlace,
+    birthday,
+    church,
+    college,
+    company,
+    country,
+    emergency_contact_name,
+    emergency_contact_number,
+    facebook,
+    gender,
+    instagram,
+    isGrad,
+    isSharable,
+    job,
+    notificationToken,
+    tiktok,
+    university,
+    youtube,
+  })
+  
+};
 
 const UserProfile = () => {
   const [activeCategory, setActiveCategory] = useState("Personal Information");
@@ -25,21 +71,23 @@ const UserProfile = () => {
     app_state.user.emergency_contact_number
   );
   const [gender, setGender] = useState(app_state.user.gender);
+  const [genderInitValue,setGenderInitValue] = useState(gender)
   
+
   const formik = useFormik({
     initialValues: { ...app_state.user },
-    onSubmit: (values) => {
-      console.log(values);
-    },
     validationSchema: Yup.object({
       emergency_contact_name: Yup.string().test(
-        "name",
+        "emergency_contact_name",
         "Name is Required",
-        () => {
+        (emergency_contact_name) => {
+          emergency_contact_name = emergency_contact_name
+            ? emergency_contact_name
+            : "";
           if (
             formik.values.emergency_contact_number &&
             formik.values.emergency_contact_number.length > 0 &&
-            formik.values.emergency_contact_name.length === 0
+            emergency_contact_name.length === 0
           ) {
             return false;
           } else {
@@ -48,8 +96,6 @@ const UserProfile = () => {
         }
       ),
       emergency_contact_number: Yup.string()
-
-        
         .test("phone", "Phone is Required", () => {
           if (
             formik.values.emergency_contact_name &&
@@ -60,19 +106,39 @@ const UserProfile = () => {
           } else {
             return true;
           }
-        }).test("phone", "Not Valid Number", (emergency_contact_number) => {
-          if (emergency_contact_number && isValidPhoneNumber(emergency_contact_number)) {
-            return true;
-          } else {
+        })
+        .test("phone", "Not Valid Number", () => {
+          if (
+            formik.values.emergency_contact_number.length > 0 &&
+            !isValidPhoneNumber(formik.values.emergency_contact_number) &&
+            formik.values.emergency_contact_name.length > 0
+          ) {
             return false;
+          } else {
+            return true;
           }
         }),
+      birthday: Yup.date()
+        .min(new Date(1900, 0, 1), "Date must be after January 1, 1900")
+        .max(new Date(), "Date cannot be in the future"),
     }),
+    onSubmit,
   });
-  
   formik.values.emergency_contact_number = phoneNumber ? phoneNumber : "";
   formik.values.gender = gender;
-  console.log(formik.errors)
+  formik.values.setAppState = setAppState
+  const handleErrorPostion = () => {
+    if (
+      (formik.errors.emergency_contact_number ||
+        formik.errors.emergency_contact_name) &&
+      !formik.errors.birthday
+    ) {
+      setActiveCategory("Personal Information");
+    } else if (formik.errors.birthday) {
+      setActiveCategory("Basic Information");
+    }
+  };
+
   return (
     <div className="w-full  font-bold ">
       <form onSubmit={formik.handleSubmit}>
@@ -100,7 +166,7 @@ const UserProfile = () => {
             isSelected={formik.values.isSharable}
             onChange={formik.handleChange}
           >
-            <p className="text-2xl">Share Profile</p>
+            <p className="text-2xl">تحب تشير البروفايل</p>
           </Checkbox>
           <div className="drop-shadow-lg rounded-md w-full md:w-3/5">
             <div className="flex flex-row rounded-md   justify-center p-1 gap-3 bg-gradient-to-r from-sky-400 to-sky-800  m-auto">
@@ -132,12 +198,16 @@ const UserProfile = () => {
                 setPhoneNumer={setPhoneNumer}
                 gender={gender}
                 setGender={setGender}
+                formikErrors={formik.errors}
+                formikBlur={formik.handleBlur}
+                genderInitValue={genderInitValue}
               />
             )}
             {activeCategory === "Basic Information" && (
               <BasicInformation
                 initValues={formik.values}
                 formikChange={formik.handleChange}
+                formikErrors={formik.errors}
               />
             )}
             {activeCategory === "Social Media" && (
@@ -148,7 +218,12 @@ const UserProfile = () => {
             )}
           </div>
         </div>
-        <Button color="primary" className="w-full text-2xl mt-4" type="submit">
+        <Button
+          color="primary"
+          className="w-full text-2xl mt-4"
+          type="submit"
+          onClick={handleErrorPostion}
+        >
           Save Edit
         </Button>
       </form>
