@@ -27,7 +27,7 @@ const register = async (userData) => {
   } catch (error) {
     console.log("error api ===", error);
     if (!error?.response) {
-      toast.error("No Server Response");
+      toast.error("الرجاء معاودة المحاولة في وقت لاحق");
     } else if (
       error?.response.data.message === "TOO_SHORT" ||
       error?.response.data.message === "TOO_LONG"
@@ -68,6 +68,19 @@ const login = async (credentials) => {
     }
   }
 };
+
+const editProfile =  async (userData)=>{
+  try {
+    const response = await api.put('/guest/profile',userData)
+    console.log('Response from server:', response.data);
+    toast.success("تم تحديث بيانات  بنجاح!")
+    return response.data
+  } catch (error) {
+    if (!error?.response) {
+      toast.error("الرجاء معاودة المحاولة في وقت لاحق");
+    } 
+  }
+}
 
 const handleRefreshToken = async () => {
   try {
@@ -139,5 +152,6 @@ export {
   login,
   verifyToken,
   handleRefreshToken,
-  silentLogin
+  silentLogin,
+  editProfile
 };
