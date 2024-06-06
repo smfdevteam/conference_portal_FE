@@ -11,7 +11,7 @@ const CustomToolTip = ({toolTipHeader,toolTipContent,customStyle,highLightedMess
         </div>
       }
     >
-      <div className="text-2xl text-orange-400">?</div>
+      <div className="text-2xl text-blue-400">?</div>
     </Tooltip>
   );
 };
