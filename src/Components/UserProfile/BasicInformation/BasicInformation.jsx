@@ -1,51 +1,75 @@
 import React from "react";
-import { Input, Textarea, Checkbox } from "@nextui-org/react";
+import {
+  Input,
+  Textarea,
+  Checkbox,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 import "./BasicInformation.css";
-import { BirthplaceIcon, ChurchIcon, CollegeIcon, BioIcon,FlagIcon,JobIcon,CompanyIcon } from "../UserIcon";
-const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
+import {
+  BirthplaceIcon,
+  ChurchIcon,
+  CollegeIcon,
+  BioIcon,
+  FlagIcon,
+  JobIcon,
+  CompanyIcon,
+} from "../UserIcon";
+import { governments } from "../../../assets/data/constants";
+const BasicInfomation = ({ formikChange, initValues, formikErrors }) => {
   return (
-    <div className="flex flex-col justify-center items-center gap-6  font-[Cairo] font-bold ">
-      <div className="w-full z-50 flex flex-col relative">
-        <label htmlFor="birthday" className={" text-sm " + (formikErrors.birthday
-            ? " text-[#F31763] "
-            : null)}>
-          تاريخ الميلاد
+    <div className="flex flex-col justify-center items-center gap-6  font-[Cairo] font-bold  relative">
+      <div className="w-full  flex flex-col    ">
+        <label
+          htmlFor="birthday"
+          className={
+            " text-sm mb-2 " +
+            (formikErrors.birthday ? " text-[#F31763] " : null)
+          }
+        >
+          عيد ميلادي
         </label>
         <input
-          className={" text-right  w-full   outline-none   border-b-2 border-s-black    focus::border-black   date-input pr-2 text-md  font-semibold " + (formikErrors.birthday
-            ? " border-b-[#F31763] text-[#F31763]"
-            : "hover:border-gray-300")}
+          className={
+            " text-right  w-full   outline-none   border-b-2 border-s-black    focus::border-black   date-input pr-2 text-md  font-semibold " +
+            (formikErrors.birthday
+              ? " border-b-[#F31763] text-[#F31763]"
+              : "hover:border-gray-300")
+          }
           name="birthday"
           type="date"
           onChange={formikChange}
           value={initValues.birthday}
         />
         {formikErrors.birthday ? (
-          <div className="text-[#F31763] text-sm">
-            {formikErrors.birthday}
-          </div>
+          <div className="text-[#F31763] text-sm">{formikErrors.birthday}</div>
         ) : null}
       </div>
 
-      <Input
-        type="text"
-        label="منشأ"
+      <Select
         variant="underlined"
-        startContent={
-          <BirthplaceIcon  />
-        }
-        size="lg"
+        label="مكان ميلادي"
+        className=" font-bold"
         name="birthPlace"
-        value={initValues.birthPlace}
+        selectedKeys={[initValues.birthPlace]}
         onChange={formikChange}
-      />
+      
+        startContent={<BirthplaceIcon />}
+        
+      >
+        {governments.map((government) => (
+          <SelectItem name="birthPlace" key={government.namePrimaryLang}   textValue={government.nameSecondaryLang}>
+            {government.nameSecondaryLang}
+          </SelectItem>
+        ))}
+      </Select>
+      
       <Input
         type="text"
-        label="بلد"
+        label="الدولة اللي اتولدت فيها"
         variant="underlined"
-        startContent={
-          <FlagIcon  />
-        }
+        startContent={<FlagIcon />}
         size="lg"
         name="country"
         value={initValues.country}
@@ -53,11 +77,9 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="الكنيسة"
+        label="كنيستي"
         variant="underlined"
-        startContent={
-          <ChurchIcon  />
-        }
+        startContent={<ChurchIcon />}
         size="lg"
         name="church"
         value={initValues.church}
@@ -65,11 +87,9 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="الجامعة"
+        label="جامعتي"
         variant="underlined"
-        startContent={
-          <CollegeIcon  />
-        }
+        startContent={<CollegeIcon />}
         size="lg"
         name="university"
         value={initValues.university}
@@ -77,11 +97,9 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="الكلية"
+        label="الكلية | المعهد"
         variant="underlined"
-        startContent={
-          <CollegeIcon  />
-        }
+        startContent={<CollegeIcon />}
         size="lg"
         name="college"
         value={initValues.college}
@@ -89,54 +107,48 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="العمل"
+        label="بشتغل ايه ؟"
         variant="underlined"
-        startContent={
-          <JobIcon  />
-        }
+        startContent={<JobIcon />}
         size="lg"
         name="job"
         value={initValues.job}
         onChange={formikChange}
       />
       <Input
-      
         type="text"
-        label="الشركة"
+        label="الشركة اللي بشتغل فيها"
         variant="underlined"
-        startContent={
-          <CompanyIcon  />
-        }
+        startContent={<CompanyIcon />}
         size="lg"
         name="company"
         value={initValues.company}
         onChange={formikChange}
       />
       <Textarea
-      
-        label="السيرة الذاتية"
+        label="Bio"
         variant="underlined"
-        placeholder="عرفني بنفسكbio"
+        placeholder="ممكن هنا تكتب حاجة عن نفسك مختصرة "
         disableAnimation
         disableAutosize
+        rows={5}
         classNames={{
-          base: "w-full ",
+          base: "w-full",
           input: "resize-y min-h-[40px] ",
         }}
-        startContent={
-          <BioIcon  />
-        }
+        startContent={<BioIcon />}
         name="bio"
         value={initValues.bio}
         onChange={formikChange}
       />
       <Checkbox
+        dir="ltr"
         name="isGrad"
         size="lg"
         isSelected={initValues.isGrad}
         onChange={formikChange}
       >
-        <p className="text-2xl text-blue-400">هل أنت خريج</p>
+        <p className=" mx-2 text-2xl text-blue-400">خريج ؟</p>
       </Checkbox>
     </div>
   );

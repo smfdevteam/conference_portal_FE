@@ -1,17 +1,17 @@
+import { Checkbox, Input } from "@nextui-org/react";
 import React, { useState } from "react";
-import { Input, Checkbox } from "@nextui-org/react";
-import {
-  NameIcon,
-  MailIcon,
-  PhoneIcon,
-  MaleIcon,
-  FemaleIcon,
-} from "../UserIcon";
 import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
 import ar from "react-phone-number-input/locale/ar";
-import "./PersonalInformation.css";
+import "react-phone-number-input/style.css";
 import CustomToolTip from "../../CustomToolTip/CustomToolTip";
+import {
+  FemaleIcon,
+  MailIcon,
+  MaleIcon,
+  NameIcon,
+  PhoneIcon,
+} from "../UserIcon";
+import "./PersonalInformation.css";
 const PersonalInformation = ({
   initValues,
   formikChange,
@@ -24,12 +24,23 @@ const PersonalInformation = ({
   genderInitValue,
 }) => {
   const [tipShow, setTipShow] = useState("");
+  const handleGender = (genderValue) => {
+    if (genderInitValue) {
+    } else if (
+      (genderValue === "male" && gender === "male") ||
+      (genderValue === "female" && gender === "female")
+    ) {
+      setGender("");
+    } else {
+      setGender(genderValue);
+    }
+  };
   return (
-    <div className="flex flex-col justify-center items-center gap-6  font-[Cairo] font-bold ">
+    <div className="flex flex-col justify-center items-center gap-6  font-[Cairo] font-bold  relative">
       <Input
         name="name"
         type="text"
-        label="الاسم"
+        label="إسمك"
         variant="underlined"
         startContent={<NameIcon />}
         isReadOnly
@@ -47,7 +58,7 @@ const PersonalInformation = ({
       />
       <Input
         type="Email"
-        label="الإيميل"
+        label="الايميل الخاص بيك"
         variant="underlined"
         startContent={<MailIcon />}
         size="lg"
@@ -57,7 +68,7 @@ const PersonalInformation = ({
         endContent={
           tipShow === "email" && (
             <CustomToolTip
-              customStyle="text-3xl font-bold bg-blue-400"
+              customStyle="text-3xl font-bold bg-blue-400 "
               toolTipContent="من فضلك اتصل بالمسؤول إذا كانت هذه البيانات غير صحيحة أو إذا كنت ترغب في تغيير البيانات."
             />
           )
@@ -65,7 +76,7 @@ const PersonalInformation = ({
       />
       <Input
         type="Phone"
-        label="الموبايل"
+        label="موبايلك"
         variant="underlined"
         startContent={<PhoneIcon />}
         isReadOnly
@@ -84,7 +95,7 @@ const PersonalInformation = ({
       <Input
         name="emergency_contact_name"
         type="text"
-        label="اسم جهة الاتصال في حالات الطوارئ"
+        label="في حالة الطواري اكتب اسم شخص نتصل بيه"
         variant="underlined"
         startContent={<NameIcon />}
         size="lg"
@@ -102,7 +113,7 @@ const PersonalInformation = ({
               : "w-full text-sm "
           }
         >
-          رقم الاتصال في حالات الطوارئ
+          الرقم اللي هنتصل بيه في حالة الطوارئ
         </label>
         <PhoneInput
           className={
@@ -127,20 +138,15 @@ const PersonalInformation = ({
         ) : null}
       </div>
 
-      <div className="flex flex-row gap-4 justify-center items-start ">
-        <div
-          className={
-            genderInitValue == ""
-              ? "flex"
-              : genderInitValue === "male"
-              ? "flex"
-              : "hidden"
-          }
-        >
+      <div
+        className="flex flex-row gap-1 justify-center items-start  w-full"
+        onMouseOver={() => setTipShow("gender")}
+      >
+        <div className="flex w-full justify-center items-center">
           <Checkbox
             name="isSharable"
             size="lg"
-            onClick={() => setGender(genderInitValue==="male"? "male":gender === "male" ? "" : "male")}
+            onClick={() => handleGender("male")}
             isSelected={gender === "male"}
           >
             <p className="text-xl">Male </p>
@@ -148,24 +154,24 @@ const PersonalInformation = ({
           <MaleIcon />
         </div>
 
-        <div
-          className={
-            genderInitValue == ""
-              ? "flex"
-              : genderInitValue === "female"
-              ? "flex"
-              : "hidden"
-          }
-        >
+        <div className="flex w-full justify-center items-center">
           <Checkbox
             name="isSharable"
             size="lg"
-            onClick={() => setGender(genderInitValue==="female"? "female":gender === "female" ? "" : "female")}
+            onClick={() => handleGender("female")}
             isSelected={gender === "female"}
           >
             <p className="text-xl">Female</p>
           </Checkbox>
           <FemaleIcon />
+        </div>
+        <div className=" w-full flex-1 text-left">
+          {tipShow === "gender" && genderInitValue && (
+            <CustomToolTip
+              customStyle="text-3xl font-bold bg-blue-400 "
+              toolTipContent="من فضلك اتصل بالمسؤول إذا كانت هذه البيانات غير صحيحة أو إذا كنت ترغب في تغيير البيانات."
+            />
+          )}
         </div>
       </div>
     </div>

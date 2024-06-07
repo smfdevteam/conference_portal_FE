@@ -11,13 +11,23 @@ import { ErrorMessage, useFormik } from "formik";
 import * as Yup from "yup";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { editProfile } from "../../Api/auth.service";
-const categories = [
-  "Personal Information",
-  "Basic Information",
-  "Social Media",
-];
+const categories = {
+  personal: {
+    ar: "البيانات الشخصية",
+    en: "Personal Information",
+  },
+  basic: {
+    ar: "البيانات الأساسية",
+    en: "Basic Information",
+  },
+  social: {
+    ar: "التواصل الإجتماعي",
+    en: "Social Media",
+  },
+};
 
 const onSubmit = async ({
+  setIsSubmiting,
   X,
   bio,
   birthPlace,
@@ -39,47 +49,50 @@ const onSubmit = async ({
   university,
   youtube,
 }) => {
-  const response = await editProfile({
-    X,
-    bio,
-    birthPlace,
-    birthday,
-    church,
-    college,
-    company,
-    country,
-    emergency_contact_name,
-    emergency_contact_number,
-    facebook,
-    gender,
-    instagram,
-    isGrad,
-    isSharable,
-    job,
-    notificationToken,
-    tiktok,
-    university,
-    youtube,
-  })
-  
+  try {
+    setIsSubmiting(true);
+    const response = await editProfile({
+      X,
+      bio,
+      birthPlace,
+      birthday,
+      church,
+      college,
+      company,
+      country,
+      emergency_contact_name,
+      emergency_contact_number,
+      facebook,
+      gender,
+      instagram,
+      isGrad,
+      isSharable,
+      job,
+      notificationToken,
+      tiktok,
+      university,
+      youtube,
+    });
+  } finally {
+    setIsSubmiting(false);
+  }
 };
 
 const UserProfile = () => {
-  const [activeCategory, setActiveCategory] = useState("Personal Information");
+  const [activeCategory, setActiveCategory] = useState(categories.personal.en);
   const { app_state, setAppState } = useContext(stateProvider);
   const [phoneNumber, setPhoneNumer] = useState(
     app_state.user.emergency_contact_number
   );
   const [gender, setGender] = useState(app_state.user.gender);
-  const [genderInitValue,setGenderInitValue] = useState(gender)
-  
-
+  const [genderInitValue, setGenderInitValue] = useState(gender);
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const formik = useFormik({
     initialValues: { ...app_state.user },
     validationSchema: Yup.object({
       emergency_contact_name: Yup.string().test(
         "emergency_contact_name",
-        "Name is Required",
+        "الاسم مطلوب",
         (emergency_contact_name) => {
           emergency_contact_name = emergency_contact_name
             ? emergency_contact_name
@@ -96,7 +109,7 @@ const UserProfile = () => {
         }
       ),
       emergency_contact_number: Yup.string()
-        .test("phone", "Phone is Required", () => {
+        .test("phone", "مطلوب الموبايل", () => {
           if (
             formik.values.emergency_contact_name &&
             formik.values.emergency_contact_name.length > 0 &&
@@ -107,7 +120,7 @@ const UserProfile = () => {
             return true;
           }
         })
-        .test("phone", "Not Valid Number", () => {
+        .test("phone", "الموبايل مش مظبوط", () => {
           if (
             formik.values.emergency_contact_number.length > 0 &&
             !isValidPhoneNumber(formik.values.emergency_contact_number) &&
@@ -126,16 +139,17 @@ const UserProfile = () => {
   });
   formik.values.emergency_contact_number = phoneNumber ? phoneNumber : "";
   formik.values.gender = gender;
-  formik.values.setAppState = setAppState
+  formik.values.setAppState = setAppState;
+  formik.values.setIsSubmiting = setIsSubmiting;
   const handleErrorPostion = () => {
     if (
       (formik.errors.emergency_contact_number ||
         formik.errors.emergency_contact_name) &&
       !formik.errors.birthday
     ) {
-      setActiveCategory("Personal Information");
+      setActiveCategory(categories.personal.en);
     } else if (formik.errors.birthday) {
-      setActiveCategory("Basic Information");
+      setActiveCategory(categories.basic.en);
     }
   };
 
@@ -170,18 +184,18 @@ const UserProfile = () => {
           </Checkbox>
           <div className="drop-shadow-lg rounded-md w-full md:w-3/5">
             <div className="flex flex-row rounded-md   justify-center p-1 gap-3 bg-gradient-to-r from-sky-400 to-sky-800  m-auto">
-              {categories.map((category) => (
+              {Object.keys(categories).map((key) => (
                 <button
                   type="button"
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
+                  key={categories[key].en}
+                  onClick={() => setActiveCategory(categories[key].en)}
                   className={`flex-1 text-md p-1  text-center rounded-lg transition-all duration-300 ease-in-out ${
-                    activeCategory === category
+                    activeCategory === categories[key].en
                       ? "bg-blue-500 text-white transform scale-105"
                       : "bg-gray-200 text-gray-700 transform scale-100"
                   }`}
                 >
-                  <p>{category}</p>
+                  <p>{categories[key].ar}</p>
                 </button>
               ))}
             </div>
@@ -190,7 +204,7 @@ const UserProfile = () => {
             <h2 className="text-xl font-semibold text-center">
               {activeCategory}
             </h2>
-            {activeCategory === "Personal Information" && (
+            {activeCategory === categories.personal.en && (
               <PersonalInformation
                 initValues={formik.values}
                 formikChange={formik.handleChange}
@@ -203,14 +217,14 @@ const UserProfile = () => {
                 genderInitValue={genderInitValue}
               />
             )}
-            {activeCategory === "Basic Information" && (
+            {activeCategory === categories.basic.en && (
               <BasicInformation
                 initValues={formik.values}
                 formikChange={formik.handleChange}
                 formikErrors={formik.errors}
               />
             )}
-            {activeCategory === "Social Media" && (
+            {activeCategory === categories.social.en && (
               <SocialMedia
                 initValues={formik.values}
                 formikChange={formik.handleChange}
@@ -223,6 +237,7 @@ const UserProfile = () => {
           className="w-full text-2xl mt-4"
           type="submit"
           onClick={handleErrorPostion}
+          isLoading={isSubmiting}
         >
           Save Edit
         </Button>
