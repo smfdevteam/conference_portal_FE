@@ -27,6 +27,7 @@ const categories = {
 };
 
 const onSubmit = async ({
+  setIsSubmiting,
   X,
   bio,
   birthPlace,
@@ -48,28 +49,33 @@ const onSubmit = async ({
   university,
   youtube,
 }) => {
-  const response = await editProfile({
-    X,
-    bio,
-    birthPlace,
-    birthday,
-    church,
-    college,
-    company,
-    country,
-    emergency_contact_name,
-    emergency_contact_number,
-    facebook,
-    gender,
-    instagram,
-    isGrad,
-    isSharable,
-    job,
-    notificationToken,
-    tiktok,
-    university,
-    youtube,
-  });
+  try {
+    setIsSubmiting(true);
+    const response = await editProfile({
+      X,
+      bio,
+      birthPlace,
+      birthday,
+      church,
+      college,
+      company,
+      country,
+      emergency_contact_name,
+      emergency_contact_number,
+      facebook,
+      gender,
+      instagram,
+      isGrad,
+      isSharable,
+      job,
+      notificationToken,
+      tiktok,
+      university,
+      youtube,
+    });
+  } finally {
+    setIsSubmiting(false);
+  }
 };
 
 const UserProfile = () => {
@@ -80,13 +86,13 @@ const UserProfile = () => {
   );
   const [gender, setGender] = useState(app_state.user.gender);
   const [genderInitValue, setGenderInitValue] = useState(gender);
-
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const formik = useFormik({
     initialValues: { ...app_state.user },
     validationSchema: Yup.object({
       emergency_contact_name: Yup.string().test(
         "emergency_contact_name",
-        "Name is Required",
+        "الاسم مطلوب",
         (emergency_contact_name) => {
           emergency_contact_name = emergency_contact_name
             ? emergency_contact_name
@@ -103,7 +109,7 @@ const UserProfile = () => {
         }
       ),
       emergency_contact_number: Yup.string()
-        .test("phone", "Phone is Required", () => {
+        .test("phone", "مطلوب الموبايل", () => {
           if (
             formik.values.emergency_contact_name &&
             formik.values.emergency_contact_name.length > 0 &&
@@ -114,7 +120,7 @@ const UserProfile = () => {
             return true;
           }
         })
-        .test("phone", "Not Valid Number", () => {
+        .test("phone", "الموبايل مش مظبوط", () => {
           if (
             formik.values.emergency_contact_number.length > 0 &&
             !isValidPhoneNumber(formik.values.emergency_contact_number) &&
@@ -134,6 +140,7 @@ const UserProfile = () => {
   formik.values.emergency_contact_number = phoneNumber ? phoneNumber : "";
   formik.values.gender = gender;
   formik.values.setAppState = setAppState;
+  formik.values.setIsSubmiting = setIsSubmiting;
   const handleErrorPostion = () => {
     if (
       (formik.errors.emergency_contact_number ||
@@ -230,6 +237,7 @@ const UserProfile = () => {
           className="w-full text-2xl mt-4"
           type="submit"
           onClick={handleErrorPostion}
+          isLoading={isSubmiting}
         >
           Save Edit
         </Button>
