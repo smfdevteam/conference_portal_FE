@@ -10,7 +10,7 @@ const Member = ({ member }) => {
         <h4 className="font-bold text-large">{name}</h4>
       </CardHeader>
       <CardBody className="overflow-hidden h-[300px]">
-        <img src={image} className="object-cover  h-[100%]" style={{
+        <img src={image} className="object-cover rounded-lg h-[100%]" style={{
           objectPosition:'top'
         }} alt="" />
       </CardBody>
