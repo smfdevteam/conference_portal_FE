@@ -9,7 +9,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
         <label htmlFor="birthday" className={" text-sm " + (formikErrors.birthday
             ? " text-[#F31763] "
             : null)}>
-          تاريخ الميلاد
+          عيد ميلادي
         </label>
         <input
           className={" text-right  w-full   outline-none   border-b-2 border-s-black    focus::border-black   date-input pr-2 text-md  font-semibold " + (formikErrors.birthday
@@ -29,7 +29,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
 
       <Input
         type="text"
-        label="منشأ"
+        label="مكان ميلادي"
         variant="underlined"
         startContent={
           <BirthplaceIcon  />
@@ -41,7 +41,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="بلد"
+        label="الدولة اللي اتولدت فيها"
         variant="underlined"
         startContent={
           <FlagIcon  />
@@ -53,7 +53,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="الكنيسة"
+        label="كنيستي"
         variant="underlined"
         startContent={
           <ChurchIcon  />
@@ -65,7 +65,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="الجامعة"
+        label="جامعتي"
         variant="underlined"
         startContent={
           <CollegeIcon  />
@@ -77,7 +77,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="الكلية"
+        label="الكلية | المعهد"
         variant="underlined"
         startContent={
           <CollegeIcon  />
@@ -89,7 +89,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Input
         type="text"
-        label="العمل"
+        label="بشتغل ايه ؟"
         variant="underlined"
         startContent={
           <JobIcon  />
@@ -102,7 +102,7 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       <Input
       
         type="text"
-        label="الشركة"
+        label="الشركة اللي بشتغل فيها"
         variant="underlined"
         startContent={
           <CompanyIcon  />
@@ -114,11 +114,12 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
       />
       <Textarea
       
-        label="السيرة الذاتية"
+        label="Bio"
         variant="underlined"
-        placeholder="عرفني بنفسكbio"
+        placeholder="ممكن هنا تكتب حاجة عن نفسك مختصرة "
         disableAnimation
         disableAutosize
+        rows={5}
         classNames={{
           base: "w-full ",
           input: "resize-y min-h-[40px] ",
@@ -131,12 +132,13 @@ const BasicInfomation = ({ formikChange, initValues,formikErrors }) => {
         onChange={formikChange}
       />
       <Checkbox
+      dir="ltr"
         name="isGrad"
         size="lg"
         isSelected={initValues.isGrad}
         onChange={formikChange}
       >
-        <p className="text-2xl text-blue-400">هل أنت خريج</p>
+        <p className= " mx-2 text-2xl text-blue-400">خريج ؟</p>
       </Checkbox>
     </div>
   );

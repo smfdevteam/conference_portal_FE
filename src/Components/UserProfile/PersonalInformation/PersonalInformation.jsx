@@ -1,17 +1,17 @@
+import { Checkbox, Input } from "@nextui-org/react";
 import React, { useState } from "react";
-import { Input, Checkbox } from "@nextui-org/react";
-import {
-  NameIcon,
-  MailIcon,
-  PhoneIcon,
-  MaleIcon,
-  FemaleIcon,
-} from "../UserIcon";
 import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
 import ar from "react-phone-number-input/locale/ar";
-import "./PersonalInformation.css";
+import "react-phone-number-input/style.css";
 import CustomToolTip from "../../CustomToolTip/CustomToolTip";
+import {
+  FemaleIcon,
+  MailIcon,
+  MaleIcon,
+  NameIcon,
+  PhoneIcon,
+} from "../UserIcon";
+import "./PersonalInformation.css";
 const PersonalInformation = ({
   initValues,
   formikChange,
@@ -29,7 +29,7 @@ const PersonalInformation = ({
       <Input
         name="name"
         type="text"
-        label="الاسم"
+        label="إسمك"
         variant="underlined"
         startContent={<NameIcon />}
         isReadOnly
@@ -47,7 +47,7 @@ const PersonalInformation = ({
       />
       <Input
         type="Email"
-        label="الإيميل"
+        label="الايميل الخاص بيك"
         variant="underlined"
         startContent={<MailIcon />}
         size="lg"
@@ -65,7 +65,7 @@ const PersonalInformation = ({
       />
       <Input
         type="Phone"
-        label="الموبايل"
+        label="موبايلك"
         variant="underlined"
         startContent={<PhoneIcon />}
         isReadOnly
@@ -84,7 +84,7 @@ const PersonalInformation = ({
       <Input
         name="emergency_contact_name"
         type="text"
-        label="اسم جهة الاتصال في حالات الطوارئ"
+        label="في حالة الطواري اكتب اسم شخص نتصل بيه"
         variant="underlined"
         startContent={<NameIcon />}
         size="lg"
@@ -102,7 +102,7 @@ const PersonalInformation = ({
               : "w-full text-sm "
           }
         >
-          رقم الاتصال في حالات الطوارئ
+           الرقم اللي هنتصل بيه في حالة الطوارئ
         </label>
         <PhoneInput
           className={
