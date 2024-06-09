@@ -3,7 +3,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { isTokenExist, setTokens } from "./utils";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {api} from './api'
+import { api } from "./api";
 const resetClientPassword = async (email) => {
   try {
     await sendPasswordResetEmail(
@@ -18,9 +18,13 @@ const resetClientPassword = async (email) => {
 const register = async (userData) => {
   try {
     const headers = { skipInterceptors: true };
-    const response = await axios.post("https://conference-portal-be.vercel.app/guest/auth/register", userData, {
-      headers,
-    });
+    const response = await axios.post(
+      "https://conference-portal-be.vercel.app/guest/auth/register",
+      userData,
+      {
+        headers,
+      }
+    );
     console.log(response.data);
 
     return response.data;
@@ -69,18 +73,31 @@ const login = async (credentials) => {
   }
 };
 
-const editProfile =  async (userData)=>{
+const editProfile = async (userData) => {
   try {
-    const response = await api.put('/guest/profile',userData)
-    console.log('Response from server:', response.data);
-    toast.success("تم تحديث بيانات  بنجاح!")
-    return response.data
+    const response = await api.put("/guest/profile", userData);
+
+    toast.success("تم تحديث بيانات  بنجاح!");
+    return response.data;
   } catch (error) {
     if (!error?.response) {
       toast.error("الرجاء معاودة المحاولة في وقت لاحق");
-    } 
+    }
   }
-}
+};
+
+const editProfileImage = async (ProfileImage) => {
+  try {
+    const response = await api.put("/guest/profile/image", ProfileImage);
+
+    toast.success("تم تغيير الصورة بنجاح!");
+    return response.data;
+  } catch (error) {
+    if (!error?.response) {
+      toast.error("يرجى المحاولة مرة أخرى لتحميل الصورة");
+    }
+  }
+};
 
 const handleRefreshToken = async () => {
   try {
@@ -142,7 +159,7 @@ const silentLogin = async (setLoading, setUserState, toLogin) => {
       setLoading(false);
     }
   } else {
-    toLogin('/login');
+    toLogin("/login");
   }
 };
 
@@ -153,5 +170,6 @@ export {
   verifyToken,
   handleRefreshToken,
   silentLogin,
-  editProfile
+  editProfile,
+  editProfileImage,
 };

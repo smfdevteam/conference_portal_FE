@@ -1,16 +1,19 @@
 import React from "react";
+
 import { stateProvider } from "../../Context/App_Context";
 import { useContext } from "react";
-import { Avatar, Checkbox, Button } from "@nextui-org/react";
+import { Checkbox, Button } from "@nextui-org/react";
 import { useState } from "react";
 import WavySvg from "./UserProfileAnimation/WavySvg";
 import PersonalInformation from "./PersonalInformation/PersonalInformation";
 import BasicInformation from "./BasicInformation/BasicInformation";
 import SocialMedia from "./SocialMedia/SocialMedia";
-import { ErrorMessage, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { editProfile } from "../../Api/auth.service";
+import { editProfile, editProfileImage } from "../../Api/auth.service";
+import ProfileImage from "./ProfileImage/ProfileImage";
+
 const categories = {
   personal: {
     ar: "البيانات الشخصية",
@@ -48,8 +51,11 @@ const onSubmit = async ({
   tiktok,
   university,
   youtube,
+  profileImage,
+  setAppState
 }) => {
   try {
+
     setIsSubmiting(true);
     const response = await editProfile({
       X,
@@ -73,6 +79,14 @@ const onSubmit = async ({
       university,
       youtube,
     });
+    if (profileImage) {
+      const formData = new FormData();
+      formData.append("image", profileImage);
+      const imageResponse = await editProfileImage(formData);
+      setAppState((prev) => {
+        return { ...prev, user: imageResponse};
+      });
+    }
   } finally {
     setIsSubmiting(false);
   }
@@ -87,6 +101,8 @@ const UserProfile = () => {
   const [gender, setGender] = useState(app_state.user.gender);
   const [genderInitValue, setGenderInitValue] = useState(gender);
   const [isSubmiting, setIsSubmiting] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [profileImage, setProfileImage] = useState(app_state.user.photoURL);
   const formik = useFormik({
     initialValues: { ...app_state.user },
     validationSchema: Yup.object({
@@ -141,6 +157,7 @@ const UserProfile = () => {
   formik.values.gender = gender;
   formik.values.setAppState = setAppState;
   formik.values.setIsSubmiting = setIsSubmiting;
+  formik.values.profileImage = selectedFile;
   const handleErrorPostion = () => {
     if (
       (formik.errors.emergency_contact_number ||
@@ -160,20 +177,13 @@ const UserProfile = () => {
           <WavySvg />
         </div>
         <div className="flex flex-col justify-center items-center mt-8 md:mt-44 gap-8 w-full">
-          <Avatar
-            isBordered
-            color="primary"
-            imgProps={{
-              style: {
-                objectFit: "contain",
-                width: "100%",
-                height: "100%",
-              },
-            }}
-            src={formik.values.photoURL}
-            alt="NextUI Album Cover"
-            className="w-32 h-32  md:w-64 md:h-64 bg-warning"
-          />
+          <div className=" relative bg-red-800 rounded-full">
+            <ProfileImage
+              profileImage={profileImage}
+              setProfileImage={setProfileImage}
+              setSelectedFile={setSelectedFile}
+            />
+          </div>
           <Checkbox
             name="isSharable"
             size="lg"
