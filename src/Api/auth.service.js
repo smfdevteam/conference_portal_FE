@@ -99,6 +99,19 @@ const editProfileImage = async (ProfileImage) => {
   }
 };
 
+const getPublicProfile = async (requesteduid) => {
+  try {
+    const headers = { requesteduid };
+    const response = await api.get("/guest/profile/public", { headers });
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    if (!error?.response) {
+      toast.error("الرجاء معاودة المحاولة في وقت لاحق");
+    }
+  }
+};
+
 const handleRefreshToken = async () => {
   try {
     const refresh = localStorage.getItem("X-REFRESH-TOKEN");
@@ -172,4 +185,5 @@ export {
   silentLogin,
   editProfile,
   editProfileImage,
+  getPublicProfile
 };

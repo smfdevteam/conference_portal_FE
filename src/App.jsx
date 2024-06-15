@@ -26,6 +26,7 @@ import Speakers from "./pages/speakers/Speakers";
 import { api } from "./Api/api";
 import Messages from "./pages/messages/Messages";
 import { getMessagesCount } from "./Api/user.service";
+import PublicUser from "./pages/User/PublicUser";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -64,7 +65,7 @@ function App() {
     getLookUpsData();
     getUserMessagesCount();
   }, []);
-
+ 
   // Redirect if not a mobile device
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   if (isMobile()) {
@@ -101,6 +102,7 @@ function App() {
                   <Route path="/materials" element={<Material />} />
                   <Route path="/speakers" element={<Speakers />} />
                   <Route path="/settings" element={<User />} />
+                  <Route path="/public/:uid" element={ <PublicUser />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/bible" element={<Bible />}>
                     <Route index element={<Bible_main />} />
