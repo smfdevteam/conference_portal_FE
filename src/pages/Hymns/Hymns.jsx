@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
-import { getHymnsTitles } from "../../Api/hymns.service";
 import { Input } from "@nextui-org/react";
-import { FixedSizeList as List } from "react-window";
+import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
+import { getHymnsTitles } from "../../Api/hymns.service";
+const cacheMap = new Map();
 const Hymns = () => {
   const [hymnsTitle, setHymnsTitles] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,14 +23,19 @@ const Hymns = () => {
 
   const filteredHymns = useMemo(() => {
     if (!searchTerm) return [];
-    return hymnsTitle.filter((hymn) =>
-      hymn.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    if (cacheMap.get(searchTerm)) {
+      return cacheMap.get(searchTerm);
+    } else {
+      const filtered = hymnsTitle.filter((hymn) =>
+        hymn.title.startsWith(searchTerm)
+      );
+      cacheMap.set(searchTerm, filtered);
+      return filtered;
+    }
   }, [searchTerm, hymnsTitle]);
 
-  const getHymn = (title) => {
-    const { hymnId } = hymnsTitle.find((hymn) => hymn.title === title);
-    alert(hymnId);
+  const getHymn = (hymn) => {
+    alert(hymn.hymnId);
   };
 
   useEffect(() => {
@@ -38,30 +43,27 @@ const Hymns = () => {
   }, []);
   return (
     <>
+      <p className="text-center text-3xl font-bold">الترانيم</p>
+      <p className="text-md text-center">هنا في اكتر من 9500 ترنيمة </p>
+      <p className="text-sm text-danger-400 text-center mb-3 w-[60%] m-auto">ممكن الترنيمة تتأخر شوية علشان تحمل علي حسب نوع الموبايل </p>
       <Input
         type="text"
         label="دور علي الترنيمة"
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <ul
-        className="my-4 text-right text-lg font-bold"
+        className="max-h-[200px] overflow-y-scroll my-2 text-right grid gap-1 text-lg font-bold"
         dir="rtl"
       >
-        <List
-          height={150}
-          itemCount={filteredHymns.length}
-          itemSize={50}
-        >
-          {({ index }) => (
-            <li
-              onClick={() => getHymn(filteredHymns[index].title)}
-              className="border-1 py-3 px-2 rounded-lg shadow-sm my-2 hover:bg-purple-700 hover:text-white transition"
-              key={filteredHymns[index].hymnId}
-            >
-              {filteredHymns[index].title}
-            </li>
-          )}
-        </List>
+        {filteredHymns.map((hymn) => (
+          <li
+            onClick={() => getHymn(hymn)}
+            className="border-1 py-3 px-2 rounded-lg shadow-sm my-2 hover:bg-purple-700 hover:text-white transition"
+            key={hymn.hymnId}
+          >
+            {hymn.title}
+          </li>
+        ))}
       </ul>
     </>
   );
