@@ -1,9 +1,24 @@
-import { Card, CardBody, CardHeader, Divider, Image , Spinner } from "@nextui-org/react";
-import { Suspense, lazy } from "react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
+  Image,
+  Spinner,
+} from "@nextui-org/react";
+import { Suspense, lazy, useState } from "react";
 const Note_Card_Modal = lazy(() => import("./Note_Card_Modal"));
 const Note_Card = ({ note }) => {
+  const [isFav, setIsFav] = useState(note.isFav);
+  const handleIsFavUI = (isFav) => {
+    setIsFav(isFav);
+  };
   return (
-    <Card key={note.noteId} dir="ltr">
+    <Card
+      key={note.noteId}
+      dir="ltr"
+      className={isFav ? `border-2 border-danger-500` : ''}
+    >
       <CardHeader className="flex gap-3 justify-between">
         <div className="flex gap-3">
           <Image
@@ -18,8 +33,8 @@ const Note_Card = ({ note }) => {
             <p className="text-small text-default-500">{note.creationTime}</p>
           </div>
         </div>
-        <Suspense fallback={<Spinner  color="secondary"/>}>
-          <Note_Card_Modal note={note} />
+        <Suspense fallback={<Spinner color="secondary" />}>
+          <Note_Card_Modal note={note} handleFav={handleIsFavUI} />
         </Suspense>
       </CardHeader>
       <Divider />

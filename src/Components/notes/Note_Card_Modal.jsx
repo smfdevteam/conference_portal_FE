@@ -1,26 +1,25 @@
-import settingsIcon from "../../assets/images/icons/options.png";
-import filledHeart from "../../assets/images/icons/filled_heart.png";
-import emptyHeart from "../../assets/images/icons/empty_heart.png";
-import deleteIcon from "../../assets/images/icons/delete.png";
-import shareIcon from "../../assets/images/icons/share.png";
-import editIcon from "../../assets/images/icons/edit_note.png";
-import openEye from "../../assets/images/icons/open_eye.png";
-import closeEye from "../../assets/images/icons/closed_eye.png";
-import viewNote from "../../assets/images/icons/view_note.png";
 import {
   Modal,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
-  Button,
-  useDisclosure,
+  ModalHeader,
+  useDisclosure
 } from "@nextui-org/react";
-import toast from "react-hot-toast";
-import { handleNoteFav, handleNoteShare } from "../../Api/notes.service";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-const Note_Card_Modal = ({ note }) => {
+import { handleNoteFav, handleNoteShare } from "../../Api/notes.service";
+import closeEye from "../../assets/images/icons/closed_eye.png";
+import deleteIcon from "../../assets/images/icons/delete.png";
+import editIcon from "../../assets/images/icons/edit_note.png";
+import emptyHeart from "../../assets/images/icons/empty_heart.png";
+import filledHeart from "../../assets/images/icons/filled_heart.png";
+import openEye from "../../assets/images/icons/open_eye.png";
+import settingsIcon from "../../assets/images/icons/options.png";
+import shareIcon from "../../assets/images/icons/share.png";
+import viewNote from "../../assets/images/icons/view_note.png";
+const Note_Card_Modal = ({ note  , handleFav}) => {
   const navigate = useNavigate();
   const [canShare, setCanShare] = useState(note.canShare);
   const [isFav, setIsFav] = useState(note.isFav);
@@ -41,6 +40,7 @@ const Note_Card_Modal = ({ note }) => {
       toast.loading();
       await handleNoteFav(!isFav, note.noteId);
       setIsFav(!isFav);
+      handleFav(!isFav)
       toast.dismiss();
       toast.success();
     } catch (e) {
@@ -96,19 +96,6 @@ const Note_Card_Modal = ({ note }) => {
                       />
                     </li>
                   )}
-                  {canShare && (
-                    <li
-                      onClick={shareNote}
-                      className="border-1 py-3 px-2 rounded-lg items-center flex justify-between"
-                    >
-                      <p>ابعتها لصاحبك</p>
-                      <img
-                        src={shareIcon}
-                        className="w-[25px] h-[25px]"
-                        alt=""
-                      />
-                    </li>
-                  )}
                   <li className="border-1 py-3 px-2 rounded-lg items-center flex justify-between">
                     <p>تعديل</p>
                     <img src={editIcon} className="w-[25px] h-[25px]" alt="" />
@@ -121,8 +108,19 @@ const Note_Card_Modal = ({ note }) => {
                       alt=""
                     />
                   </li>
-                  {canShare ? (
-                    <>
+                  {!canShare && (
+                    <li
+                      onClick={handleShare}
+                      className="border-1 py-3 px-2 rounded-lg items-center flex justify-between"
+                    >
+                      <p>اعملها شير</p>
+                      <img src={openEye} className="w-[25px] h-[25px]" alt="" />
+                    </li>
+                  )}
+
+                  {canShare && (
+                    <div className="bg-slate-50 p-3 grid gap-3 rounded-xl ">
+                    <p className="border-b-3 py-3 font-bold">بما انك عامل شير </p>
                       <li
                         onClick={handleShare}
                         className="border-1 py-3 px-2 rounded-lg items-center flex justify-between"
@@ -145,15 +143,18 @@ const Note_Card_Modal = ({ note }) => {
                           alt=""
                         />
                       </li>
-                    </>
-                  ) : (
-                    <li
-                      onClick={handleShare}
-                      className="border-1 py-3 px-2 rounded-lg items-center flex justify-between"
-                    >
-                      <p>اعملها شير</p>
-                      <img src={openEye} className="w-[25px] h-[25px]" alt="" />
-                    </li>
+                      <li
+                        onClick={shareNote}
+                        className="border-1 py-3 px-2 rounded-lg items-center flex justify-between"
+                      >
+                        <p>ابعتها لصاحبك</p>
+                        <img
+                          src={shareIcon}
+                          className="w-[25px] h-[25px]"
+                          alt=""
+                        />
+                      </li>
+                    </div>
                   )}
                 </ul>
               </ModalBody>
