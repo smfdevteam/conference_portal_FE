@@ -121,7 +121,7 @@ const Side_bar = () => {
               isBordered
               imgProps={{
                 style: {
-                  objectFit: "contain",
+                  objectFit: "cover",
                 },
               }}
               color={isUserActive ? "warning" : "default"}
