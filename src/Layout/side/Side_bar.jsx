@@ -7,7 +7,7 @@ import "./aside.css";
 const links = [
   { name: "الرئيسية", link: "/" },
   { name: "الكتاب المقدس", link: "/bible" },
-  { name: "الترانيم", link: "/bible" },
+  { name: "الترانيم", link: "/hymns" },
   { name: "المتكلمين", link: "/speakers" },
   { name: "احنا فين ؟", link: "/location" },
   { name: "الشعار", link: "/song" },
