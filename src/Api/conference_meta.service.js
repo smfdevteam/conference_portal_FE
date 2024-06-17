@@ -36,16 +36,33 @@ const getLookups = async () => {
 const getConferenceMaterial = async () => {
   try {
     const material = await api.get("/guest/materials");
-    console.log(material.data);
     return material.data;
   } catch (e) {
     throw new Error("حصل حاجة غلط");
   }
 };
 
+const getConferenceLocation = async () => {
+  try {
+    const material = await api.get("/conference/location");
+    return material.data;
+  } catch (e) {
+    throw new Error("حصل حاجة غلط");
+  }
+};
+const getConferenceSong = async () => {
+  try {
+    const song = await api.get("/conference/song");
+    return song.data;
+  } catch (e) {
+    throw new Error("حصل حاجة غلط");
+  }
+};
 export {
   getConferenceSpeakers,
   getAlertsandHappenNow,
   getLookups,
   getConferenceMaterial,
+  getConferenceLocation , 
+  getConferenceSong
 };

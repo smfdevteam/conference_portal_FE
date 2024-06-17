@@ -28,6 +28,7 @@ import Speakers from "./pages/speakers/Speakers";
 import { isMobile } from "./utils/client";
 import Notes from "./pages/notes/Notes";
 import Shared_Notes from "./pages/notes/Shared_Notes";
+import Song from "./pages/Song/Song";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -101,6 +102,7 @@ function App() {
                   <Route path="/msgs" element={<Messages />} />
                   <Route path="/team" element={<Team />} />
                   <Route path="/location" element={<Location />} />
+                  <Route path="/song" element={<Song />} />
                   <Route path="/materials" element={<Material />} />
                   <Route path="/speakers" element={<Speakers />} />
                   <Route path="/settings" element={<User />} />
