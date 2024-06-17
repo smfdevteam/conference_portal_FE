@@ -6,18 +6,20 @@ import "./aside.css";
 
 const links = [
   { name: "الرئيسية", link: "/" },
+  { name: "الكتاب المقدس", link: "/bible" },
+  { name: "الترانيم", link: "/bible" },
   { name: "المتكلمين", link: "/speakers" },
   { name: "احنا فين ؟", link: "/location" },
   { name: "الشعار", link: "/song" },
-  { name: "الأرشيف", link: "/" },
   { name: "البرنامج", link: "/program" },
-  { name: "الكتاب المقدس", link: "/bible" },
 ];
 const userLinks = [
   { name: "بروفايلي", link: "/settings" },
   { name: "ملاحظاتي", link: "/notes" },
   { name: "ملفاتي", link: "/materials" },
   { name: "أسرة مارمرقس", link: "/" },
+  { name: "الأرشيف", link: "/" },
+
   { name: "التقييم", link: "/" },
   { name: "تسجيل الخروج", link: "/logout" },
 ];
