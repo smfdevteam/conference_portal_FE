@@ -1,14 +1,17 @@
 import { onMessage } from "firebase/messaging";
 import { Suspense, lazy, useContext, useEffect, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { silentLogin } from "./Api/auth.service";
 import { getLookups } from "./Api/conference_meta.service";
+import { getMessagesCount } from "./Api/user.service";
 import "./App.css";
 import Login from "./Auth/Login/Login";
 import Logout from "./Auth/Logout";
 import Register from "./Auth/Register/Register";
 import Full_Screen_Skeleton_Loader from "./Components/shared/Full_Screen_Skeleton_Loader";
+import UnExpected_Error from "./Components/shared/UnExpected_Error";
 import { stateProvider } from "./Context/App_Context";
 import Layout from "./Layout/Layout";
 import { CONFERENCE_FIREBASE_MESSAGEING_HANDLER } from "./firebase/firebase.config";
@@ -18,15 +21,13 @@ import NotFound from "./pages/NotFound";
 import NotMobile from "./pages/NotMobile";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Team from "./pages/Team/Team";
-import User from "./pages/User/User";
-import { isMobile } from "./utils/client";
-import { ErrorBoundary } from "react-error-boundary";
-import UnExpected_Error from "./Components/shared/UnExpected_Error";
-import Speakers from "./pages/speakers/Speakers";
-import { api } from "./Api/api";
-import Messages from "./pages/messages/Messages";
-import { getMessagesCount } from "./Api/user.service";
 import PublicUser from "./pages/User/PublicUser";
+import User from "./pages/User/User";
+import Messages from "./pages/messages/Messages";
+import Speakers from "./pages/speakers/Speakers";
+import { isMobile } from "./utils/client";
+import Notes from "./pages/notes/Notes";
+import Shared_Notes from "./pages/notes/Shared_Notes";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -57,7 +58,7 @@ function App() {
       const count = await getMessagesCount();
       setAppState((prev) => ({ ...prev, user_messages: count }));
     } catch (e) {
-      setAppState((prev) => ({ ...prev, user_messages: '?' }));
+      setAppState((prev) => ({ ...prev, user_messages: "?" }));
     }
   };
   useEffect(() => {
@@ -65,7 +66,7 @@ function App() {
     getLookUpsData();
     getUserMessagesCount();
   }, []);
- 
+
   // Redirect if not a mobile device
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   if (isMobile()) {
@@ -95,6 +96,7 @@ function App() {
                 <>
                   <Route path="/" element={<Home />} />
                   <Route path="/resetpassword" element={<ResetPassword />} />
+                  <Route path="/notes" element={<Notes />} />
                   <Route path="/hymns" element={<Hymns />} />
                   <Route path="/msgs" element={<Messages />} />
                   <Route path="/team" element={<Team />} />
@@ -102,7 +104,11 @@ function App() {
                   <Route path="/materials" element={<Material />} />
                   <Route path="/speakers" element={<Speakers />} />
                   <Route path="/settings" element={<User />} />
-                  <Route path="/public/:uid" element={ <PublicUser />} />
+                  <Route
+                    path="/shared-notes/:noteId"
+                    element={<Shared_Notes />}
+                  />
+                  <Route path="/public/:uid" element={<PublicUser />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/bible" element={<Bible />}>
                     <Route index element={<Bible_main />} />
