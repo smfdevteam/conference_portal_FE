@@ -26,7 +26,7 @@ const Bible_search = () => {
   //   }
   // };
   const getSearch = async () => {
-    if (searchRef.current.value && searchRef.current.value !== wordState) {
+    if (searchRef.current.value.trim()!="" && searchRef.current.value !== wordState) {
       try {
         setwordState(searchRef.current.value);
         setResults([]);
@@ -36,10 +36,12 @@ const Bible_search = () => {
         setResults(result.data.results);
       } catch (e) {
         setwordState("");
-        toast.error(e.message);
+        toast.error('جرب تاني');
       } finally {
         setIsLoading(false);
       }
+    } else {
+      toast.error('كمل البيانات')
     }
   };
   return (
