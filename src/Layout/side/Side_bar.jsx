@@ -9,6 +9,7 @@ const links = [
   { name: "المتكلمين", link: "/speakers" },
   { name: "احنا فين ؟", link: "/location" },
   { name: "الشعار", link: "/song" },
+  { name: "الأرشيف", link: "/" },
   { name: "البرنامج", link: "/program" },
   { name: "الكتاب المقدس", link: "/bible" },
 ];
@@ -17,6 +18,7 @@ const userLinks = [
   { name: "ملاحظاتي", link: "/notes" },
   { name: "ملفاتي", link: "/materials" },
   { name: "أسرة مارمرقس", link: "/" },
+  { name: "التقييم", link: "/" },
   { name: "تسجيل الخروج", link: "/logout" },
 ];
 const Side_bar = () => {
