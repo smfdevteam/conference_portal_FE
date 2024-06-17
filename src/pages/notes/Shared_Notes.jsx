@@ -5,6 +5,7 @@ import { getNoteById } from "../../Api/notes.service";
 import toast from "react-hot-toast";
 import Full_Screen_Skeleton_Loader from "../../Components/shared/Full_Screen_Skeleton_Loader";
 const Shared_Notes = () => {
+  const navigate = useNavigate()
   const { noteId } = useParams();
   const [note, setNote] = useState(null);
   const getNote = async () => {
@@ -15,7 +16,8 @@ const Shared_Notes = () => {
       toast.dismiss()
       toast.success('استمتع')
     } catch (e) {
-      toast.error("حصل مشكلة");
+      toast.error("البوست ده خاص");
+      navigate('/not-found')
     }
   };
   useEffect(() => {
