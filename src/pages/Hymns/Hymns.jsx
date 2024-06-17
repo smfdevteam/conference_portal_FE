@@ -44,14 +44,13 @@ const Hymns = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <ul
-        className="max-h-[200px] overflow-y-scroll my-4 text-right grid gap-3 text-lg font-bold"
+        className="my-4 text-right text-lg font-bold"
         dir="rtl"
       >
         <List
-          height={200}
+          height={150}
           itemCount={filteredHymns.length}
-          itemSize={35} // Adjust based on your list item height
-          width="100%"
+          itemSize={50}
         >
           {({ index }) => (
             <li
