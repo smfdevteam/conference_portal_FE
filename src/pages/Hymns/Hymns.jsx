@@ -45,7 +45,6 @@ const Hymns = () => {
     <>
       <p className="text-center text-3xl font-bold">الترانيم</p>
       <p className="text-md text-center">هنا في اكتر من 9500 ترنيمة </p>
-      <p className="text-sm text-danger-400 text-center mb-3 w-[60%] m-auto">ممكن الترنيمة تتأخر شوية علشان تحمل علي حسب نوع الموبايل </p>
       <Input
         type="text"
         label="دور علي الترنيمة"
