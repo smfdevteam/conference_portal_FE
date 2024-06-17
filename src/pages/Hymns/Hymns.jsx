@@ -27,7 +27,7 @@ const Hymns = () => {
       return cacheMap.get(searchTerm);
     } else {
       const filtered = hymnsTitle.filter((hymn) =>
-        hymn.title.includes(searchTerm)
+        hymn.title.startsWith(searchTerm)
       );
       cacheMap.set(searchTerm, filtered);
       return filtered;
@@ -40,6 +40,10 @@ const Hymns = () => {
 
   useEffect(() => {
     getTitles();
+
+    return () => {
+      cacheMap.clear();
+    };
   }, []);
   return (
     <>
