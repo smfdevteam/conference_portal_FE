@@ -16,6 +16,7 @@ const Shared_Notes = () => {
       toast.dismiss()
       toast.success('استمتع')
     } catch (e) {
+      toast.dismiss()
       toast.error("البوست ده خاص");
       navigate('/not-found')
     }
