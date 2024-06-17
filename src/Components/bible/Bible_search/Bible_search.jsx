@@ -36,7 +36,7 @@ const Bible_search = () => {
         setResults(result.data.results);
       } catch (e) {
         setwordState("");
-        toast.error('جرب تاني');
+        toast.error('جرب تاني او اتأكد  انك حاطط كل البيانات');
       } finally {
         setIsLoading(false);
       }
