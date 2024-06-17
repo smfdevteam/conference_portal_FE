@@ -4,45 +4,49 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  useDisclosure
+  useDisclosure,
 } from "@nextui-org/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { handleNoteFav, handleNoteShare } from "../../Api/notes.service";
+import {
+  deleteNote,
+  handleNoteFav,
+  handleNoteShare,
+} from "../../Api/notes.service";
 import closeEye from "../../assets/images/icons/closed_eye.png";
 import deleteIcon from "../../assets/images/icons/delete.png";
-import editIcon from "../../assets/images/icons/edit_note.png";
 import emptyHeart from "../../assets/images/icons/empty_heart.png";
 import filledHeart from "../../assets/images/icons/filled_heart.png";
 import openEye from "../../assets/images/icons/open_eye.png";
 import settingsIcon from "../../assets/images/icons/options.png";
 import shareIcon from "../../assets/images/icons/share.png";
 import viewNote from "../../assets/images/icons/view_note.png";
-const Note_Card_Modal = ({ note  , handleFav}) => {
+import Edit_Note_Modal from "./Edit_Note_Modal";
+const Note_Card_Modal = ({ note, handleFav, getAllNotes }) => {
   const navigate = useNavigate();
   const [canShare, setCanShare] = useState(note.canShare);
   const [isFav, setIsFav] = useState(note.isFav);
 
   const handleShare = async () => {
     try {
-      toast.loading();
+      toast.loading("ثواني");
       await handleNoteShare(!canShare, note.noteId);
       setCanShare(!canShare);
       toast.dismiss();
-      toast.success();
+      toast.success("تمام");
     } catch (e) {
       toast.error("جرب تاني");
     }
   };
   const handleIsFav = async () => {
     try {
-      toast.loading();
+      toast.loading("ثواني");
       await handleNoteFav(!isFav, note.noteId);
       setIsFav(!isFav);
-      handleFav(!isFav)
+      handleFav(!isFav);
       toast.dismiss();
-      toast.success();
+      toast.success("تمام");
     } catch (e) {
       toast.error("جرب تاني");
     }
@@ -55,7 +59,19 @@ const Note_Card_Modal = ({ note  , handleFav}) => {
         url: `${window.location.origin}/shared-notes/${note.noteId}`,
       });
     } catch (error) {
-      toast.error("المتصفح مش بيدعم الشير ");
+      // toast.error("المتصفح مش بيدعم الشير ");
+    }
+  };
+  const handleDelete = async () => {
+    toast.loading("بنمسحها دلوقتي");
+    try {
+      await deleteNote(note.noteId);
+      await getAllNotes();
+      toast.dismiss();
+      toast.success("تمام");
+    } catch (e) {
+      toast.dismiss();
+      toast.error("جرب تاني");
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -96,11 +112,12 @@ const Note_Card_Modal = ({ note  , handleFav}) => {
                       />
                     </li>
                   )}
-                  <li className="border-1 py-3 px-2 rounded-lg items-center flex justify-between">
-                    <p>تعديل</p>
-                    <img src={editIcon} className="w-[25px] h-[25px]" alt="" />
-                  </li>
-                  <li className="border-1 py-3 px-2 rounded-lg items-center flex justify-between">
+
+                  <Edit_Note_Modal note={note} getAllNotes={getAllNotes}/>
+                  <li
+                    onClick={handleDelete}
+                    className="border-1 py-3 px-2 rounded-lg items-center flex justify-between"
+                  >
                     <p>مسح</p>
                     <img
                       src={deleteIcon}
@@ -120,7 +137,9 @@ const Note_Card_Modal = ({ note  , handleFav}) => {
 
                   {canShare && (
                     <div className="bg-slate-50 p-3 grid gap-3 rounded-xl ">
-                    <p className="border-b-3 py-3 font-bold">بما انك عامل شير </p>
+                      <p className="border-b-3 py-3 font-bold">
+                        بما انك عامل شير{" "}
+                      </p>
                       <li
                         onClick={handleShare}
                         className="border-1 py-3 px-2 rounded-lg items-center flex justify-between"

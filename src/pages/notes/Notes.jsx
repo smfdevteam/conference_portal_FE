@@ -33,7 +33,7 @@ const Notes = () => {
         <>
           <Add_Note getAllNotes={getNotes} />
           <Suspense fallback={<Full_Screen_Skeleton_Loader/>}>
-            <Notes_container notes={notes}/>
+            <Notes_container notes={notes} getAllNotes={getNotes}/>
           </Suspense>
         </>
       ) : (

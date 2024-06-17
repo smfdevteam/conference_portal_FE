@@ -9,31 +9,29 @@ const createNote = async (note) => {
   }
 };
 
-
 const getAllGuestNotes = async () => {
-    try {
-        const guestNotes = await api.get("/guest/notes");
-        return guestNotes.data;
-      } catch (e) {
-        throw new Error(e.message);
-      }
-}
-
-
-const handleNoteShare = async (canShare , noteId) => {
   try {
-    await api.put("/guest/notes/canShare", { canShare , noteId });
+    const guestNotes = await api.get("/guest/notes");
+    return guestNotes.data;
   } catch (e) {
     throw new Error(e.message);
   }
-}
-const handleNoteFav = async (isFav , noteId) => {
+};
+
+const handleNoteShare = async (canShare, noteId) => {
   try {
-    await api.put("/guest/notes/isFav", { isFav , noteId });
+    await api.put("/guest/notes/canShare", { canShare, noteId });
   } catch (e) {
     throw new Error(e.message);
   }
-}
+};
+const handleNoteFav = async (isFav, noteId) => {
+  try {
+    await api.put("/guest/notes/isFav", { isFav, noteId });
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 
 const getNoteById = async (noteId) => {
   try {
@@ -42,10 +40,36 @@ const getNoteById = async (noteId) => {
   } catch (e) {
     throw new Error(e.message);
   }
+};
+const deleteNote = async (noteId) => {
+  try {
+    await api.delete("/guest/notes/", {
+      data: {
+        noteId,
+      },
+    });
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 
+const editNode = async (noteId, note) => {
+  try {
+    await api.put("/guest/notes/", {
+      noteId,
+      note,
+    });
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 
-
-}
-export { createNote , getAllGuestNotes , handleNoteShare , handleNoteFav , getNoteById};
-
-
+export {
+  editNode , 
+  createNote,
+  getAllGuestNotes,
+  handleNoteShare,
+  handleNoteFav,
+  getNoteById,
+  deleteNote,
+};

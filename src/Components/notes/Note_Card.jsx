@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import { Suspense, lazy, useState } from "react";
 const Note_Card_Modal = lazy(() => import("./Note_Card_Modal"));
-const Note_Card = ({ note }) => {
+const Note_Card = ({ note , getAllNotes }) => {
   const [isFav, setIsFav] = useState(note.isFav);
   const handleIsFavUI = (isFav) => {
     setIsFav(isFav);
@@ -34,7 +34,7 @@ const Note_Card = ({ note }) => {
           </div>
         </div>
         <Suspense fallback={<Spinner color="secondary" />}>
-          <Note_Card_Modal note={note} handleFav={handleIsFavUI} />
+          <Note_Card_Modal getAllNotes={getAllNotes} note={note} handleFav={handleIsFavUI} />
         </Suspense>
       </CardHeader>
       <Divider />
