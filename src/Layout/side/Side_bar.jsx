@@ -14,7 +14,7 @@ const links = [
 ];
 const userLinks = [
   { name: "بروفايلي", link: "/settings" },
-  { name: "ملاحظاتي", link: "/" },
+  { name: "ملاحظاتي", link: "/notes" },
   { name: "ملفاتي", link: "/materials" },
   { name: "أسرة مارمرقس", link: "/" },
   { name: "تسجيل الخروج", link: "/logout" },
