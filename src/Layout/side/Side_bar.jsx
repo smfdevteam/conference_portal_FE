@@ -10,14 +10,12 @@ const links = [
   { name: "الترانيم", link: "/hymns" },
   { name: "المتكلمين", link: "/speakers" },
   { name: "احنا فين ؟", link: "/location" },
-  { name: "الشعار", link: "/song" },
   { name: "البرنامج", link: "/program" },
 ];
 const userLinks = [
   { name: "بروفايلي", link: "/settings" },
   { name: "ملاحظاتي", link: "/notes" },
   { name: "ملفاتي", link: "/materials" },
-  { name: "أسرة مارمرقس", link: "/" },
   { name: "الأرشيف", link: "/" },
 
   { name: "التقييم", link: "/" },
