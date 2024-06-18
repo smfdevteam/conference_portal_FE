@@ -53,8 +53,6 @@ const SMF_Tech = () => {
                   />
                 </div>
 
-  
-
                 <div className="grid grid-cols-2 gap-5">
                   <div
                     onClick={() => navigate("/team")}
@@ -77,16 +75,16 @@ const SMF_Tech = () => {
                   </a>
                   <LinkIcon />
                 </div>
-                              {/* ---------------- */}
+                {/* ---------------- */}
 
-                              <div className=" bg-gray-100 p-6 rounded-lg">
+                <div className=" bg-gray-100 p-6 rounded-lg">
                   <header className="text-center my-10">
                     <h1 className="text-4xl font-bold text-blue-600">
                       SMF Tech
                     </h1>
                     <p className="text-xl text-gray-700 mt-2">
-                      Digitizing all Coptic Orthodox Church activities and developing people from a
-                      technological perspective
+                      Digitizing all Coptic Orthodox Church activities and
+                      developing people from a technological perspective
                     </p>
                   </header>
 
@@ -95,7 +93,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Engineers | Developers Team
                       </h2>
-                      <p className="text-gray-700 mt-4">
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
                         Frontend, Backend, Mobile, and Cyber Security Engineers
                         who create software to digitize church activities.
                       </p>
@@ -105,7 +103,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Management | Product Team
                       </h2>
-                      <p className="text-gray-700 mt-4">
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
                         Oversee projects, manage resources, and ensure the
                         successful delivery of our digital products.
                       </p>
@@ -115,7 +113,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Media Team
                       </h2>
-                      <p className="text-gray-700 mt-4">
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
                         Handle all media-related activities, including social
                         media management, video production, and content
                         creation.
@@ -126,7 +124,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Creative Design Team
                       </h2>
-                      <p className="text-gray-700 mt-4">
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
                         Design visual content, including graphics, UI/UX, and
                         promotional materials.
                       </p>
@@ -136,7 +134,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Event Planning Team
                       </h2>
-                      <p className="text-gray-700 mt-4">
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
                         Plan and execute events, ensuring they run smoothly and
                         meet their objectives.
                       </p>
@@ -146,7 +144,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Continuous Learning Team
                       </h2>
-                      <p className="text-gray-700 mt-4">
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
                         Promote ongoing education and training for team members
                         to keep skills up-to-date and foster personal growth.
                       </p>
