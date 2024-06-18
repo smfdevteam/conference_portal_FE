@@ -6,10 +6,12 @@ import Now from "../../Components/happen_now/Now";
 import Request_Help from "../../Components/help/Request_Help";
 import User_Card from "../../Components/user/User_Card";
 import { stateProvider } from "../../Context/App_Context";
+import Leader_badge from "../../Components/Leader_badge/Leader_badge";
 
 export default function Home() {
   const {
     app_state: {
+      user: { isLeader, displayName },
       conference: { name },
     },
   } = useContext(stateProvider);
@@ -32,9 +34,12 @@ export default function Home() {
     <>
       <div className="flex justify-between items-center ms-[1rem]">
         <Alert alert={homeState.alert} />
-        <h1 className="text-3xl  font-bold border-r-3 border-l-3 px-4">{name}</h1>
+        <h1 className="text-3xl  font-bold border-r-3 border-l-3 px-4">
+          {name}
+        </h1>
         <Now now={homeState.now} />
       </div>
+      {isLeader && <Leader_badge />}
       <SMF_Tech />
       <User_Card />
       <Request_Help />

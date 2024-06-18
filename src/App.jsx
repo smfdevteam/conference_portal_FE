@@ -29,6 +29,7 @@ import { isMobile } from "./utils/client";
 import Notes from "./pages/notes/Notes";
 import Shared_Notes from "./pages/notes/Shared_Notes";
 import Song from "./pages/Song/Song";
+import Points from "./pages/Points/Points";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -73,63 +74,66 @@ function App() {
   if (isMobile()) {
     return (
       // <ErrorBoundary fallbackRender={UnExpected_Error}>
-        <Layout>
-          <Toaster
-            position="bottom-center"
-            reverseOrder={true}
-            gutter={8}
-            containerClassName=""
-            containerStyle={{}}
-            toastOptions={{
-              // Define default options
-              className: "",
-              duration: 5000,
-              style: {
-                color: "black",
-                width: "fit",
-                fontWeight: "500",
-              },
-            }}
-          />
-          <Suspense fallback={<Full_Screen_Skeleton_Loader />}>
-            <Routes>
-              {app_state.isLogged ? (
-                <>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/resetpassword" element={<ResetPassword />} />
-                  <Route path="/notes" element={<Notes />} />
-                  <Route path="/hymns" element={<Hymns />} />
-                  <Route path="/msgs" element={<Messages />} />
-                  <Route path="/team" element={<Team />} />
-                  <Route path="/location" element={<Location />} />
-                  <Route path="/song" element={<Song />} />
-                  <Route path="/materials" element={<Material />} />
-                  <Route path="/speakers" element={<Speakers />} />
-                  <Route path="/settings" element={<User />} />
-                  <Route
-                    path="/shared-notes/:noteId"
-                    element={<Shared_Notes />}
-                  />
-                  <Route path="/public/:uid" element={<PublicUser />} />
-                  <Route path="/logout" element={<Logout />} />
-                  <Route path="/bible" element={<Bible />}>
-                    <Route index element={<Bible_main />} />
-                    <Route path=":language" element={<Bible_content />} />
-                    <Route path="search" element={<Bible_search />} />
-                  </Route>
-                </>
-              ) : (
-                <>
-                  <Route path="/" element={<Login />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                </>
-              )}
+      <Layout>
+        <Toaster
+          position="bottom-center"
+          reverseOrder={true}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            // Define default options
+            className: "",
+            duration: 5000,
+            style: {
+              color: "black",
+              width: "fit",
+              fontWeight: "500",
+            },
+          }}
+        />
+        <Suspense fallback={<Full_Screen_Skeleton_Loader />}>
+          <Routes>
+            {app_state.isLogged ? (
+              <>
+                <Route path="/" element={<Home />} />
+                <Route path="/resetpassword" element={<ResetPassword />} />
+                <Route path="/notes" element={<Notes />} />
+                <Route path="/hymns" element={<Hymns />} />
+                <Route path="/msgs" element={<Messages />} />
+                <Route path="/team" element={<Team />} />
+                <Route path="/location" element={<Location />} />
+                <Route path="/song" element={<Song />} />
+                <Route path="/materials" element={<Material />} />
+                <Route path="/speakers" element={<Speakers />} />
+                <Route path="/settings" element={<User />} />
+                <Route
+                  path="/shared-notes/:noteId"
+                  element={<Shared_Notes />}
+                />
+                <Route path="/public/:uid" element={<PublicUser />} />
+                {app_state.user.isLeader && (
+                  <Route path="/points" element={<Points />} />
+                )}
+                <Route path="/logout" element={<Logout />} />
+                <Route path="/bible" element={<Bible />}>
+                  <Route index element={<Bible_main />} />
+                  <Route path=":language" element={<Bible_content />} />
+                  <Route path="search" element={<Bible_search />} />
+                </Route>
+              </>
+            ) : (
+              <>
+                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+              </>
+            )}
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </Layout>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </Layout>
       // </ErrorBoundary>
     );
   } else {

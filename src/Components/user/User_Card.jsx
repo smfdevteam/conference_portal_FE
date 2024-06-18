@@ -1,30 +1,45 @@
-import { stateProvider } from "../../Context/App_Context";
-import { useContext } from "react";
-import SMF_QR from "../QR/SMF_QR";
-import personPlaceHolder from "../../assets/images/team/samaan.png";
-import Smf_Modal from "../shared/Smf_Modal";
-import ShareProfile from "../ShareProfile/ShareProfile";
-import ShareIcon from "../ShareProfile/ShareIcon";
-import ShareSvg from "../../assets/images/icons/share.svg";
-import { useNavigate } from "react-router-dom";
 import {
+  Avatar,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
+  CardHeader,
   Divider,
   Link,
-  Image,
-  Avatar,
 } from "@nextui-org/react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { stateProvider } from "../../Context/App_Context";
+import ShareSvg from "../../assets/images/icons/share.svg";
+import SMF_QR from "../QR/SMF_QR";
+import ShareProfile from "../ShareProfile/ShareProfile";
+import leaderBadge from "../../assets/images/icons/badge.png";
+import Smf_Modal from "../shared/Smf_Modal";
 const User_Card = () => {
   const navigate = useNavigate;
   const { app_state, setAppState } = useContext(stateProvider);
   console.log(app_state);
-  const { displayName, email, photoURL, phoneNumber, profile_views } =
+  const { displayName, email, photoURL, phoneNumber, profile_views, isLeader } =
     app_state.user;
   return (
-    <Card dir="ltr">
+    <Card dir="ltr" className={isLeader && "border-5 border-black"}>
+      {isLeader && (
+        <>
+          <CardHeader className="flex justify-center">
+            <Avatar
+              imgProps={{
+                style: {
+                  objectFit: "contain",
+                },
+              }}
+              isBordered
+              color="primary"
+              src={leaderBadge}
+            />
+          </CardHeader>
+          <Divider />
+        </>
+      )}
       <CardHeader className="flex gap-3">
         <Avatar
           imgProps={{
