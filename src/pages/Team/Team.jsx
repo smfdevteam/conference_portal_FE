@@ -24,6 +24,11 @@ const Team = () => {
         <p className="text-xl w-[85%] mx-auto mb-3 text-center">
           Home of Brilliant Minds Crafting Creativity
         </p>
+        <div className="flex justify-center my-3" onClick={()=>window.open('https://forms.gle/7HS6Sx5is7y7R4YXA' , '_blank')}>
+          <button className="text-center px-4 py-2 w-[85%] bg-black rounded-lg">
+            Join Us Now
+          </button>
+        </div>
         <div className="w-[85%] grid grid-cols-1 justify-center items-center sm:grid-cols-3 gap-3 m-auto ">
           {SmfTechTeam.map((member) => (
             <Suspense

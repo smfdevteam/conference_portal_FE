@@ -41,20 +41,20 @@ const SMF_Tech = () => {
                 className="rounded-4xl overflow-y-scroll"
               >
                 <div className="grid grid-cols-2 my-2 justify-between items-center">
-                  <img src={smfTechTypo} className="w-max-[50px] m-auto inline-block" alt="" />
-                  <img src={mark} className="w-max-[10px] m-auto inline-block" alt="" />
+                  <img
+                    src={smfTechTypo}
+                    className="w-max-[50px] m-auto inline-block"
+                    alt=""
+                  />
+                  <img
+                    src={mark}
+                    className="w-max-[10px] m-auto inline-block"
+                    alt=""
+                  />
                 </div>
-                <p className="text-3xl font-bold text-center text-white">
-                  احنا شباب مارمرقس
-                </p>
-                <p className="text-center text-xl text-white ">
-                  احنا اول خدمة متخصصة في التكنولوجيا و البرمجيات في الكنيسة
-                  القبطية
-                </p>
-                <p className="text-center text-xl text-white">
-                  هدفنا اننا نصنع بنفسنا التطوير الرقمي اللي هيعمل تجربة مختلفة
-                  و جديدة لكنيستنا القبطية و الخدمات الخاصة بيها{" "}
-                </p>
+
+  
+
                 <div className="grid grid-cols-2 gap-5">
                   <div
                     onClick={() => navigate("/team")}
@@ -77,6 +77,84 @@ const SMF_Tech = () => {
                   </a>
                   <LinkIcon />
                 </div>
+                              {/* ---------------- */}
+
+                              <div className=" bg-gray-100 p-6 rounded-lg">
+                  <header className="text-center my-10">
+                    <h1 className="text-4xl font-bold text-blue-600">
+                      SMF Tech
+                    </h1>
+                    <p className="text-xl text-gray-700 mt-2">
+                      Digitizing all Coptic Orthodox Church activities and developing people from a
+                      technological perspective
+                    </p>
+                  </header>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                      <h2 className="text-2xl font-semibold text-blue-600">
+                        Engineers | Developers Team
+                      </h2>
+                      <p className="text-gray-700 mt-4">
+                        Frontend, Backend, Mobile, and Cyber Security Engineers
+                        who create software to digitize church activities.
+                      </p>
+                    </div>
+
+                    <div className="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                      <h2 className="text-2xl font-semibold text-blue-600">
+                        Management | Product Team
+                      </h2>
+                      <p className="text-gray-700 mt-4">
+                        Oversee projects, manage resources, and ensure the
+                        successful delivery of our digital products.
+                      </p>
+                    </div>
+
+                    <div className="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                      <h2 className="text-2xl font-semibold text-blue-600">
+                        Media Team
+                      </h2>
+                      <p className="text-gray-700 mt-4">
+                        Handle all media-related activities, including social
+                        media management, video production, and content
+                        creation.
+                      </p>
+                    </div>
+
+                    <div className="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                      <h2 className="text-2xl font-semibold text-blue-600">
+                        Creative Design Team
+                      </h2>
+                      <p className="text-gray-700 mt-4">
+                        Design visual content, including graphics, UI/UX, and
+                        promotional materials.
+                      </p>
+                    </div>
+
+                    <div className="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                      <h2 className="text-2xl font-semibold text-blue-600">
+                        Event Planning Team
+                      </h2>
+                      <p className="text-gray-700 mt-4">
+                        Plan and execute events, ensuring they run smoothly and
+                        meet their objectives.
+                      </p>
+                    </div>
+
+                    <div className="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                      <h2 className="text-2xl font-semibold text-blue-600">
+                        Continuous Learning Team
+                      </h2>
+                      <p className="text-gray-700 mt-4">
+                        Promote ongoing education and training for team members
+                        to keep skills up-to-date and foster personal growth.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ---------------- */}
               </ModalBody>
             </>
           )}
