@@ -59,7 +59,7 @@ const login = async (credentials) => {
     const response = await api.post("/guest/auth/login", credentials, {
       headers,
     });
-    toast.success("بنرحب بيك");
+    toast.success("أهلا بيك معانا")
     return response;
   } catch (error) {
     if (!error?.response) {

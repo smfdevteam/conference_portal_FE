@@ -7,6 +7,7 @@ import Request_Help from "../../Components/help/Request_Help";
 import User_Card from "../../Components/user/User_Card";
 import { stateProvider } from "../../Context/App_Context";
 import Leader_badge from "../../Components/Leader_badge/Leader_badge";
+import Basic_Navigator from "../../Components/BasicNavigator/Basic_Navigator";
 
 export default function Home() {
   const {
@@ -42,20 +43,8 @@ export default function Home() {
       {isLeader && <Leader_badge />}
       <SMF_Tech />
       <User_Card />
+      <Basic_Navigator/>
       <Request_Help />
-      <iframe
-        title="map"
-        className="my-3"
-        src="https://www.youtube.com/embed/6aUhm9YNtE0?si=k1Pq2Nk10lBBWl9Q"
-        style={{
-          borderRadius: "21px",
-          height: "200px",
-          width: "100%",
-        }}
-        allowFullScreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
-        loading="lazy"
-      ></iframe>
     </>
   );
 }

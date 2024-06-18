@@ -74,7 +74,7 @@ function App() {
   if (isMobile()) {
     return (
       // <ErrorBoundary fallbackRender={UnExpected_Error}>
-      <Layout>
+      <Layout app_state={app_state}>
         <Toaster
           position="bottom-center"
           reverseOrder={true}
