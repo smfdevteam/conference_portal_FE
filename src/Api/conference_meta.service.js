@@ -50,6 +50,22 @@ const getConferenceLocation = async () => {
     throw new Error("حصل حاجة غلط");
   }
 };
+const getConferenceRules = async () => {
+  try {
+    const rules = await api.get("/conference/rules");
+    return rules.data;
+  } catch (e) {
+    throw new Error("حصل حاجة غلط");
+  }
+};
+const getConferenceHost = async () => {
+  try {
+    const family = await api.get("/conference/family");
+    return family.data;
+  } catch (e) {
+    throw new Error("حصل حاجة غلط");
+  }
+};
 const getConferenceSong = async () => {
   try {
     const song = await api.get("/conference/song");
@@ -64,5 +80,7 @@ export {
   getLookups,
   getConferenceMaterial,
   getConferenceLocation , 
-  getConferenceSong
+  getConferenceSong , 
+  getConferenceRules ,
+  getConferenceHost
 };

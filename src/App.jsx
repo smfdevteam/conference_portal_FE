@@ -30,6 +30,8 @@ import Notes from "./pages/notes/Notes";
 import Shared_Notes from "./pages/notes/Shared_Notes";
 import Song from "./pages/Song/Song";
 import Points from "./pages/Points/Points";
+import Rules from "./pages/rules/Rules";
+import Host from "./pages/host/Host";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -107,6 +109,8 @@ function App() {
                 <Route path="/materials" element={<Material />} />
                 <Route path="/speakers" element={<Speakers />} />
                 <Route path="/settings" element={<User />} />
+                <Route path="/rules" element={<Rules />} />
+                <Route path="/host" element={<Host />} />
                 <Route
                   path="/shared-notes/:noteId"
                   element={<Shared_Notes />}

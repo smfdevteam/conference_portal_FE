@@ -12,7 +12,7 @@ const Basic_Navigator = () => {
           <img src={fileIcon} width={30} alt="" />
           <p>ملفاتي</p>
         </div>
-        <div onClick={()=>navigate('/')} className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center">
+        <div onClick={()=>navigate('/host')} className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center">
           <img src={smf} width={40} alt="" />
           <p>SMF</p>
         </div>
@@ -20,7 +20,7 @@ const Basic_Navigator = () => {
           <img src={songIcon} width={30} alt="" />
           <p>الشعار</p>
         </div>
-        <div onClick={()=>navigate('/')} className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center">
+        <div onClick={()=>navigate('/rules')} className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center">
           <img src={rulesIcon} width={30} alt="" />
           <p>القواعد</p>
         </div>
