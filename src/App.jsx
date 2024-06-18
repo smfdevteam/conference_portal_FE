@@ -72,7 +72,7 @@ function App() {
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   if (isMobile()) {
     return (
-      <ErrorBoundary fallbackRender={UnExpected_Error}>
+      // <ErrorBoundary fallbackRender={UnExpected_Error}>
         <Layout>
           <Toaster
             position="bottom-center"
@@ -130,7 +130,7 @@ function App() {
             </Routes>
           </Suspense>
         </Layout>
-      </ErrorBoundary>
+      // </ErrorBoundary>
     );
   } else {
     return <NotMobile />;

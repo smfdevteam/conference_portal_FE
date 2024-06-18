@@ -9,4 +9,13 @@ const getHymnsTitles = async () => {
     }
 }
 
-export {getHymnsTitles}
+const getHymnLyrics = async (id) => {
+    try {
+        const hymn = await api.get(`/hymns/${id}`)
+        return hymn.data
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+export {getHymnsTitles , getHymnLyrics}

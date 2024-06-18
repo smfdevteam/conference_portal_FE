@@ -1,11 +1,14 @@
 import { Input } from "@nextui-org/react";
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { getHymnsTitles } from "../../Api/hymns.service";
+import { getHymnLyrics, getHymnsTitles } from "../../Api/hymns.service";
+import Lyrics from "./Lyrics";
 const cacheMap = new Map();
+const selectedLyricsMap = new Map();
 const Hymns = () => {
   const [hymnsTitle, setHymnsTitles] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLyrics, setSelectedLyrics] = useState(null);
   const getTitles = async () => {
     const hymns = localStorage.getItem("hymns_titles");
     if (hymns) {
@@ -34,8 +37,15 @@ const Hymns = () => {
     }
   }, [searchTerm, hymnsTitle]);
 
-  const getHymn = (hymn) => {
-    alert(hymn.hymnId);
+  const getHymn = async (hymn) => {
+    if (selectedLyricsMap.get(hymn.hymnId)) {
+      setSelectedLyrics(selectedLyricsMap.get(hymn.hymnId));
+    } else {
+      const lyrics = await getHymnLyrics(hymn.hymnId);
+      selectedLyricsMap.set(hymn.hymnId, lyrics);
+      setSelectedLyrics(lyrics);
+    }
+    setSearchTerm("");
   };
 
   useEffect(() => {
@@ -45,10 +55,22 @@ const Hymns = () => {
       cacheMap.clear();
     };
   }, []);
+
   return (
     <>
       <p className="text-center text-3xl font-bold">الترانيم</p>
-      <p className="text-md text-center">هنا في اكتر من 9500 ترنيمة </p>
+      <p className="text-md text-center">
+        هنا في اكتر من
+        <span className="mx-2 text-purple-800 font-bold">9500</span>
+        ترنيمة{" "}
+      </p>
+      <p className="text-center text-sm font-bold my-3">
+        الرجاء مراعات الهمزات في كتابة الأسماء علي سبيل المثال
+        <p className="text-sm text-red-500">
+          " إلهنا عظيم " بدلا من "الهنا عظيم"
+        </p>
+      </p>
+
       <Input
         type="text"
         label="دور علي الترنيمة"
@@ -68,6 +90,7 @@ const Hymns = () => {
           </li>
         ))}
       </ul>
+      {selectedLyrics && <Lyrics hymn_lyrics={selectedLyrics} />}
     </>
   );
 };
