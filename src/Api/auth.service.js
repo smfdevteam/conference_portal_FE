@@ -19,7 +19,7 @@ const register = async (userData) => {
   try {
     const headers = { skipInterceptors: true };
     const response = await axios.post(
-      "http://localhost:3000/guest/auth/register",
+      "https://conference-portal-be.vercel.app/guest/auth/register",
       userData,
       {
         headers,
@@ -118,7 +118,7 @@ const handleRefreshToken = async () => {
     const {
       data: { id_token, refresh_token, user },
     } = await axios.post(
-      "http://localhost:3000/guest/auth/refresh-token",
+      "https://conference-portal-be.vercel.app/guest/auth/refresh-token",
       null,
       {
         headers: {
@@ -138,8 +138,7 @@ const verifyToken = async () => {
     const loggedInToken = localStorage.getItem("X-ACCESS-TOKEN");
 
     const { data } = await axios.post(
-      // "https://conference-portal-be.vercel.app/guest/auth/verify_token",
-      "http://localhost:3000/guest/auth/verify_token",
+      "https://conference-portal-be.vercel.app/guest/auth/verify_token",
       null,
       {
         headers: {
