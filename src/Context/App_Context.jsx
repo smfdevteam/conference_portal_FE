@@ -10,7 +10,8 @@ const App_Context = ({children}) => {
         isLoading:false,
         user:{} , 
         conference :{} ,
-        isAsideOpen : false
+        isAsideOpen : false,
+        user_messages : 0
     })
     console.log(app_state)
   return (
