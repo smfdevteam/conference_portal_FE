@@ -17,4 +17,30 @@ const controlTeamPoints = async (teamId, points) => {
   }
 };
 
-export { getTeams , controlTeamPoints };
+const getGuestByPointId = async (pointId) => {
+  try {
+    const guestRes = await api.get("/guest/teams/user-pointId", {
+      params: {
+        id: pointId,
+      },
+    });
+    return guestRes.data;
+  } catch (e) {
+    const {
+      response: { data },
+    } = e;
+    throw new Error(data);
+  }
+};
+
+const controlGuestPoints = async (points, guestId) => {
+  try {
+    await api.put("/guest/teams/guest-point", {
+      guestId,
+      points,
+    });
+  } catch (e) {
+    throw new Error(e.message)
+  }
+};
+export { getTeams, controlTeamPoints, getGuestByPointId , controlGuestPoints };

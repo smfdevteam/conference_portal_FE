@@ -12,7 +12,7 @@ import Basic_Navigator from "../../Components/BasicNavigator/Basic_Navigator";
 export default function Home() {
   const {
     app_state: {
-      user: { isLeader, displayName },
+      user: { isLeader, pointId, points },
       conference: { name },
     },
   } = useContext(stateProvider);
@@ -43,8 +43,21 @@ export default function Home() {
       {isLeader && <Leader_badge />}
       <SMF_Tech />
       <User_Card />
-      <Basic_Navigator/>
+      <Basic_Navigator />
       <Request_Help />
+      <div className="border-2 rounded-xl shadow-xl p-3 border-yellow-500">
+        <p>
+          انا عندي
+          <span className="text-purple-900 text-3xl mx-3">{points}</span>
+          نقطة
+        </p>
+        <p dir="ltr" className="text-3xl">
+          Points ID :<span className="text-purple-900 text-4xl">{pointId}</span>
+        </p>
+        <p className="text-sm font-bold">
+          لما الليدر يسألك علي ال ID الخاص بيك مليه الكود ده
+        </p>
+      </div>
     </>
   );
 }
