@@ -1,35 +1,41 @@
-import { Input, Button, Image } from "@nextui-org/react";
+import { Input, Button, Image, Avatar } from "@nextui-org/react";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
 import logo from "/smf.png";
 import { useState, useContext } from "react";
-import {login} from '../../Api/auth.service'
+import { login } from "../../Api/auth.service";
 import { stateProvider } from "../../Context/App_Context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { getLookups } from "../../Api/conference_meta.service";
 import { getMessagesCount } from "../../Api/user.service";
-
+import GradientSvg from "../UserProfile/UserProfileAnimation/GradientSvg";
 const initialValues = {
   email: "",
   password: "",
 };
 
-const onSubmit = async ({ email, password, setIsSubmiting, setAppState,navigate }) => {
+const onSubmit = async ({
+  email,
+  password,
+  setIsSubmiting,
+  setAppState,
+  navigate,
+}) => {
   const getLookUpsData = async () => {
     const lookups = await getLookups();
     setAppState((prev) => {
       return { ...prev, conference: { ...lookups } };
     });
   };
-  
+
   const getUserMessagesCount = async () => {
     try {
       const count = await getMessagesCount();
       setAppState((prev) => ({ ...prev, user_messages: count }));
     } catch (e) {
-      setAppState((prev) => ({ ...prev, user_messages: '?' }));
+      setAppState((prev) => ({ ...prev, user_messages: "?" }));
     }
   };
   try {
@@ -48,8 +54,7 @@ const onSubmit = async ({ email, password, setIsSubmiting, setAppState,navigate 
       setAppState((prev) => {
         return { ...prev, user: response.data, isLogged: true };
       });
-      navigate('/')
-      
+      navigate("/");
     }
   } finally {
     setIsSubmiting(false);
@@ -77,22 +82,29 @@ export default function LoginForm() {
   formik.values.navigate = navigate;
   return (
     <div className="font-semibold font-[Cairo]">
-      <div
-        className="text-blue-600 border-2 w-fit rounded-md p-1 hover:bg-blue-600 hover:text-white duration-400"
-        onClick={() => navigate("/register")}
-      >
-        <p>إنشاء حساب</p>
+      <div className="absolute inset-0 rounded-md  ">
+        <GradientSvg />
       </div>
+
       <form
-        className="flex flex-col gap-4 justify-center items-center h-full"
+        className=" flex flex-col gap-4 justify-center items-center h-full text-3xl "
         onSubmit={formik.handleSubmit}
       >
-        <Image
-          width={100}
-          src={logo}
-          alt="NextUI Album Cover"
-          className="animate-pulse"
-        />
+        <div>
+          <Avatar
+            isBordered
+            imgProps={{
+              style: {
+                objectFit: "contain",
+                width: "100%",
+                height: "100%",
+              },
+            }}
+            src={logo}
+            className="bg-white w-32 h-32  md:w-64 md:h-64 "
+          />
+        </div>
+
         <h1>تسجيل الدخول</h1>
 
         <Input
@@ -100,6 +112,8 @@ export default function LoginForm() {
           type="email"
           variant="bordered"
           label="الايميل"
+          radius="full"
+          color="primary"
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -113,6 +127,8 @@ export default function LoginForm() {
           type={isVisible ? "text" : "password"}
           variant="bordered"
           label="الباسوورد"
+          radius="full"
+          color="primary"
           endContent={
             <button
               className="focus:outline-none"
@@ -136,18 +152,26 @@ export default function LoginForm() {
         />
 
         <div
-          className="w-full text-blue-600"
+          className="w-full text-blue-600 z-10"
           onClick={() => navigate("/resetpassword")}
         >
           <p> نسيت كلمة المرور؟</p>
         </div>
         <Button
           color="primary"
-          className="w-full"
+          className="w-full bg-gradient-to-r from-indigo-600 to-violet-600"
           type="submit"
           isLoading={isSubmiting}
         >
           يلا بينا
+        </Button>
+        <Button
+          color="primary"
+          className="w-full bg-gradient-to-r from-violet-600 to-indigo-600"
+          type="button"
+          onClick={() => navigate("/register")}
+        >
+          إنشاء حساب
         </Button>
       </form>
     </div>

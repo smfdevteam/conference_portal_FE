@@ -99,7 +99,6 @@ function App() {
             {app_state.isLogged ? (
               <>
                 <Route path="/" element={<Home />} />
-                <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/notes" element={<Notes />} />
                 <Route path="/hymns" element={<Hymns />} />
                 <Route path="/msgs" element={<Messages />} />
@@ -119,6 +118,7 @@ function App() {
                 {app_state.user.isLeader && (
                   <Route path="/points" element={<Points />} />
                 )}
+
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/bible" element={<Bible />}>
                   <Route index element={<Bible_main />} />
@@ -128,6 +128,7 @@ function App() {
               </>
             ) : (
               <>
+                <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
