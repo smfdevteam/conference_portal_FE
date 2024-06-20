@@ -141,6 +141,14 @@ const Guest_Points = () => {
           >
             يلا بينا
           </button>
+          {(userPoints > 0 || userPoints < 0) && (
+            <button
+              onClick={() => setUserPoints(0)}
+              className="my-3 w-full border-2 border-red-600 text-3xl py-2 rounded-2xl"
+            >
+              رجعني للصفر
+            </button>
+          )}
         </div>
       )}
     </div>
