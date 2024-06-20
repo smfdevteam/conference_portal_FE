@@ -1,17 +1,27 @@
 import { CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER } from "../firebase/firebase.config";
 import { sendPasswordResetEmail } from "firebase/auth";
+
 import { isTokenExist, setTokens } from "./utils";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { api } from "./api";
+
 const resetClientPassword = async (email) => {
   try {
     await sendPasswordResetEmail(
       CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER,
       email
     );
-  } catch (e) {
-    console.log(e);
+
+    toast.success("تم إرسال البريد الإلكتروني");
+  } catch (error) {
+    const errorCode = error.code;
+    console.log(errorCode);
+    if (!error?.code) {
+      toast.error("الرجاء معاودة المحاولة في وقت لاحق");
+    } else if (errorCode == "auth/invalid-email") {
+      toast.error("البريد الإلكتروني غير مسجل");
+    }
   }
 };
 
@@ -59,7 +69,7 @@ const login = async (credentials) => {
     const response = await api.post("/guest/auth/login", credentials, {
       headers,
     });
-    toast.success("أهلا بيك معانا")
+    toast.success("أهلا بيك معانا");
     return response;
   } catch (error) {
     if (!error?.response) {
@@ -103,7 +113,7 @@ const getPublicProfile = async (requesteduid) => {
   try {
     const headers = { requesteduid };
     const response = await api.get("/guest/profile/public", { headers });
-    console.log(response.data)
+    console.log(response.data);
     return response.data;
   } catch (error) {
     if (!error?.response) {
@@ -149,6 +159,7 @@ const verifyToken = async () => {
     return data;
   } catch (e) {
     throw new Error(e.message);
+
   }
 };
 
@@ -185,5 +196,5 @@ export {
   silentLogin,
   editProfile,
   editProfileImage,
-  getPublicProfile
+  getPublicProfile,
 };

@@ -13,6 +13,7 @@ const App_Context = ({children}) => {
         isAsideOpen : false,
         user_messages : 0
     })
+    console.log(app_state)
   return (
     <stateProvider.Provider value={{
         app_state , setAppState

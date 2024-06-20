@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { handleRefreshToken } from "./auth.service";
 const api = axios.create({
   baseURL: 'https://conference-portal-be.vercel.app',
@@ -24,12 +25,15 @@ const resError = async (error) => {
   if (status == 401) {
     await handleRefreshToken();
     return api(_original_req);
+
   }
 
   return Promise.reject(error);
 };
 
+
 api.interceptors.request.use(reqCallback, reqError);
 api.interceptors.response.use((response) => response, resError);
 
 export { api };
+

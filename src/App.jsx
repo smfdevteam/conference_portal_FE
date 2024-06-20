@@ -21,6 +21,7 @@ import NotFound from "./pages/NotFound";
 import NotMobile from "./pages/NotMobile";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Team from "./pages/Team/Team";
+
 import PublicUser from "./pages/User/PublicUser";
 import User from "./pages/User/User";
 import Messages from "./pages/messages/Messages";
@@ -32,6 +33,7 @@ import Song from "./pages/Song/Song";
 import Points from "./pages/Points/Points";
 import Rules from "./pages/rules/Rules";
 import Host from "./pages/host/Host";
+
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -75,6 +77,7 @@ function App() {
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   if (isMobile()) {
     return (
+
       // <ErrorBoundary fallbackRender={UnExpected_Error}>
       <Layout app_state={app_state}>
         <Toaster
@@ -99,7 +102,6 @@ function App() {
             {app_state.isLogged ? (
               <>
                 <Route path="/" element={<Home />} />
-                <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/notes" element={<Notes />} />
                 <Route path="/hymns" element={<Hymns />} />
                 <Route path="/msgs" element={<Messages />} />
@@ -119,6 +121,7 @@ function App() {
                 {app_state.user.isLeader && (
                   <Route path="/points" element={<Points />} />
                 )}
+
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/bible" element={<Bible />}>
                   <Route index element={<Bible_main />} />
@@ -128,6 +131,7 @@ function App() {
               </>
             ) : (
               <>
+                <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
@@ -139,6 +143,7 @@ function App() {
         </Suspense>
       </Layout>
       // </ErrorBoundary>
+
     );
   } else {
     return <NotMobile />;
