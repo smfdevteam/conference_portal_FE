@@ -16,6 +16,7 @@ const initialValues = {
   password: "",
 };
 
+
 const onSubmit = async ({
   email,
   password,
@@ -38,6 +39,7 @@ const onSubmit = async ({
       setAppState((prev) => ({ ...prev, user_messages: "?" }));
     }
   };
+
   try {
     setIsSubmiting(true);
     const response = await login({
@@ -49,12 +51,14 @@ const onSubmit = async ({
       localStorage.setItem("X-ACCESS-TOKEN", response.headers.get("Token"));
       localStorage.setItem("X-REFRESH-TOKEN", response.headers.get("Refresh"));
       console.log("data ====", response.data);
+
       getLookUpsData();
       getUserMessagesCount();
       setAppState((prev) => {
         return { ...prev, user: response.data, isLogged: true };
       });
       navigate("/");
+
     }
   } finally {
     setIsSubmiting(false);
@@ -79,7 +83,9 @@ export default function LoginForm() {
 
   formik.values.setIsSubmiting = setIsSubmiting;
   formik.values.setAppState = setAppState;
+
   formik.values.navigate = navigate;
+
   return (
     <div className="font-semibold font-[Cairo]">
       <div className="absolute inset-0 rounded-md  ">

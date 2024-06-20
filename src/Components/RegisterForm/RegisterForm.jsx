@@ -28,8 +28,10 @@ const onSubmit = async ({
   password,
   profileImage,
   setIsSubmiting,
+
   setErrorMessage,
   navigate,
+
 }) => {
   try {
     setIsSubmiting(true);
@@ -47,10 +49,11 @@ const onSubmit = async ({
     const response = await register(formData);
     console.log("response", response);
     if (response != "created") {
-      setErrorMessage(response);
     } else {
+
       setErrorMessage(null);
       navigate("/login");
+
     }
   } finally {
     setIsSubmiting(false);
@@ -78,8 +81,10 @@ const RegisterForm = () => {
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState(null);
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+
   const toggleVisibility = () => setIsVisible(!isVisible);
   const formik = useFormik({
     initialValues,
@@ -91,11 +96,11 @@ const RegisterForm = () => {
   };
   formik.values.profileImage = selectedFile;
   formik.values.setIsSubmiting = setIsSubmiting;
-  formik.values.setErrorMessage = setErrorMessage;
   formik.values.navigate = navigate;
 
   return (
     <div className="font-semibold font-[Cairo]">
+
       <div className="absolute inset-0 rounded-md ">
         <GradientSvg />
       </div>
@@ -222,6 +227,7 @@ const RegisterForm = () => {
           </div>
         </form>
       </div>
+
     </div>
   );
 };

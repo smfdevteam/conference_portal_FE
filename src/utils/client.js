@@ -24,6 +24,5 @@ export const handleNotifications = async () => {
       await tokenHandler();
     }
   } catch (e) {
-    console.log(e);
   }
 };

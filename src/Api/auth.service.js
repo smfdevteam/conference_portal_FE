@@ -1,15 +1,18 @@
 import { CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER } from "../firebase/firebase.config";
 import { sendPasswordResetEmail } from "firebase/auth";
+
 import { isTokenExist, setTokens } from "./utils";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { api } from "./api";
+
 const resetClientPassword = async (email) => {
   try {
     await sendPasswordResetEmail(
       CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER,
       email
     );
+
     toast.success("تم إرسال البريد الإلكتروني");
   } catch (error) {
     const errorCode = error.code;
@@ -156,6 +159,7 @@ const verifyToken = async () => {
     return data;
   } catch (e) {
     throw new Error(e.message);
+
   }
 };
 

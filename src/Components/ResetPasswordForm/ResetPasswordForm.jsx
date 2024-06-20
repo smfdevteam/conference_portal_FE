@@ -6,15 +6,16 @@ import { Input, Button,Avatar } from "@nextui-org/react";
 import logo from "/smf.png";
 import { resetClientPassword } from "../../Api/auth.service";
 import { useNavigate } from "react-router-dom";
+
 import GradientSvg from "../UserProfile/UserProfileAnimation/GradientSvg";
+
 const initialValues = {
   email: "",
 };
-const onSubmit = ({ email, setIsSubmiting, setEmailSent }) => {
+const onSubmit = async ({ email, setIsSubmiting }) => {
   try {
     setIsSubmiting(true);
     resetClientPassword(email);
-    setEmailSent(true);
   } finally {
     setIsSubmiting(false);
   }
@@ -25,17 +26,12 @@ const validationSchema = Yup.object({
 const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const [isSubmiting, setIsSubmiting] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
-  const handleClick = () => {
-    setEmailSent(false);
-  };
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
   });
   formik.values.setIsSubmiting = setIsSubmiting;
-  formik.values.setEmailSent = setEmailSent;
 
   return (
     <div className="flex flex-col gap-6 font-[Cairo] font-semibold ">
@@ -61,6 +57,8 @@ const ResetPasswordForm = () => {
           />
         </div>
         <h1>تغيير كلمة المرور أو إعادة ضبطها</h1>
+
+
         <Input
           name="email"
           type="email"
@@ -69,7 +67,6 @@ const ResetPasswordForm = () => {
           radius="full"
           value={formik.values.email}
           onChange={formik.handleChange}
-          onClick={handleClick}
           onBlur={formik.handleBlur}
           isInvalid={
             formik.touched.email && (formik.errors.email ? true : false)
