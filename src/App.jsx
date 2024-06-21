@@ -34,6 +34,7 @@ import Points from "./pages/Points/Points";
 import Rules from "./pages/rules/Rules";
 import Host from "./pages/host/Host";
 import Join_to_team from "./Components/Points/Teams/Join_to_team";
+import Points_Overview from "./Components/Points/Points_Overview";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -112,6 +113,7 @@ function App() {
                 <Route path="/settings" element={<User />} />
                 <Route path="/rules" element={<Rules />} />
                 <Route path="/host" element={<Host />} />
+                <Route path="/points-overview" element={<Points_Overview />} />
                 <Route
                   path="/jointoteam/:randomString1/:randomstring2/:teamId"
                   element={<Join_to_team />}

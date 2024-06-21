@@ -46,20 +46,7 @@ export default function Home() {
       <User_Card />
       <Basic_Navigator />
       <Request_Help />
-      <div className="border-2 rounded-xl shadow-xl p-3 border-yellow-500">
-        <p>
-          انا عندي
-          <span className="text-purple-900 text-3xl mx-3">{points}</span>
-          نقطة
-        </p>
-        <p dir="ltr" className="text-3xl">
-          Points ID :<span className="text-purple-900 text-4xl">{pointId}</span>
-        </p>
-        <p className="text-sm font-bold">
-          لما الليدر يسألك علي ال ID الخاص بيك مليه الكود ده
-        </p>
-      </div>
-      <Guest_Home />
+
     </>
   );
 }
