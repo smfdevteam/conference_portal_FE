@@ -3,6 +3,7 @@ import { getTeams } from "../../../Api/team.service";
 import toast from "react-hot-toast";
 import Full_Screen_Skeleton_Loader from "../../shared/Full_Screen_Skeleton_Loader";
 import Team_Card from "./Team_Card";
+import Team_QR from "./Team_QR";
 
 const Teams = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +28,10 @@ const Teams = () => {
       <p>أضغط علي الفريق و اتحكم في النقط</p>
       <div className="flex gap-3 overflow-x-scroll">
         {teams.map((team) => (
-          <Team_Card team={team} getAllTeams={getAllTeams} key={team.teamId} />
+          <div className="flex flex-col" key={team.teamId}>
+            <Team_Card team={team} getAllTeams={getAllTeams} />
+            <Team_QR teamId={team.teamId} teamName={team.name} />
+          </div>
         ))}
       </div>
     </>

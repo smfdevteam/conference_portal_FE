@@ -7,6 +7,14 @@ const getTeams = async () => {
     throw new Error(e.message);
   }
 };
+const getTeambyId = async (teamId) => {
+  try {
+    const team = await api.get(`/guest/teams/team/${teamId}`);
+    return team.data;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 
 const controlTeamPoints = async (teamId, points) => {
   try {
@@ -40,7 +48,23 @@ const controlGuestPoints = async (points, guestId) => {
       points,
     });
   } catch (e) {
-    throw new Error(e.message)
+    throw new Error(e.message);
   }
 };
-export { getTeams, controlTeamPoints, getGuestByPointId , controlGuestPoints };
+
+const joinGuestToTeam = async (teamId, userId) => {
+  try {
+    await api.post(`/guest/teams/${teamId}/${userId}`);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+export {
+  getTeams,
+  controlTeamPoints,
+  getGuestByPointId,
+  controlGuestPoints,
+  getTeambyId,
+  joinGuestToTeam
+};

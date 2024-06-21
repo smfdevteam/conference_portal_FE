@@ -33,7 +33,7 @@ import Song from "./pages/Song/Song";
 import Points from "./pages/Points/Points";
 import Rules from "./pages/rules/Rules";
 import Host from "./pages/host/Host";
-
+import Join_to_team from "./Components/Points/Teams/Join_to_team";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -77,7 +77,6 @@ function App() {
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   if (isMobile()) {
     return (
-
       // <ErrorBoundary fallbackRender={UnExpected_Error}>
       <Layout app_state={app_state}>
         <Toaster
@@ -114,6 +113,10 @@ function App() {
                 <Route path="/rules" element={<Rules />} />
                 <Route path="/host" element={<Host />} />
                 <Route
+                  path="/jointoteam/:randomString1/:randomstring2/:teamId"
+                  element={<Join_to_team />}
+                />
+                <Route
                   path="/shared-notes/:noteId"
                   element={<Shared_Notes />}
                 />
@@ -143,7 +146,6 @@ function App() {
         </Suspense>
       </Layout>
       // </ErrorBoundary>
-
     );
   } else {
     return <NotMobile />;

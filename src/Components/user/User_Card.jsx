@@ -44,7 +44,7 @@ const User_Card = () => {
         <Avatar
           imgProps={{
             style: {
-              objectFit: "contain",
+              objectFit: "cover",
             },
           }}
           isBordered

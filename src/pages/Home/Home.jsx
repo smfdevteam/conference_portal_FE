@@ -8,6 +8,7 @@ import User_Card from "../../Components/user/User_Card";
 import { stateProvider } from "../../Context/App_Context";
 import Leader_badge from "../../Components/Leader_badge/Leader_badge";
 import Basic_Navigator from "../../Components/BasicNavigator/Basic_Navigator";
+import Guest_Home from "../../Components/Points/GuestHome/Guest_Home";
 
 export default function Home() {
   const {
@@ -58,6 +59,7 @@ export default function Home() {
           لما الليدر يسألك علي ال ID الخاص بيك مليه الكود ده
         </p>
       </div>
+      <Guest_Home />
     </>
   );
 }
