@@ -23,26 +23,32 @@ const Leaders = () => {
   }, []);
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   return leaders ? (
-    <div className="flex flex-col gap-4">
-      {leaders.leaders.map((leader) => {
-        return (
-          <div
-            className="flex items-center gap-4 p-4 border-2 rounded-lg border-purple-600"
-            key={leader.photoURL}
-            dir="ltr"
-          >
-            <Avatar src={leader.photoURL} className="w-20 h-20 text-large" />
-            <div>
-              <p className="truncate w-[170px] ">{leader.displayName}</p>
-              <p className="text-sm">{leader.responsibility}</p>
-              <a className="my-3 block" href={`tel:${leader.phoneNumber}`}>
-                <img width={25} src={callIcon} alt="" />
-              </a>
+    <>
+    <p className="text-center text-5xl text-purple-700 capitalize">our Leaders</p>
+    <p>هنا هتلاقي 
+      <span className="mx-2 text-purple-800 text-4xl">{leaders.count}</span>
+       قادة يقدروا يساعدوك في أي حاجة انت محتاجها</p>
+      <div className="flex flex-col gap-4">
+        {leaders.leaders.map((leader) => {
+          return (
+            <div
+              className="flex items-center gap-4 p-4 border-2 rounded-lg border-purple-600"
+              key={leader.photoURL}
+              dir="ltr"
+            >
+              <Avatar src={leader.photoURL} className="w-20 h-20 text-large" />
+              <div>
+                <p className="truncate w-[170px] ">{leader.displayName}</p>
+                <p className="text-sm">{leader.responsibility}</p>
+                <a className="my-3 block" href={`tel:${leader.phoneNumber}`}>
+                  <img width={25} src={callIcon} alt="" />
+                </a>
+              </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   ) : (
     <p className="text-3xl font-bold my-5 text-center">مفيش بيانات حاليا</p>
   );
