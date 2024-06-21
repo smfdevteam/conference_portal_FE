@@ -32,7 +32,7 @@ const Basic_Navigator = () => {
           <p>الشعار</p>
         </div>
         <div
-          onClick={() => navigate("/rules")}
+          onClick={() => navigate("/leaders")}
           className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center"
         >
           <img src={leadersIcon} width={30} alt="" />

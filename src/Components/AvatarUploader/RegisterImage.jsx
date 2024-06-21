@@ -31,7 +31,7 @@ const RegisterImage = ({ avatarImage, setAvatarImage, setSelectedFile }) => {
         color="primary"
         imgProps={{
           style: {
-            objectFit: "contain",
+            objectFit: "cover",
             width: "100%",
             height: "100%",
           },

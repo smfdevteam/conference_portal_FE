@@ -74,13 +74,24 @@ const getConferenceSong = async () => {
     throw new Error("حصل حاجة غلط");
   }
 };
+
+const getConferenceLeaders = async () => {
+  try {
+    const leaders = await api.get("/conference/leaders");
+    console.log(leaders.data);
+    return leaders.data;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 export {
   getConferenceSpeakers,
   getAlertsandHappenNow,
   getLookups,
   getConferenceMaterial,
-  getConferenceLocation , 
-  getConferenceSong , 
-  getConferenceRules ,
-  getConferenceHost
+  getConferenceLocation,
+  getConferenceSong,
+  getConferenceRules,
+  getConferenceHost,
+  getConferenceLeaders,
 };
