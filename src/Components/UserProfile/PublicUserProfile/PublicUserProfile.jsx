@@ -111,7 +111,7 @@ const PublicUserProfile = () => {
               ابعت رساله
             </Button>
           </div>
-          <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose}>
+          <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} placement="top">
             <ModalContent>
               {(onClose) => (
                 <>
