@@ -73,8 +73,8 @@ const PublicUserProfile = () => {
           <GradientSvg />
         </div>
 
-        <div className=" relative flex flex-col items-center justify-center mt-8 md:mt-24 gap-3 md:gap-8 text-center">
-          <div className="bg-black relative rounded-full">
+        <div className=" relative flex flex-col items-center justify-center mt-8 md:mt-24 gap-3 md:gap-4 text-center">
+          <div className="relative rounded-full">
             <Avatar
               isBordered
               color="primary"
@@ -87,14 +87,14 @@ const PublicUserProfile = () => {
               }}
               src={photoURL}
               alt="NextUI Album Cover"
-              className="  bg-primary  w-32 h-32  md:w-64 md:h-64  "
+              className="  bg-primary  w-32 h-32  sm:w-64 sm:h-64  "
             />
             {isLeader && (
               <div className=" absolute inset-0 ">
                 <img
                   src={LeaderBagde}
                   alt=""
-                  className=" absolute bottom-0 w-5 h-5 md:w-10 md:h-10"
+                  className=" absolute bottom-0 w-5 h-5 sm:w-10 sm:h-10"
                 />
               </div>
             )}
@@ -180,8 +180,8 @@ const PublicUserProfile = () => {
                   </div>
                 </CardHeader>
                 <Divider />
-                <CardBody className="max-h-48 ">
-                  <p className=" text-right text-[1rem] sm:text-[3rem]">
+                <CardBody className="max-h-48 leading-relaxed">
+                  <p className=" text-right text-[1rem] sm:text-2xl  sm:leading-relaxed">
                     {note.note}
                   </p>
                 </CardBody>
