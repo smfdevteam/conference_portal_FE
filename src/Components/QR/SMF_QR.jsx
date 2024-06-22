@@ -5,7 +5,7 @@ const SMF_QR = ({ link }) => {
   return (
     <div className="border-2 rounded-lg w-fit my-4 p-5 ">
       <QRCode
-        value={link ? link : "https://www.google.com"}
+        value={link ? link : ""}
         logoImage={logo}
         qrStyle="dots"
         quietZone={5}

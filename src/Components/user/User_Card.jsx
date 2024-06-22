@@ -97,7 +97,7 @@ const User_Card = () => {
                   />
                   <p className="text-md ">{displayName}</p>
                   <p className="font-semibold">خلي صاحبك يعمل سكان هنا</p>
-                  <SMF_QR />
+                  <SMF_QR link={`${window.location.origin}/public/${uid}`} />
                 </div>
 
                 <div className="m-0 p-0"></div>

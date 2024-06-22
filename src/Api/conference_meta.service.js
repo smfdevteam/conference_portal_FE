@@ -84,6 +84,16 @@ const getConferenceLeaders = async () => {
     throw new Error(e.message);
   }
 };
+
+
+const getConferenceFeedBack = async () => {
+  try {
+    const feedbackForm = await api.get('/conference/feedback_form_url') 
+    return feedbackForm.data
+  } catch (e) {
+    throw new Error(e.message)
+  }
+}
 export {
   getConferenceSpeakers,
   getAlertsandHappenNow,
@@ -94,4 +104,5 @@ export {
   getConferenceRules,
   getConferenceHost,
   getConferenceLeaders,
+  getConferenceFeedBack
 };

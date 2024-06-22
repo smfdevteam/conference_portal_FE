@@ -5,6 +5,7 @@ import leadersIcon from "../../assets/images/icons/leaders.png";
 import cashBackIcon from "../../assets/images/icons/cashback.png";
 import smf from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
 import { useNavigate } from "react-router-dom";
+import Feedback from "../feedback/Feedback";
 const Basic_Navigator = () => {
   const navigate = useNavigate();
   return (
@@ -53,6 +54,7 @@ const Basic_Navigator = () => {
           <p>Cashback</p>
         </div>
       </div>
+      <Feedback/>
     </>
   );
 };

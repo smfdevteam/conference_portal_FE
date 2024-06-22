@@ -1,5 +1,5 @@
 import { Avatar } from "@nextui-org/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { stateProvider } from "../../Context/App_Context";
 import "./aside.css";
@@ -17,8 +17,6 @@ const userLinks = [
   { name: "ملاحظاتي", link: "/notes" },
   { name: "ملفاتي", link: "/materials" },
   { name: "الأرشيف", link: "/" },
-
-  { name: "التقييم", link: "/" },
   { name: "تسجيل الخروج", link: "/logout" },
 ];
 const Side_bar = () => {
