@@ -22,6 +22,20 @@ const getUserMessages = async () => {
   }
 };
 
+const sendUserPrivateMessage = async (uid, message) => {
+  try {
+    const response = await api.post("/guest/messages/private/" + uid, {message});
+    toast.success("الرسالة اتبعتت")
+    return response;
+  } catch (e) {
+    if (!e?.response) {
+      toast.error("جرب ابعتها تاني");
+    } else if ((e.response.data = "cant send message to your self")) {
+      toast.error("مينفعش تبعت رسالة لنفسك");
+    }
+  }
+};
+
 const sendRequestHelpMessage = async (message) => {
   toast.loading("بنبعت الرسالة");
   try {
@@ -32,4 +46,9 @@ const sendRequestHelpMessage = async (message) => {
   }
 };
 
-export { getMessagesCount, getUserMessages , sendRequestHelpMessage };
+export {
+  getMessagesCount,
+  getUserMessages,
+  sendRequestHelpMessage,
+  sendUserPrivateMessage,
+};

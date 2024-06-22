@@ -5,7 +5,7 @@ const ShareProfile = ({ userId }) => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        url: `${window.location.origin}/puplic/${userId}`,
+        url: `${window.location.origin}/public/${userId}`,
       });
     }
   };

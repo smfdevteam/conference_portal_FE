@@ -28,10 +28,7 @@ const onSubmit = async ({
   password,
   profileImage,
   setIsSubmiting,
-
-  setErrorMessage,
   navigate,
-
 }) => {
   try {
     setIsSubmiting(true);
@@ -48,12 +45,8 @@ const onSubmit = async ({
     console.log(Object.fromEntries(formData));
     const response = await register(formData);
     console.log("response", response);
-    if (response != "created") {
-    } else {
-
-      setErrorMessage(null);
+    if (response === "created") {
       navigate("/login");
-
     }
   } finally {
     setIsSubmiting(false);
@@ -83,7 +76,6 @@ const RegisterForm = () => {
   const [avatarImage, setAvatarImage] = useState(null);
 
   const [selectedFile, setSelectedFile] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
   const formik = useFormik({
@@ -91,16 +83,13 @@ const RegisterForm = () => {
     onSubmit,
     validationSchema,
   });
-  const handleNavigate = () => {
-    navigate("/login");
-  };
+
   formik.values.profileImage = selectedFile;
   formik.values.setIsSubmiting = setIsSubmiting;
   formik.values.navigate = navigate;
 
   return (
     <div className="font-semibold font-[Cairo]">
-
       <div className="absolute inset-0 rounded-md ">
         <GradientSvg />
       </div>
@@ -219,7 +208,7 @@ const RegisterForm = () => {
               color="primary"
               className="w-full bg-gradient-to-r from-violet-600 to-indigo-600"
               radius="full"
-              onClick={handleNavigate}
+              onClick={() => navigate("/login")}
             >
               لديك حساب ؟
             </Button>
@@ -227,7 +216,6 @@ const RegisterForm = () => {
           </div>
         </form>
       </div>
-
     </div>
   );
 };
