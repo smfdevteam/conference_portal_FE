@@ -136,10 +136,11 @@ const UserProfile = () => {
             return true;
           }
         })
-        .test("phone", "الموبايل مش مظبوط", () => {
+        .test("phone", "الموبايل مش مظبوط", (emergency_contact_number) => {
+          console.log(emergency_contact_number)
           if (
             formik.values.emergency_contact_number.length > 0 &&
-            !isValidPhoneNumber(formik.values.emergency_contact_number) &&
+            !isValidPhoneNumber(emergency_contact_number) &&
             formik.values.emergency_contact_name.length > 0
           ) {
             return false;
@@ -153,7 +154,7 @@ const UserProfile = () => {
     }),
     onSubmit,
   });
-  formik.values.emergency_contact_number = phoneNumber ? phoneNumber : "";
+  // formik.values.emergency_contact_number = phoneNumber ? phoneNumber : "";
   formik.values.gender = gender;
   formik.values.setAppState = setAppState;
   formik.values.setIsSubmiting = setIsSubmiting;
@@ -169,6 +170,7 @@ const UserProfile = () => {
       setActiveCategory(categories.basic.en);
     }
   };
+  console.log(formik.values.emergency_contact_number)
 
   return (
     <div className="w-full  font-bold ">
