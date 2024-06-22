@@ -42,8 +42,10 @@ const PublicUserProfile = () => {
       try {
         setIsLoading(true);
         await sendUserPrivateMessage(uid, message);
+        
       } finally {
         setIsLoading(false);
+        onClose()
       }
     },
   });
@@ -140,6 +142,7 @@ const PublicUserProfile = () => {
                       />
                       <Button
                         isLoading={isLoading}
+                        
                         type="submit"
                         className="w-full py-3 px-1  border-1 shadow-md rounded-lg bg-indigo-500 font-bold text-xl text-white"
                       >
