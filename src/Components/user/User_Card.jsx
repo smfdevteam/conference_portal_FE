@@ -18,8 +18,8 @@ import Smf_Modal from "../shared/Smf_Modal";
 const User_Card = () => {
   const navigate = useNavigate;
   const { app_state, setAppState } = useContext(stateProvider);
-  console.log(app_state);
-  const { displayName, email, photoURL, phoneNumber, profile_views, isLeader } =
+  
+  const { displayName, email, photoURL, profile_views, isLeader,uid } =
     app_state.user;
   return (
     <Card dir="ltr" className={isLeader && "border-5 border-black"}>
@@ -65,7 +65,7 @@ const User_Card = () => {
               <span className="font-bold  text-warning mx-1">
                 {profile_views}
               </span>
-              times{" "}
+              times
             </p>
           </CardBody>
           <Divider />
@@ -74,7 +74,7 @@ const User_Card = () => {
       <CardFooter>
         <div className="flex justify-between items-center flex-1 gap-4">
           <div className="">
-            <Link isExternal showAnchorIcon href="/user">
+            <Link isExternal showAnchorIcon href={"/public/"+uid}>
               View my profile
             </Link>
           </div>
@@ -103,7 +103,7 @@ const User_Card = () => {
                 <div className="m-0 p-0"></div>
                 <div className=" font-[Cairo] flex flex-col justify-center items-center gap-2 w-full ">
                   <hr className="  w-full h-1 bg-gradient-to-r from-zinc-200 via-zinc-900 to-zinc-200" />
-                  <ShareProfile />
+                  <ShareProfile userId={uid}/>
                 </div>
               </div>
             </Smf_Modal>

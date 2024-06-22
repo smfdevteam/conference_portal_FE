@@ -1,6 +1,6 @@
 import { CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER } from "../firebase/firebase.config";
 import { sendPasswordResetEmail } from "firebase/auth";
-
+import { useNavigate } from "react-router-dom";
 import { isTokenExist, setTokens } from "./utils";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -35,8 +35,8 @@ const register = async (userData) => {
         headers,
       }
     );
-    console.log(response.data);
-
+    
+    toast.success("اكتمل التسجيل")
     return response.data;
   } catch (error) {
     console.log("error api ===", error);
@@ -113,11 +113,12 @@ const getPublicProfile = async (requesteduid) => {
   try {
     const headers = { requesteduid };
     const response = await api.get("/guest/profile/public", { headers });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     if (!error?.response) {
       toast.error("الرجاء معاودة المحاولة في وقت لاحق");
+    }else{
+      return "blocked"
     }
   }
 };
