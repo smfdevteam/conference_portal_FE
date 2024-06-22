@@ -1,26 +1,33 @@
-import { useEffect, useState, useId, lazy, Suspense } from "react";
+import { useEffect, useState, useId, lazy, Suspense, useContext } from "react";
 import toast from "react-hot-toast";
 import { getUserMessages } from "../../Api/user.service";
 import SMF_QR from "../../Components/QR/SMF_QR";
 import ShareProfile from "../../Components/ShareProfile/ShareProfile";
 import Full_Screen_Skeleton_Loader from "../../Components/shared/Full_Screen_Skeleton_Loader";
+import { stateProvider } from "../../Context/App_Context";
 const Message_Card = lazy(() =>
   import("../../Components/messages/Message_Card")
 );
 const Messages = () => {
   const [messages, setMessages] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const {
+    app_state: {
+      user: { uid },
+    },
+  } = useContext(stateProvider);
   const id = useId();
   const getMessages = async () => {
     try {
       setIsLoading(true);
       const userMessages = await getUserMessages();
       if (userMessages.count == 0) {
-        return ;
+        return;
       }
-      setMessages(userMessages);
+      const sortedMessages = userMessages.messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      setMessages(sortedMessages);
     } catch (e) {
-      toast.error("جرب تاني");
+      toast.error(e.message);
     } finally {
       setIsLoading(false);
     }
@@ -34,7 +41,7 @@ const Messages = () => {
   return (
     <div dir="ltr" className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {messages ? (
-        messages.messages.map((message) => (
+        messages.map((message) => (
           <Suspense key={id} fallback={<Full_Screen_Skeleton_Loader />}>
             <Message_Card userMessage={message} />
           </Suspense>
@@ -45,8 +52,8 @@ const Messages = () => {
             اعمل شير لبروفايلك علشان نقدر نبعتلك رسايل
           </p>
           <div>
-            <SMF_QR />
-            <ShareProfile />
+            <SMF_QR link={`${window.location.origin}/public/${uid}`} />
+            <ShareProfile  userId={uid}/>
           </div>
         </div>
       )}
