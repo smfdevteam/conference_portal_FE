@@ -10,6 +10,8 @@ const ProfileImage = ({ profileImage,setProfileImage,setSelectedFile }) => {
     const file = event.target.files[0];
     if (file.size > MAX_FILE_SIZE) {
         toast.error("حجم الملف يتجاوز 5 ميغابايت. الرجاء تحديد ملف أصغر.");
+    }else if(!file.type.match('image.*') ){
+      toast.error("إرفاق الصور فقط")
     } else {
       setSelectedFile(file);
       const reader = new FileReader();
