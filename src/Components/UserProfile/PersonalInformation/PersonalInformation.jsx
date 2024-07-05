@@ -104,39 +104,19 @@ const PersonalInformation = ({
         isInvalid={formikErrors.emergency_contact_name ? true : false}
         errorMessage={formikErrors.emergency_contact_name}
       />
-      <div className="w-full mt-2">
-        <label
-          htmlFor="emergency_contact_number"
-          className={
-            formikErrors.emergency_contact_number
-              ? "text-[#F31763] text-sm w-full"
-              : "w-full text-sm "
-          }
-        >
-          الرقم اللي هنتصل بيه في حالة الطوارئ
-        </label>
-        <PhoneInput
-          className={
-            "w-full border-b-2 " +
-            (formikErrors.emergency_contact_number
-              ? " border-b-[#F31763] "
-              : "hover:border-gray-300  focus::border-black mt-2")
-          }
-          name="emergency_contact_number"
-          labels={ar}
-          defaultCountry="EG"
-          value={phoneNumber}
-          onChange={setPhoneNumer}
-          onBlur={formikBlur}
-          international
-          countryCallingCodeEditable={false}
-        />
-        {formikErrors.emergency_contact_number ? (
-          <div className="text-[#F31763] text-sm">
-            {formikErrors.emergency_contact_number}
-          </div>
-        ) : null}
-      </div>
+      <Input
+        name="emergency_contact_number"
+        type="tel"
+        label="الرقم اللي هنتصل بيه في حالة الطوارئ"
+        variant="underlined"
+        placeholder="+2010054349XX"
+        startContent={<PhoneIcon />}
+        size="lg"
+        value={initValues.emergency_contact_number}
+        onChange={formikChange}
+        isInvalid={formikErrors.emergency_contact_number ? true : false}
+        errorMessage={formikErrors.emergency_contact_number}
+      />
 
       <div
         className="flex flex-row gap-1 justify-center items-start  w-full"
