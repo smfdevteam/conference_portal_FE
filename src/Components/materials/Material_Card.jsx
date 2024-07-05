@@ -3,7 +3,7 @@ import { Divider } from "@nextui-org/react";
 import smfTechLogo from "../../assets/images/brand/smftecttypo.png";
 import smfLogo from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
 import { Link } from "@nextui-org/react";
-const Material_Card = ({url , fileSize , name}) => {
+const Material_Card = ({ url, fileSize, name }) => {
   return (
     <div
       dir="ltr"
@@ -30,7 +30,7 @@ const Material_Card = ({url , fileSize , name}) => {
         </div>
         <div className="w-[80%] truncate me-1">
           <p>{name}</p>
-          <p className="text-xs">{fileSize}</p>
+          {fileSize && <p className="text-xs">{fileSize}</p>}
         </div>
       </header>
       <Divider />
@@ -47,4 +47,4 @@ const Material_Card = ({url , fileSize , name}) => {
   );
 };
 
-export default Material_Card
+export default Material_Card;

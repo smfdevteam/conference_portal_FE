@@ -36,6 +36,7 @@ import Host from "./pages/host/Host";
 import Join_to_team from "./Components/Points/Teams/Join_to_team";
 import Points_Overview from "./Components/Points/Points_Overview";
 import Leaders from "./pages/leaders/Leaders";
+import Conference_Program from "./pages/program/Conference_Program";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -115,6 +116,7 @@ function App() {
                 <Route path="/rules" element={<Rules />} />
                 <Route path="/host" element={<Host />} />
                 <Route path="/leaders" element={<Leaders />} />
+                <Route path="/program" element={<Conference_Program />} />
                 <Route path="/points-overview" element={<Points_Overview />} />
                 <Route
                   path="/jointoteam/:randomString1/:randomstring2/:teamId"

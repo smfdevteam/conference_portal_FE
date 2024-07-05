@@ -85,15 +85,23 @@ const getConferenceLeaders = async () => {
   }
 };
 
-
 const getConferenceFeedBack = async () => {
   try {
-    const feedbackForm = await api.get('/conference/feedback_form_url') 
-    return feedbackForm.data
+    const feedbackForm = await api.get("/conference/feedback_form_url");
+    return feedbackForm.data;
   } catch (e) {
-    throw new Error(e.message)
+    throw new Error(e.message);
   }
-}
+};
+
+const getConferenceProgram = async () => {
+  try {
+    const program = await api.get("/conference/program");
+    return program.data;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 export {
   getConferenceSpeakers,
   getAlertsandHappenNow,
@@ -104,5 +112,6 @@ export {
   getConferenceRules,
   getConferenceHost,
   getConferenceLeaders,
-  getConferenceFeedBack
+  getConferenceFeedBack,
+  getConferenceProgram
 };
