@@ -1,17 +1,17 @@
 import {
   Badge,
-  Button,
   Image,
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
-  useDisclosure,
+  useDisclosure
 } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 import alarmIcon from "../../assets/images/icons/alarm.png";
 import timetable from "../../assets/images/icons/timetable.png";
 const Now = ({ now }) => {
+  const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -35,7 +35,7 @@ const Now = ({ now }) => {
                 <div className="max-h-[200px] font-bold text-2xl overflow-y-scroll">
                   {now}
                 </div>
-                <div className="rounded-md my-5 flex items-center gap-2 p-10 justify-center hover:bg-gradient-to-br hover:from-purple-700 hover:to-indigo-900 hover:text-white text-xl font-semibold transition-all duration-500 shadow-md ">
+                <div onClick={()=>navigate('/program')} className="rounded-md my-5 flex items-center gap-2 p-10 justify-center hover:bg-gradient-to-br hover:from-purple-700 hover:to-indigo-900 hover:text-white text-xl font-semibold transition-all duration-500 shadow-md ">
                     <Image src={timetable} width={40}/>
                     <p>وريني البرنامج</p>
                 </div>

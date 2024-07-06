@@ -27,7 +27,7 @@ const images = [img1, img2, img6, img4, img5, img3, img7, img8, img9];
 const gradient = {
   background: "radial-gradient(circle at 50% 50%, #8255f1, #0d2486)",
 };
-const SMF_Tech = () => {
+const SMF_Tech = ({ show = true }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   return (
@@ -68,13 +68,15 @@ const SMF_Tech = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-5">
-                  <div
-                    onClick={() => navigate("/team")}
-                    className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg"
-                  >
-                    <p className="text-3xl">الفريق </p>
-                  </div>
+                <div className={`grid ${show ? ' grid-cols-2 ' : ' grid-cols-1 '} gap-5`}>
+                  {show && (
+                    <div
+                      onClick={() => navigate("/team")}
+                      className="hover:bg-white hover:text-black my-5 transition-all duration-500 text-white h-[100px] border-1 flex justify-center items-center rounded-lg"
+                    >
+                      <p className="text-3xl">الفريق </p>
+                    </div>
+                  )}
                   <div
                     onClick={() =>
                       window.open("https://wa.me/201201891349", "_blank")
@@ -168,29 +170,32 @@ const SMF_Tech = () => {
                 </div>
 
                 {/* ---------------- */}
-
-                <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
-                  <p className="text-5xl mt-5 font-bold text-white">Our App Story</p>
-                  {images.map((item, index) => (
-                    <Card
-                      shadow="sm"
-                      key={index}
-                      isPressable
-                      onPress={() => console.log("item pressed")}
-                    >
-                      <CardBody className="overflow-visible p-0">
-                        <Image
-                          shadow="sm"
-                          radius="lg"
-                          width="100%"
-                          alt={item}
-                          className="w-full object-cover h-[140px]"
-                          src={item}
-                        />
-                      </CardBody>
-                    </Card>
-                  ))}
-                </div>
+                {show && (
+                  <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
+                    <p className="text-5xl mt-5 font-bold text-white">
+                      Our App Story
+                    </p>
+                    {images.map((item, index) => (
+                      <Card
+                        shadow="sm"
+                        key={index}
+                        isPressable
+                        onPress={() => console.log("item pressed")}
+                      >
+                        <CardBody className="overflow-visible p-0">
+                          <Image
+                            shadow="sm"
+                            radius="lg"
+                            width="100%"
+                            alt={item}
+                            className="w-full object-cover h-[140px]"
+                            src={item}
+                          />
+                        </CardBody>
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </ModalBody>
             </>
           )}

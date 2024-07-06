@@ -16,7 +16,6 @@ const userLinks = [
   { name: "بروفايلي", link: "/settings" },
   { name: "ملاحظاتي", link: "/notes" },
   { name: "ملفاتي", link: "/materials" },
-  { name: "الأرشيف", link: "/" },
   { name: "تسجيل الخروج", link: "/logout" },
 ];
 const Side_bar = () => {

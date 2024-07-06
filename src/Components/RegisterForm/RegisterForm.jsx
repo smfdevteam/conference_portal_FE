@@ -215,7 +215,7 @@ const RegisterForm = () => {
           </div>
         </form>
       </div>
-            <SMF_Tech />
+            <SMF_Tech show={false} />
     </div>
   );
 };

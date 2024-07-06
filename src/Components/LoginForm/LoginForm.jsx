@@ -187,7 +187,7 @@ export default function LoginForm() {
           إنشاء حساب
         </Button>
       </form>
-      <SMF_Tech/>
+      <SMF_Tech show={false}/>
     </div>
   );
 }
