@@ -11,30 +11,30 @@
     <title>SMF Conference Portal</title>
     <style>
       #installButton {
-          display: none;
-          width: 100%;
-          padding: 15px 30px;
-          font-size: 18px;
-          font-weight: bold;
-          color: #fff;
-          background-color: #171717;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          transition: background-color 0.3s ease, transform 0.2s ease;
+        display: none;
+        width: 100%;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #171717;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
       }
 
       #installButton:hover {
-          background-color: #444;
-          transform: translateY(-2px);
+        background-color: #444;
+        transform: translateY(-2px);
       }
 
       #installButton:active {
-          background-color: #333;
-          transform: translateY(0);
+        background-color: #333;
+        transform: translateY(0);
       }
-  </style>
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -43,28 +43,28 @@
       let deferredPrompt;
       const installButton = document.getElementById("installButton");
 
+      // Listen for the beforeinstallprompt event to enable the default infobar
       window.addEventListener("beforeinstallprompt", (e) => {
-        // Prevent the default mini-infobar from appearing on mobile
-        e.preventDefault();
-        // Stash the event so it can be triggered later.
+        // Store the event to use it later
         deferredPrompt = e;
-        // Update UI notify the user they can install the PWA
+        // Show the install button
         installButton.style.display = "block";
+      });
 
-        installButton.addEventListener("click", () => {
-          // Hide the install button
-          installButton.style.display = "none";
-          // Show the install prompt
-          deferredPrompt.prompt();
-          // Wait for the user to respond to the prompt
-          deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === "accepted") {
-              console.log("User accepted the A2HS prompt");
-            } else {
-              console.log("User dismissed the A2HS prompt");
-            }
-            deferredPrompt = null;
-          });
+      // Handle the click event on the custom install button
+      installButton.addEventListener("click", () => {
+        // Hide the install button
+        installButton.style.display = "none";
+        // Show the install prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === "accepted") {
+            console.log("User accepted the A2HS prompt");
+          } else {
+            console.log("User dismissed the A2HS prompt");
+          }
+          deferredPrompt = null;
         });
       });
 
