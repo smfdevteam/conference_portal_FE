@@ -1,0 +1,38 @@
+{
+  "name": "SMF Tech.",
+  "short_name": "SMF Tech.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0e7db",
+  "lang": "en",
+  "scope": "/",
+  "description": "Conference Application",
+  "icons": [
+    {
+      "src": "/smf.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "favicon"
+    },
+    {
+      "src": "/smf.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "favicon"
+    },
+    {
+      "src": "/smf.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    },
+    {
+      "src": "/smf.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#171717",
+  "orientation": "portrait"
+}
