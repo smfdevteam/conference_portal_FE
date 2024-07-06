@@ -10,7 +10,9 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { getLookups } from "../../Api/conference_meta.service";
 import { getMessagesCount } from "../../Api/user.service";
+import SMF_Tech from '../../Components/SMF_Tech'
 import GradientSvg from "../UserProfile/UserProfileAnimation/GradientSvg";
+import toast from "react-hot-toast";
 const initialValues = {
   email: "",
   password: "",
@@ -60,7 +62,12 @@ const onSubmit = async ({
       navigate("/");
 
     }
-  } finally {
+
+  }
+  catch(e) {
+    toast.error('حصل حاجة غلط | جرب تاني او ارجع ل SMF Tech.')
+  }
+  finally {
     setIsSubmiting(false);
   }
 };
@@ -180,6 +187,7 @@ export default function LoginForm() {
           إنشاء حساب
         </Button>
       </form>
+      <SMF_Tech/>
     </div>
   );
 }

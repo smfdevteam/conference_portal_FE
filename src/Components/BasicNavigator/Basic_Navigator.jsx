@@ -51,7 +51,7 @@ const Basic_Navigator = () => {
           className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center"
         >
           <img src={cashBackIcon} width={30} alt="" />
-          <p>Cashback</p>
+          <p>النقاط</p>
         </div>
       </div>
       <Feedback/>

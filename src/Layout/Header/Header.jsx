@@ -5,7 +5,7 @@ import { Badge } from "@nextui-org/react";
 import messageIcon from "../../assets/images/icons/message.png";
 import { useNavigate } from "react-router-dom";
 export default function Header() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { app_state, setAppState } = useContext(stateProvider);
   const handleIsSideOpen = () => {
     setAppState({ ...app_state, isAsideOpen: !app_state.isAsideOpen });
@@ -15,6 +15,7 @@ export default function Header() {
       <Navbar dir="ltr" className="m-auto my-2 border-2 rounded-xl">
         <NavbarBrand>
           <Avatar
+            onClick={() => navigate("/")}
             isBordered
             color="primary"
             src={app_state.conference.logoUrl}
@@ -26,7 +27,7 @@ export default function Header() {
           placement="top-left"
           content={app_state.user_messages > 9 ? "+9" : app_state.user_messages}
           shape="circle"
-          onClick={()=>navigate('/msgs')}
+          onClick={() => navigate("/msgs")}
         >
           <img src={messageIcon} width={30} />
         </Badge>

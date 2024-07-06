@@ -212,10 +212,10 @@ const RegisterForm = () => {
             >
               لديك حساب ؟
             </Button>
-            <SMF_Tech />
           </div>
         </form>
       </div>
+            <SMF_Tech />
     </div>
   );
 };

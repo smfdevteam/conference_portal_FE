@@ -1,4 +1,8 @@
 import {
+  Card,
+  CardBody,
+  CardFooter,
+  Image,
   LinkIcon,
   Modal,
   ModalBody,
@@ -9,6 +13,17 @@ import { useNavigate } from "react-router-dom";
 import smfTechLogo from "../assets/images/brand/smftech.png";
 import smfTechTypo from "../assets/images/brand/smftecttypo.png";
 import mark from "../assets/images/mark.png";
+import img1 from "../assets/images/archieve/1.jpg";
+import img2 from "../assets/images/archieve/2.jpg";
+import img3 from "../assets/images/archieve/3.jpg";
+import img4 from "../assets/images/archieve/4.jpg";
+import img5 from "../assets/images/archieve/5.jpg";
+import img6 from "../assets/images/archieve/6.jpg";
+import img7 from "../assets/images/archieve/7.jpg";
+import img8 from "../assets/images/archieve/8.jpg";
+import img9 from "../assets/images/archieve/9.jpg";
+
+const images = [img1, img2, img6, img4, img5, img3, img7, img8, img9];
 const gradient = {
   background: "radial-gradient(circle at 50% 50%, #8255f1, #0d2486)",
 };
@@ -93,7 +108,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Engineers | Developers Team
                       </h2>
-                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal">
                         Frontend, Backend, Mobile, and Cyber Security Engineers
                         who create software to digitize church activities.
                       </p>
@@ -103,7 +118,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Management | Product Team
                       </h2>
-                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal">
                         Oversee projects, manage resources, and ensure the
                         successful delivery of our digital products.
                       </p>
@@ -113,7 +128,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Media Team
                       </h2>
-                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal">
                         Handle all media-related activities, including social
                         media management, video production, and content
                         creation.
@@ -124,7 +139,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Creative Design Team
                       </h2>
-                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal">
                         Design visual content, including graphics, UI/UX, and
                         promotional materials.
                       </p>
@@ -134,7 +149,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Event Planning Team
                       </h2>
-                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal">
                         Plan and execute events, ensuring they run smoothly and
                         meet their objectives.
                       </p>
@@ -144,7 +159,7 @@ const SMF_Tech = () => {
                       <h2 className="text-2xl font-semibold text-blue-600">
                         Continuous Learning Team
                       </h2>
-                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal" >
+                      <p className="text-gray-700 mt-4 text-md break-words whitespace-normal">
                         Promote ongoing education and training for team members
                         to keep skills up-to-date and foster personal growth.
                       </p>
@@ -153,6 +168,29 @@ const SMF_Tech = () => {
                 </div>
 
                 {/* ---------------- */}
+
+                <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
+                  <p className="text-5xl mt-5 font-bold text-white">Our App Story</p>
+                  {images.map((item, index) => (
+                    <Card
+                      shadow="sm"
+                      key={index}
+                      isPressable
+                      onPress={() => console.log("item pressed")}
+                    >
+                      <CardBody className="overflow-visible p-0">
+                        <Image
+                          shadow="sm"
+                          radius="lg"
+                          width="100%"
+                          alt={item}
+                          className="w-full object-cover h-[140px]"
+                          src={item}
+                        />
+                      </CardBody>
+                    </Card>
+                  ))}
+                </div>
               </ModalBody>
             </>
           )}
