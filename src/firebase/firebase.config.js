@@ -8,13 +8,13 @@ import {getMessaging} from 'firebase/messaging'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAGE6y9zowVBy2b0ZxrNX8NrF9MUOauIKI",
-  authDomain: "smfconferencebe.firebaseapp.com",
-  projectId: "smfconferencebe",
-  storageBucket: "smfconferencebe.appspot.com",
-  messagingSenderId: "561521603159",
-  appId: "1:561521603159:web:3c6672ae490ca95e39e912",
-  measurementId: "G-GNE902NGGV",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
