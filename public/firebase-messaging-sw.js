@@ -14,14 +14,14 @@ const defaultConfig = {
 };
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAGE6y9zowVBy2b0ZxrNX8NrF9MUOauIKI",
-    authDomain: "smfconferencebe.firebaseapp.com",
-    projectId: "smfconferencebe",
-    storageBucket: "smfconferencebe.appspot.com",
-    messagingSenderId: "561521603159",
-    appId: "1:561521603159:web:3c6672ae490ca95e39e912",
-    measurementId: "G-GNE902NGGV",
-  };
+  apiKey: '%%VITE_FIREBASE_API_KEY%%',
+  authDomain: '%%VITE_FIREBASE_AUTH_DOMAIN%%',
+  projectId: '%%VITE_FIREBASE_PROJECT_ID%%',
+  storageBucket: '%%VITE_FIREBASE_STORAGE_BUCKET%%',
+  messagingSenderId: '%%VITE_FIREBASE_MESSAGING_SENDER_ID%%',
+  appId: '%%VITE_FIREBASE_APP_ID%%',
+  measurementId: '%%VITE_FIREBASE_MEASUREMENT_ID%%',
+};
 
 firebase.initializeApp(firebaseConfig);
 

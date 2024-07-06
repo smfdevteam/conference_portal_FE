@@ -11,6 +11,7 @@ import kirosameh from "../images/team/kirosameh.png";
 import michael from "../images/team/michael.png";
 import noren from "../images/team/noren.png";
 import rahma from "../images/team/rahma.png";
+import merna from "../images/team/merna.png";
 import remon from "../images/team/remon.png";
 import safwat from "../images/team/safwat.png";
 import susanna from "../images/team/susanna.png";
@@ -115,12 +116,12 @@ export const SmfTechTeam = [
     image: noren,
   },
   {
-    name: "Rahma Emad",
-    position: "Product Leader",
-    unit: "Business Unit",
+    name: "Merna Zakariz",
+    position: "Media Leader",
+    unit: "Media Unit",
     description:
-      "Meet Rahma Emad, our Product Leader in the Business Unit. With her knack for innovation and understanding of customer needs, Rahma ensures our products are top-notch. She fosters collaboration and creativity, making every project a success. Rahma's leadership brings out the best in our team and keeps SMF happy.",
-    image: rahma,
+      "",
+    image: merna,
   },
   {
     name: "Remon Samir",
