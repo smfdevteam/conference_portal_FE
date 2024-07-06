@@ -9,10 +9,35 @@
     />
     <link rel="manifest" href="/manifest.json" />
     <title>SMF Conference Portal</title>
+    <style>
+      #installButton {
+          display: none;
+          padding: 15px 30px;
+          font-size: 18px;
+          font-weight: bold;
+          color: #fff;
+          background-color: #171717;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      #installButton:hover {
+          background-color: #444;
+          transform: translateY(-2px);
+      }
+
+      #installButton:active {
+          background-color: #333;
+          transform: translateY(0);
+      }
+  </style>
   </head>
   <body>
-    <button id="installButton" style="display: none">Install App</button>
     <div id="root"></div>
+    <button id="installButton" style="display: none">Install App</button>
     <script>
       let deferredPrompt;
       const installButton = document.getElementById("installButton");
