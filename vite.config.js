@@ -1,6 +1,7 @@
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import obfuscatorPlugin from 'vite-plugin-javascript-obfuscator'
 const manifestForPlugIn = {
   registerType: "prompt",
   includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
@@ -43,7 +44,19 @@ const manifestForPlugIn = {
   },
 };
 export default defineConfig({
-  plugins: [react()  , VitePWA(manifestForPlugIn)],
+  plugins: [
+    react(),
+    VitePWA(manifestForPlugIn),
+    obfuscatorPlugin({
+      include: ["src/firebase/firebase.config.js"],
+      exclude: [/node_modules/],
+      apply: "build",
+      debugger: true,
+      options: {
+        debugProtection: true,
+      },
+    }),
+  ],
   server: {
     open: true,
     hmr: {
