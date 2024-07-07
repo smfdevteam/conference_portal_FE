@@ -49,9 +49,9 @@ function App() {
   const { app_state, setAppState } = useContext(stateProvider);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  onMessage(CONFERENCE_FIREBASE_MESSAGEING_HANDLER, (payload) => {
-    console.log(payload, "NOTIFICATION");
-  });
+  // onMessage(CONFERENCE_FIREBASE_MESSAGEING_HANDLER, (payload) => {
+  //   console.log(payload, "NOTIFICATION");
+  // });
 
   const getLookUpsData = async () => {
     const lookups = await getLookups();
@@ -69,10 +69,12 @@ function App() {
     }
   };
   useEffect(() => {
-    silentLogin(setIsLoading, setAppState, navigate);
-    getLookUpsData();
-    getUserMessagesCount();
-    handleNotifications()
+    handleNotifications();
+    if (localStorage.getItem("X-ACCESS-TOKEN")) {
+      silentLogin(setIsLoading, setAppState, navigate);
+      getLookUpsData();
+      getUserMessagesCount();
+    }
   }, []);
 
   // Redirect if not a mobile device

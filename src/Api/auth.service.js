@@ -35,8 +35,8 @@ const register = async (userData) => {
         headers,
       }
     );
-    
-    toast.success("اكتمل التسجيل")
+
+    toast.success("اكتمل التسجيل");
     return response.data;
   } catch (error) {
     console.log("error api ===", error);
@@ -117,8 +117,8 @@ const getPublicProfile = async (requesteduid) => {
   } catch (error) {
     if (!error?.response) {
       toast.error("الرجاء معاودة المحاولة في وقت لاحق");
-    }else{
-      return "blocked"
+    } else {
+      return "blocked";
     }
   }
 };
@@ -160,7 +160,6 @@ const verifyToken = async () => {
     return data;
   } catch (e) {
     throw new Error(e.message);
-
   }
 };
 
@@ -188,6 +187,18 @@ const silentLogin = async (setLoading, setUserState, toLogin) => {
   }
 };
 
+const addVapdid = async (token) => {
+  try {
+    const { data } = await axios.post(
+      "https://conference-portal-be.vercel.app/guest/auth/vapid",
+      { token }
+    );
+    console.log(data);
+    return data;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 export {
   resetClientPassword,
   register,
@@ -198,4 +209,5 @@ export {
   editProfile,
   editProfileImage,
   getPublicProfile,
+  addVapdid
 };
