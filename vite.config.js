@@ -55,6 +55,9 @@ export default defineConfig({
       debugger: true,
       options: {
         debugProtection: true,
+        disableConsoleOutput:true , 
+        renameGlobals : true  ,
+        
       },
     }),
     compression()
