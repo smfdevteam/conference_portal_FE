@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {getMessaging} from 'firebase/messaging'
+import { getMessaging } from "firebase/messaging";
+import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,6 +23,13 @@ const CONFERENCE_FIREBASE_CLIENT_APP = initializeApp(firebaseConfig);
 const CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER = getAuth(
   CONFERENCE_FIREBASE_CLIENT_APP
 );
-const CONFERENCE_FIREBASE_MESSAGEING_HANDLER = getMessaging(CONFERENCE_FIREBASE_CLIENT_APP)
-
-export { CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER  , CONFERENCE_FIREBASE_MESSAGEING_HANDLER};
+const CONFERENCE_FIREBASE_MESSAGEING_HANDLER = getMessaging(
+  CONFERENCE_FIREBASE_CLIENT_APP
+);
+const CONFERENCE_FIREBASE_ANALYTICS_HANDLER = getAnalytics(
+  CONFERENCE_FIREBASE_CLIENT_APP
+);
+export {
+  CONFERENCE_FIREBASE_CLIENT_AUTH_HANDLER,
+  CONFERENCE_FIREBASE_MESSAGEING_HANDLER,
+};

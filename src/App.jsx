@@ -34,7 +34,7 @@ import Shared_Notes from "./pages/notes/Shared_Notes";
 import Conference_Program from "./pages/program/Conference_Program";
 import Rules from "./pages/rules/Rules";
 import Speakers from "./pages/speakers/Speakers";
-import { isMobile } from "./utils/client";
+import { handleNotifications, isMobile } from "./utils/client";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -72,6 +72,7 @@ function App() {
     silentLogin(setIsLoading, setAppState, navigate);
     getLookUpsData();
     getUserMessagesCount();
+    handleNotifications()
   }, []);
 
   // Redirect if not a mobile device
