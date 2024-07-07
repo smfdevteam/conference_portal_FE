@@ -1,7 +1,8 @@
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
-import obfuscatorPlugin from 'vite-plugin-javascript-obfuscator'
+import obfuscatorPlugin from "vite-plugin-javascript-obfuscator";
+import { compression } from "vite-plugin-compression2";
 const manifestForPlugIn = {
   registerType: "prompt",
   includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
@@ -56,6 +57,7 @@ export default defineConfig({
         debugProtection: true,
       },
     }),
+    compression()
   ],
   server: {
     open: true,
