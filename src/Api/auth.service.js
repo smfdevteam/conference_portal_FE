@@ -189,14 +189,18 @@ const silentLogin = async (setLoading, setUserState, toLogin) => {
 
 const addVapdid = async (token) => {
   try {
+    toast.loading("Handle Notifications");
     const { data } = await axios.post(
       "https://conference-portal-be.vercel.app/guest/auth/vapid",
       { token }
     );
-    console.log(data);
+    toast.dismiss();
+    toast.success('Handled')
     return data;
   } catch (e) {
     throw new Error(e.message);
+  } finally {
+    toast.dismiss();
   }
 };
 export {
@@ -209,5 +213,5 @@ export {
   editProfile,
   editProfileImage,
   getPublicProfile,
-  addVapdid
+  addVapdid,
 };

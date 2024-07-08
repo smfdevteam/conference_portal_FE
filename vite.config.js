@@ -52,7 +52,7 @@ export default defineConfig({
       include: ["src/firebase/firebase.config.js"],
       exclude: [/node_modules/],
       apply: "build",
-      debugger: true,
+      // debugger: true,
       options: {
         debugProtection: true,
         disableConsoleOutput:true , 
