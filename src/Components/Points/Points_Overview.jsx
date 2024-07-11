@@ -2,6 +2,7 @@ import { useContext } from "react";
 import cashBackIcon from "../../assets/images/icons/cashback.png";
 import { stateProvider } from "../../Context/App_Context";
 import Guest_Home from "./GuestHome/Guest_Home";
+import TheTop from "./Teams/TheTop";
 
 const Points_Overview = () => {
   const {
@@ -32,6 +33,7 @@ const Points_Overview = () => {
         </div>
       </div>
       <Guest_Home/>
+      <TheTop/>
     </div>
   );
 };

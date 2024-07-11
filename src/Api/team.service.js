@@ -60,11 +60,32 @@ const joinGuestToTeam = async (teamId, userId) => {
   }
 };
 
+const changeTeamOrder = async (teamId, order) => {
+  try {
+    await api.put("/guest/teams/team-order", {
+      teamId,
+      order,
+    });
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+const getTheTop = async () => {
+  try {
+    const top = await api.get("/guest/teams/top");
+    const {members , teams} = top.data
+    return {members , teams}
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 export {
   getTeams,
   controlTeamPoints,
   getGuestByPointId,
   controlGuestPoints,
   getTeambyId,
-  joinGuestToTeam
+  joinGuestToTeam,
+  changeTeamOrder , 
+  getTheTop
 };

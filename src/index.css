@@ -6,7 +6,7 @@
 
 body {
   font-family: "arabic-regular";
-  /* user-select: none; */
+  user-select: none;
   font-family: "arabic-medium";
 }
 

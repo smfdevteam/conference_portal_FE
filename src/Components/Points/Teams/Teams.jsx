@@ -25,7 +25,7 @@ const Teams = () => {
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   return teams.length > 0 ? (
     <>
-      <p>أضغط علي الفريق و اتحكم في النقط</p>
+      <p>أضغط علي الفريق و اتحكم في النقط و الترتيب</p>
       <div className="flex gap-3 overflow-x-scroll">
         {teams.map((team) => (
           <div className="flex flex-col" key={team.teamId}>
