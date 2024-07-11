@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getTheTop } from "../../Api/team.service";
 import { User } from "@nextui-org/react";
 import { Link } from "react-router-dom";
-import smfTechLogo from '../../../assets/images/brand/familyLogo-removebg-preview (1).png'
+import smfTechLogo from '../../assets/images/brand/smftech.png'
 const Top_Achievers = () => {
   const [top, setTop] = useState({
     members: [],
