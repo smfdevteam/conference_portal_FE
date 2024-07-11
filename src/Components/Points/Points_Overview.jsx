@@ -7,13 +7,13 @@ import TheTop from "./Teams/TheTop";
 const Points_Overview = () => {
   const {
     app_state: {
-      user: { teamName, teamId, points, pointId },
+      user: { points, pointId },
     },
   } = useContext(stateProvider);
   return (
     <div>
       <div className="flex justify-center items-center">
-        <img src={cashBackIcon} width={70} />
+        <img src={cashBackIcon} width={70} alt=""/>
       </div>
       <p className="text-center my-2">
         هنا هتبقي عارف كل النقط اللي انت جمعتها لحد دلوقتي في المؤتمر
