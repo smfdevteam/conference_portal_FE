@@ -73,8 +73,26 @@ const changeTeamOrder = async (teamId, order) => {
 const getTheTop = async () => {
   try {
     const top = await api.get("/guest/teams/top");
-    const {members , teams} = top.data
-    return {members , teams}
+    const { members, teams } = top.data;
+    return { members, teams };
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+const isPointsShown = async () => {
+  try {
+    const isShown = await api.get("/guest/teams/show-teams-points");
+    return isShown.data;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+const setIsPointsShownApi = async (isShown) => {
+  try {
+    await api.put("/guest/teams/show-teams-points" , {
+      isShown
+    });
+    return isShown.data;
   } catch (e) {
     throw new Error(e.message);
   }
@@ -86,6 +104,8 @@ export {
   controlGuestPoints,
   getTeambyId,
   joinGuestToTeam,
-  changeTeamOrder , 
-  getTheTop
+  changeTeamOrder,
+  getTheTop,
+  isPointsShown , 
+  setIsPointsShownApi
 };

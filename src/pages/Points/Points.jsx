@@ -5,7 +5,7 @@ const Points = () => {
   return (
     <section>
         <Teams/>
-        <Guest_Points/>
+        {/* <Guest_Points/> */}
     </section>
   )
 }
