@@ -47,8 +47,7 @@ const manifestForPlugIn = {
 export default defineConfig({
   plugins: [
     react(),
-    VitePWA(manifestForPlugIn)
-    ,
+    VitePWA(manifestForPlugIn),
     obfuscatorPlugin({
       include: ["src/firebase/firebase.config.js"],
       exclude: [/node_modules/],
@@ -56,14 +55,11 @@ export default defineConfig({
       debugger: true,
       options: {
         debugProtection: true,
-        disableConsoleOutput:true , 
-        renameGlobals : true  ,
-        
+        disableConsoleOutput: true,
+        renameGlobals: true,
       },
-    }
-  
-  ),
-    compression()
+    }),
+    compression(),
   ],
   server: {
     open: true,

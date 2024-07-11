@@ -2,7 +2,7 @@ import { useContext } from "react";
 import cashBackIcon from "../../assets/images/icons/cashback.png";
 import { stateProvider } from "../../Context/App_Context";
 import Guest_Home from "./GuestHome/Guest_Home";
-import Top_Achievers from "./Teams/Top_Achievers";
+import Top_Achievers from "./Top_Achievers";
 
 const Points_Overview = () => {
   const {
