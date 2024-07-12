@@ -10,11 +10,12 @@ import User_Card from "../../Components/user/User_Card";
 import { stateProvider } from "../../Context/App_Context";
 import SMFTech1 from "../../assets/images/brand/smftech.png";
 import SMFTech2 from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
+import leadersBadge from "../../assets/images/icons/badge.png";
 import { Divider, Image } from "@nextui-org/react";
 export default function Home() {
   const {
     app_state: {
-      user: { isLeader, pointId, points },
+      user: { isLeader, pointId, points, displayName },
       conference: { name },
     },
   } = useContext(stateProvider);
@@ -42,7 +43,24 @@ export default function Home() {
         </h1>
         <Now now={homeState.now} />
       </div>
-      {isLeader && <Leader_badge />}
+      {isLeader && (
+        <div className="border-black bg-slate-950 border-3 rounded-lg p-2 my-3">
+          <p className="text-white text-center">
+            Leader /<span className="text-3xl mx-3">{displayName.split(" ")[0]}</span>
+          </p>
+          <div className="grid grid-cols-2 gap-3 ">
+            <Leader_badge label={"Teams"} route={"/points"} />
+            <Leader_badge label={"Members"} route={"/points-guest"} />
+          </div>
+          <div className="flex items-center justify-center gap-5">
+            <img src={leadersBadge} width={20} />
+            <p className="text-white text-center capitalize">
+              You Now Own the Leaders Badge
+            </p>
+            <img src={leadersBadge} width={20} />
+          </div>
+        </div>
+      )}
       <SMF_Tech />
       <User_Card />
       <Basic_Navigator />
@@ -57,7 +75,7 @@ export default function Home() {
           />
           <div>
             <p className="text-4xl ">EIKON</p>
-            <Divider className="mb-2 bg-purple-950"/>
+            <Divider className="mb-2 bg-purple-950" />
             <p className="px-2">
               أول نظام إدارة المؤتمرات الكنسية في الكنيسة القبطية الارثوذكسية
             </p>

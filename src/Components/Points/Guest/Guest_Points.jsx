@@ -1,19 +1,26 @@
 import { Avatar, Input } from "@nextui-org/react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   controlGuestPoints,
   getGuestByPointId,
 } from "../../../Api/team.service";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const Guest_Points = () => {
+const Guest_Points = ({ pointId }) => {
   const searchRef = useRef(null);
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [userPoints, setUserPoints] = useState(0);
-  const getGuest = async () => {
+  const getGuest = async (pointIdToSearch) => {
     toast.loading("بندور عليه ثواني");
     try {
-      const guestData = await getGuestByPointId(searchRef.current.value);
+      let guestData;
+      if (!pointIdToSearch) {
+        guestData = await getGuestByPointId(searchRef.current.value);
+      } else {
+        guestData = await getGuestByPointId(pointIdToSearch);
+      }
       setUser(guestData);
       toast.dismiss();
       toast.success("لقيناه");
@@ -21,6 +28,7 @@ const Guest_Points = () => {
       if (e.message == "User Not Found") {
         toast.dismiss();
         toast.error("ال ID مش موجود");
+        if (pointId) navigate("/points-guest");
       } else {
         toast.dismiss();
 
@@ -38,25 +46,35 @@ const Guest_Points = () => {
       toast.error("حصل حاجة غلط");
     }
   };
+  useEffect(() => {
+    if (pointId) {
+      getGuest(pointId);
+    }
+  }, []);
   return (
     <div className="mt-4 mb-2">
-      <p>إضافة نقط فردية</p>
-      <div className="flex gap-3 items-center my-3">
-        <button
-          onClick={getGuest}
-          className="font-bold border-2 border-purple-500 w-[40%] h-[50px] rounded-lg"
-        >
-          بحث
-        </button>
-        <Input
-          ref={searchRef}
-          type="text"
-          placeholder="Point ID"
-          dir="ltr"
-          labelPlacement="inside"
-          label="إكتب الرقم الخاص بالنقط للمخدوم"
-        />
-      </div>
+      {!pointId && (
+        <>
+          <p>إضافة نقط فردية</p>
+          <div className="flex gap-3 items-center my-3">
+            <button
+              onClick={() => getGuest(null)}
+              className="font-bold border-2 border-purple-500 w-[40%] h-[50px] rounded-lg"
+            >
+              بحث
+            </button>
+            <Input
+              ref={searchRef}
+              type="text"
+              placeholder="Point ID"
+              dir="ltr"
+              labelPlacement="inside"
+              label="إكتب الرقم الخاص بالنقط للمخدوم"
+            />
+          </div>
+        </>
+      )}
+
       {user && (
         <div className="border-1 px-3 py-5 rounded-lg shadow-lg">
           <div className="flex gap-5" dir="ltr">

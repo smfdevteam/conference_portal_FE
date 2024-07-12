@@ -1,19 +1,18 @@
-import smfTechLogo from "../../assets/images/brand/smftecttypo.png";
-import badgeIcon from "../../assets/images/icons/badge.png";
-import smfLogo from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
 import { useNavigate } from "react-router-dom";
-const Leader_badge = () => {
+import smfLogo from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
+import smfTechLogo from "../../assets/images/brand/smftecttypo.png";
+const Leader_badge = ({label , route}) => {
   const navigate = useNavigate();
   return (
     <div
       className="shadow-lg my-4"
       dir="ltr"
-      onClick={() => navigate("/points")}
+      onClick={() => navigate(route)}
     >
       <div className="bg-black rounded-xl">
+        <p className="text-white text-3xl text-center py-3">{label}</p>
         <div className="flex items-center p-3 justify-between ">
           <img width={50} src={smfLogo} alt="" />
-          <img width={50} src={badgeIcon} alt="" />
           <img width={50} src={smfTechLogo} alt="" />
         </div>
       </div>

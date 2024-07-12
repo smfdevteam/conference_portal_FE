@@ -35,6 +35,7 @@ import Conference_Program from "./pages/program/Conference_Program";
 import Rules from "./pages/rules/Rules";
 import Speakers from "./pages/speakers/Speakers";
 import { handleNotifications, isMobile } from "./utils/client";
+import Guest_Points_Page from "./pages/Points/Guest_Points_Page";
 
 const Location = lazy(() => import("./pages/Location"));
 const Material = lazy(() => import("./pages/material/Material"));
@@ -129,7 +130,17 @@ function App() {
                 />
                 <Route path="/public/:uid" element={<PublicUser />} />
                 {app_state.user.isLeader && (
-                  <Route path="/points" element={<Points />} />
+                  <>
+                    <Route path="/points" element={<Points />} />
+                    <Route
+                      path="/points-guest"
+                      element={<Guest_Points_Page />}
+                    />
+                    <Route
+                      path="/client_app_points/:random/:pointId/:random2/_conference/"
+                      element={<Guest_Points_Page />}
+                    />
+                  </>
                 )}
 
                 <Route path="/logout" element={<Logout />} />

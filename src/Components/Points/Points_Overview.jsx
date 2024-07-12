@@ -1,10 +1,14 @@
-import { useContext } from "react";
+import { useContext, useId } from "react";
 import cashBackIcon from "../../assets/images/icons/cashback.png";
 import { stateProvider } from "../../Context/App_Context";
 import Guest_Home from "./GuestHome/Guest_Home";
 import Top_Achievers from "./Top_Achievers";
+import SMF_QR from "../QR/SMF_QR";
+import ShareSvg from "../../assets/images/icons/qr_code_icon.png";
+import Smf_Modal from "../shared/Smf_Modal";
 
 const Points_Overview = () => {
+  const randomId = useId()
   const {
     app_state: {
       user: { points, pointId },
@@ -13,14 +17,30 @@ const Points_Overview = () => {
   return (
     <div>
       <div className="flex justify-center items-center">
-        <img src={cashBackIcon} width={70} alt=""/>
+        <img src={cashBackIcon} width={70} alt="" />
       </div>
       <p className="text-center my-2">
         هنا هتبقي عارف كل النقط اللي انت جمعتها لحد دلوقتي في المؤتمر
       </p>
       <div className="flex items-center gap-5 justify-center my-4">
+        <div className="mt-10">
+          <Smf_Modal
+            isBtnImage
+            btnImgClassNames={"w-[60px]"}
+            btnImgSrc={ShareSvg}
+          >
+            <div className="flex justify-center flex-col items-center">
+              <p className="text-xl text-center">
+                Share the QR With your Leader
+              </p>
+              <SMF_QR
+                link={`${window.location.origin}/client_app_points/${randomId}/${pointId}/${Date.now()}/_conference/`}
+              />
+            </div>
+          </Smf_Modal>
+        </div>
         <div>
-        <p className="text-center mt-2 mb-1">Points ID</p>
+          <p className="text-center mt-2 mb-1">Points ID</p>
           <p className="text-center m-auto text-5xl border-2 rounded-full w-fit p-3 border-purple-800">
             {pointId}
           </p>
@@ -32,8 +52,9 @@ const Points_Overview = () => {
           </p>
         </div>
       </div>
-      <Guest_Home/>
-      <Top_Achievers/>
+
+      <Guest_Home />
+      <Top_Achievers />
     </div>
   );
 };

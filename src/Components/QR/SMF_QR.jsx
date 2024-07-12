@@ -5,6 +5,7 @@ const SMF_QR = ({ link }) => {
   return (
     <div className="border-2 rounded-lg w-fit my-4 p-5 ">
       <QRCode
+        size={"200"}
         value={link ? link : ""}
         logoImage={logo}
         qrStyle="dots"
