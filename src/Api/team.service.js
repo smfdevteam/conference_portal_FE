@@ -87,12 +87,38 @@ const isPointsShown = async () => {
     throw new Error(e.message);
   }
 };
+const teamsConfig = async () => {
+  try {
+    const config = await api.get("/guest/teams/teams-leaders-config");
+    return config.data;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 const setIsPointsShownApi = async (isShown) => {
   try {
-    await api.put("/guest/teams/show-teams-points" , {
-      isShown
+    await api.put("/guest/teams/show-teams-points", {
+      isShown,
     });
     return isShown.data;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+const setIsOrderShownApi = async (isShown) => {
+  try {
+    await api.put("/guest/teams/show-teams-order", {
+      isShown,
+    });
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+const setIsOrderCustomApi = async (isCustom) => {
+  try {
+    await api.put("/guest/teams/is-custom-order", {
+      isCustom,
+    });
   } catch (e) {
     throw new Error(e.message);
   }
@@ -106,6 +132,9 @@ export {
   joinGuestToTeam,
   changeTeamOrder,
   getTheTop,
-  isPointsShown , 
-  setIsPointsShownApi
+  isPointsShown,
+  setIsPointsShownApi,
+  teamsConfig , 
+  setIsOrderShownApi , 
+  setIsOrderCustomApi
 };

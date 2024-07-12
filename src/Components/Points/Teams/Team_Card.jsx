@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { changeTeamOrder, controlTeamPoints } from "../../../Api/team.service";
-const Team_Card = ({ team, getAllTeams }) => {
+const Team_Card = ({ team, getAllTeams, isOrderCustom }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [points, setPoints] = useState(0);
   const [order, setOrder] = useState(Number(team.order));
@@ -36,16 +36,16 @@ const Team_Card = ({ team, getAllTeams }) => {
     }
   };
   const handleTeamOrder = async () => {
-    toast.loading('ثواني')
+    toast.loading("ثواني");
     try {
-      await changeTeamOrder(team.teamId , order) ; 
+      await changeTeamOrder(team.teamId, order);
       await getAllTeams();
-      toast.dismiss()
-      toast.success('تمام يا ليدر')
+      toast.dismiss();
+      toast.success("تمام يا ليدر");
     } catch (e) {
-      toast.error('حصل حاجة غلط')
-    } 
-  }
+      toast.error("حصل حاجة غلط");
+    }
+  };
   return (
     <>
       <div
@@ -57,22 +57,38 @@ const Team_Card = ({ team, getAllTeams }) => {
         }}
       >
         <p className="capitalize text-center text-3xl">{team.name}</p>
-        <div className="grid grid-cols-2 mt-3 gap-3">
-          <p
-            className="capitalize text-center text-2xl p-3 border-purple-500 border-1 rounded-md"
-            dir="ltr"
-          >
-            <p>النقط</p>
-            <p>{team.points}</p>
-          </p>
-          <p
-            className="capitalize text-center text-2xl p-3 border-purple-500 border-1 rounded-md"
-            dir="ltr"
-          >
-            <p>الترتيب</p>
-            <p>{team.order}</p>
-          </p>
-        </div>
+        {isOrderCustom ? (
+          <>
+            <div className="grid grid-cols-2 mt-3 gap-3">
+              <p
+                className="capitalize text-center text-2xl p-3 border-purple-500 border-1 rounded-md"
+                dir="ltr"
+              >
+                <p>النقط</p>
+                <p>{team.points}</p>
+              </p>
+              <p
+                className="capitalize text-center text-2xl p-3 border-purple-500 border-1 rounded-md"
+                dir="ltr"
+              >
+                <p>الترتيب</p>
+                <p>{team.order}</p>
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="mt-3 gap-3">
+              <p
+                className="capitalize text-center text-2xl p-3 border-purple-500 border-1 rounded-md"
+                dir="ltr"
+              >
+                <p>النقط</p>
+                <p>{team.points}</p>
+              </p>
+            </div>
+          </>
+        )}
       </div>
       <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose}>
         <ModalContent>
@@ -82,7 +98,7 @@ const Team_Card = ({ team, getAllTeams }) => {
                 {team.name}
               </ModalHeader>
               <ModalBody>
-                <div  className="h-[500px] overflow-y-scroll">
+                <div className="h-[500px] overflow-y-scroll">
                   <div className="text-center">
                     <p>الفريق دلوقتي مجمع</p>
                     <p
@@ -142,40 +158,44 @@ const Team_Card = ({ team, getAllTeams }) => {
                   >
                     تغيير النقاط
                   </button>
-                  <Divider className="my-4" />
-                  <p className="text-3xl text-center">الترتيب</p>
+                  {isOrderCustom && (
+                    <>
+                      <Divider className="my-4" />
+                      <p className="text-3xl text-center">الترتيب</p>
 
-                  <div className="grid grid-cols-2 my-4 gap-4 justify-center">
-                    <div>
-                      <input
-                        type="number"
-                        defaultValue={order}
-                        value={order}
-                        className="text-2xl border-[5px] w-[100%] my-2 border-purple-600 rounded-xl  text-center"
-                      />
-                      <div className="grid grid-cols-2 gap-3">
-                        <p
-                          onClick={() => handleOrder("+")}
-                          className="text-5xl border-blue-700 border-4 px-4 rounded-xl"
-                        >
-                          +
-                        </p>
+                      <div className="grid grid-cols-2 my-4 gap-4 justify-center">
+                        <div>
+                          <input
+                            type="number"
+                            defaultValue={order}
+                            value={order}
+                            className="text-2xl border-[5px] w-[100%] my-2 border-purple-600 rounded-xl  text-center"
+                          />
+                          <div className="grid grid-cols-2 gap-3">
+                            <p
+                              onClick={() => handleOrder("+")}
+                              className="text-5xl border-blue-700 border-4 px-4 rounded-xl"
+                            >
+                              +
+                            </p>
 
-                        <p
-                          onClick={() => handleOrder("-")}
-                          className="text-5xl border-blue-700 border-4 px-4 rounded-xl"
+                            <p
+                              onClick={() => handleOrder("-")}
+                              className="text-5xl border-blue-700 border-4 px-4 rounded-xl"
+                            >
+                              -
+                            </p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={handleTeamOrder}
+                          className="border-2 border-blue-700 text-3xl rounded-2xl"
                         >
-                          -
-                        </p>
+                          تغيير
+                        </button>
                       </div>
-                    </div>
-                    <button
-                      onClick={handleTeamOrder}
-                      className="border-2 border-blue-700 text-3xl rounded-2xl"
-                    >
-                      تغيير
-                    </button>
-                  </div>
+                    </>
+                  )}
                 </div>
               </ModalBody>
             </>

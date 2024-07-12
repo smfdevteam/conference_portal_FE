@@ -17,10 +17,10 @@ const Top_Achievers = () => {
   }, []);
   return (
     <div className="border-2 text-center rounded-xl shadow-xl p-3  my-3">
-      <p className="text-3xl">Top Achievers</p>
+      <p className="text-3xl my-4">أصحاب اعلي النقط</p>
       <div className="grid grid-cols-2">
         <div className="members">
-          <p className="text-3xl">Members</p>
+          <p className="text-2xl">أشخاص </p>
 
           <div dir="ltr" className="h-[230px] overflow-y-scroll">
             {top.members.map(
@@ -52,30 +52,19 @@ const Top_Achievers = () => {
           </div>
         </div>
         <div className="teams">
-          <p className="text-3xl">Teams</p>
+          <p className="text-2xl">فرق</p>
           <div
             dir="ltr"
             className="max-h-[230px] overflow-y-scroll flex flex-col justify-center items-center"
           >
-            {top.teams.map(({ name, points }) => (
-              <User
-                dir="ltr"
-                key={name}
-                name={name}
-                className="w-full my-2 justify-start"
-                description={
-                  <div className="flex flex-col">
-                    {points && (
-                      <Link size="lg" className="text-purple-700" isExternal>
-                        {points} points
-                      </Link>
-                    )}
-                  </div>
-                }
-                avatarProps={{
-                    src : smfTechLogo
-                }}
-              />
+            {top.teams.map(({ name, points } , index) => (
+              <div className="grid grid-cols-5 w-full items-center justify-center" key={name}>
+                <p className="col-span-1 text-left text-2xl">{index+1}</p>
+                <div className="col-span-3">
+                  <p className="text-lg text-purple-700">{name}</p>
+                  <p className="text-yellow-600 font-bold">{points}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>

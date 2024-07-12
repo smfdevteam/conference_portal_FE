@@ -51,11 +51,13 @@ const Guest_Home = () => {
               ( {teamName} )
             </span>
           </p>
+          {team.points &&           
           <p>
             عندكم
             <span className="text-purple-900 text-6xl mx-3">{team.points}</span>
             نقط
           </p>
+          }
           {team.members && (
             <>
               <p className="font-bold text-2xl">فريقي</p>

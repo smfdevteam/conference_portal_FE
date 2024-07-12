@@ -1,16 +1,21 @@
+import { Switch } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import {
   getTeams,
   isPointsShown,
+  setIsOrderCustomApi,
+  setIsOrderShownApi,
   setIsPointsShownApi,
+  teamsConfig,
 } from "../../../Api/team.service";
-import toast from "react-hot-toast";
 import Full_Screen_Skeleton_Loader from "../../shared/Full_Screen_Skeleton_Loader";
 import Team_Card from "./Team_Card";
 import Team_QR from "./Team_QR";
-import { Divider, Switch } from "@nextui-org/react";
 const Teams = () => {
   const [isPointsShownState, setIsPointsShown] = React.useState(null);
+  const [isOrderCustom, setIsOrderCustom] = React.useState(null);
+  const [isOrderShown, setIsOrderShown] = React.useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [teams, setTeams] = useState([]);
   const handePointShown = async (value) => {
@@ -18,6 +23,28 @@ const Teams = () => {
       toast.loading("ثواني");
       setIsPointsShown(!value);
       await setIsPointsShownApi(!value);
+      toast.dismiss();
+      toast.success("تمام");
+    } catch (e) {
+      toast.error(e.message);
+    }
+  };
+  const handleOrderShown = async (value) => {
+    try {
+      toast.loading("ثواني");
+      setIsOrderShown(!value);
+      await setIsOrderShownApi(!value);
+      toast.dismiss();
+      toast.success("تمام");
+    } catch (e) {
+      toast.error(e.message);
+    }
+  };
+  const handleOrderIsCustom = async (value) => {
+    try {
+      toast.loading("ثواني");
+      setIsOrderCustom(!value);
+      await setIsOrderCustomApi(!value);
       toast.dismiss();
       toast.success("تمام");
     } catch (e) {
@@ -36,10 +63,13 @@ const Teams = () => {
       setIsLoading(false);
     }
   };
-  const getIfTeamPointsShown = async () => {
+  const getTeamsConfig = async () => {
     try {
-      const { isShown } = await isPointsShown();
-      setIsPointsShown(isShown);
+      const { isTeamOrderShown, isTeamPointsShown, isTeamsCustomOrder } =
+        await teamsConfig();
+      setIsPointsShown(isTeamPointsShown.isShown);
+      setIsOrderCustom(isTeamsCustomOrder.isCustom);
+      setIsOrderShown(isTeamOrderShown.isShown);
     } catch (e) {
       console.log(e);
     } finally {
@@ -48,7 +78,7 @@ const Teams = () => {
   };
   useEffect(() => {
     getAllTeams();
-    getIfTeamPointsShown();
+    getTeamsConfig();
   }, []);
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   return teams.length > 0 ? (
@@ -56,7 +86,7 @@ const Teams = () => {
       <div className="flex gap-3 overflow-x-scroll">
         {teams.map((team) => (
           <div className="flex flex-col" key={team.teamId}>
-            <Team_Card team={team} getAllTeams={getAllTeams} />
+            <Team_Card team={team} isOrderCustom={isOrderCustom} getAllTeams={getAllTeams} />
             <Team_QR teamId={team.teamId} teamName={team.name} />
           </div>
         ))}
@@ -70,6 +100,22 @@ const Teams = () => {
               onValueChange={() => handePointShown(isPointsShownState)}
             >
               <p>عرض نقاط الفرق</p>
+            </Switch>
+          </div>
+          <div className="my-3">
+            <Switch
+              isSelected={isOrderShown}
+              onValueChange={() => handleOrderShown(isOrderShown)}
+            >
+              <p>عرض ترتيب الفرق</p>
+            </Switch>
+          </div>
+          <div className="my-3">
+            <Switch
+              isSelected={isOrderCustom}
+              onValueChange={() => handleOrderIsCustom(isOrderCustom)}
+            >
+              <p>ترتيب المراكز يدويا</p>
             </Switch>
           </div>
         </div>
