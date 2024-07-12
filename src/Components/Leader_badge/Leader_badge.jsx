@@ -9,7 +9,7 @@ const Leader_badge = ({label , route}) => {
       dir="ltr"
       onClick={() => navigate(route)}
     >
-      <div className="bg-black rounded-xl">
+      <div className="bg-black rounded-xl border-3 border-white">
         <p className="text-white text-3xl text-center py-3">{label}</p>
         <div className="flex items-center p-3 justify-between ">
           <img width={50} src={smfLogo} alt="" />

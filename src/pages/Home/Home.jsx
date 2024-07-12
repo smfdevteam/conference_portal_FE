@@ -44,7 +44,7 @@ export default function Home() {
         <Now now={homeState.now} />
       </div>
       {isLeader && (
-        <div className="border-black bg-slate-950 border-3 rounded-lg p-2 my-3">
+        <div className="shadow-lg bg-black border-3 rounded-2xl py-2 px-5 my-3">
           <p className="text-white text-center">
             Leader /<span className="text-3xl mx-3">{displayName.split(" ")[0]}</span>
           </p>
