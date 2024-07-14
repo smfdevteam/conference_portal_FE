@@ -12,14 +12,14 @@ export default function Layout({ children, app_state }) {
         {children}
       </div>
       {/* <Footer/> */}
-      {app_state?.isLogged && (
+      {/* {app_state?.isLogged && (
         <div
           onClick={() => navigate("/")}
           className=" my-5 flex justify-center items-center border-1 rounded-lg py-3 w-[80%] m-[auto]"
         >
           <img src={homeIcon} width={30} alt="" />
         </div>
-      )}
+      )} */}
     </section>
   );
 }

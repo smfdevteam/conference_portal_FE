@@ -29,7 +29,9 @@ const User_Card = () => {
             <Avatar
               imgProps={{
                 style: {
-                  objectFit: "contain",
+                  objectFit: "cover",
+                  width:'100%',
+                  height:'100%'
                 },
               }}
               isBordered
@@ -79,8 +81,7 @@ const User_Card = () => {
             </Link>
           </div>
           <div className="flex justify-center items-center ">
-            <p className="text-[#006FEE]">شير البروفايل الخاص بيا</p>
-            <Smf_Modal isBtnImage btnImgSrc={ShareSvg}>
+            <Smf_Modal isBtnImage btnImgClassNames={'w-[25px]'} btnImgSrc={ShareSvg}>
               <div className="flex flex-col justify-center items-center gap-1 text-xl   max-h-[85vh] ">
                 <div className="flex flex-col justify-center items-center gap-1 font-[Cairo] ">
                   <Avatar

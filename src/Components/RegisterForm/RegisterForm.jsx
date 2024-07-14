@@ -185,6 +185,7 @@ const RegisterForm = () => {
               type="tel"
               label="الموبايل"
               radius="full"
+              description="هتكتب 2+ و بعدين رقمك عادي و ممكن تبدل بكود دولة تاني لو مش معاك خط مصري"
               placeholder="+2010054349XX"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -199,6 +200,7 @@ const RegisterForm = () => {
               color="primary"
               className="w-full bg-gradient-to-r from-indigo-600 to-violet-600"
               isLoading={isSubmiting}
+              isDisabled={isSubmiting}
               radius="full"
             >
               يلا بينا

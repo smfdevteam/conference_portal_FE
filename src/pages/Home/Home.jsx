@@ -14,6 +14,7 @@ import SMFTech2 from "../../assets/images/brand/familyLogo-removebg-preview (1).
 import leadersBadge from "../../assets/images/icons/badge.png";
 import { Divider, Image } from "@nextui-org/react";
 import { Avatar } from "@nextui-org/react";
+import toast from "react-hot-toast";
 export default function Home() {
   const {
     app_state: {
@@ -47,7 +48,7 @@ export default function Home() {
       </div>
       {isLeader && (
         <>
-          <div className="shadow-lg bg-black border-3 rounded-2xl py-2  my-3 flex justify-center items-center">
+          <div onClick={()=>toast.success('يا ليدر ❤️')} className="shadow-lg bg-black border-3 rounded-2xl py-2  my-3 flex justify-center items-center">
             <Avatar
               imgProps={{
                 style: {
