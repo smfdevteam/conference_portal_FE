@@ -41,9 +41,17 @@ const Hymns = () => {
     if (selectedLyricsMap.get(hymn.hymnId)) {
       setSelectedLyrics(selectedLyricsMap.get(hymn.hymnId));
     } else {
-      const lyrics = await getHymnLyrics(hymn.hymnId);
-      selectedLyricsMap.set(hymn.hymnId, lyrics);
-      setSelectedLyrics(lyrics);
+      try {
+        toast.loading('بنحملهالك') ;
+        const lyrics = await getHymnLyrics(hymn.hymnId);
+        selectedLyricsMap.set(hymn.hymnId, lyrics);
+        setSelectedLyrics(lyrics);
+        toast.dismiss()
+        toast.success('اتحملت') 
+      } catch(e) {
+        toast.dismiss()
+        toast.error('حصل حاجة غلط')
+      }
     }
     setSearchTerm("");
   };

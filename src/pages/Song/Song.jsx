@@ -3,7 +3,7 @@ import { getConferenceSong } from "../../Api/conference_meta.service";
 import toast from "react-hot-toast";
 import Full_Screen_Skeleton_Loader from '../../Components/shared/Full_Screen_Skeleton_Loader'
 const Song = () => {
-  const [song, setSong] = useState("");
+  const [song, setSong] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const getSong = async () => {
     setIsLoading(true);
@@ -23,7 +23,7 @@ const Song = () => {
     !isLoading ? 
     <>
       <p className="text-center text-4xl font-semibold my-4">الشعار</p>
-      {song ? (
+      {song && Object.keys(song).length > 0 ? (
         <>
           <div
             className="text-center border-1 border-purple-700 py-3 rounded-2xl"

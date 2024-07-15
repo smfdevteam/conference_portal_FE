@@ -22,7 +22,7 @@ const Leaders = () => {
     getLeaders();
   }, []);
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
-  return leaders ? (
+  return leaders && leaders.count > 0 ? (
     <>
     <p className="text-center text-5xl text-purple-700 capitalize">our Leaders</p>
     <p>هنا هتلاقي 

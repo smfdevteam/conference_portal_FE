@@ -34,7 +34,9 @@ export default function Header() {
         <Avatar
           imgProps={{
             style: {
-              objectFit: "contain",
+              objectFit: "cover",
+              width:"100%" , 
+              height:"100%"
             },
           }}
           isBordered
