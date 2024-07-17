@@ -23,7 +23,7 @@ const Basic_Navigator = () => {
           className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center"
         >
           <img src={smf} width={40} alt="" />
-          <p>SMF</p>
+          <p>اسرة مارمرقس</p>
         </div>
         <div
           onClick={() => navigate("/song")}
@@ -37,7 +37,7 @@ const Basic_Navigator = () => {
           className="flex flex-col hover:translate-y-[-5px] hover:scale-110 transition items-center justify-center"
         >
           <img src={leadersIcon} width={30} alt="" />
-          <p>القادة</p>
+          <p>الخدام</p>
         </div>
         <div
           onClick={() => navigate("/rules")}

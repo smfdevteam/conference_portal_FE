@@ -29,13 +29,13 @@ const Now = ({ now }) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 font-bold text-3xl">
-                اللي شغال دلوقتي ؟  
+                ايه اللي شغال دلوقتي ؟   
               </ModalHeader>
               <ModalBody>
-                <div className="max-h-[200px] font-bold text-2xl overflow-y-scroll">
-                  {now}
+                <div className="max-h-[200px] text-center text-2xl overflow-y-scroll">
+                  {now ? now : 'اول ما تشتغل حاجة هنكتب ليك هنا علطول'}
                 </div>
-                <div onClick={()=>navigate('/program')} className="rounded-md my-5 flex items-center gap-2 p-10 justify-center hover:bg-gradient-to-br hover:from-purple-700 hover:to-indigo-900 hover:text-white text-xl font-semibold transition-all duration-500 shadow-md ">
+                <div onClick={()=>navigate('/program')} className="rounded-md my-5 flex items-center gap-2 p-10 justify-center hover:bg-gradient-to-br hover:from-purple-700 hover:to-indigo-900 hover:text-white text-xl font-semibold transition-all duration-500 shadow-lg ">
                     <Image src={timetable} width={40}/>
                     <p>وريني البرنامج</p>
                 </div>

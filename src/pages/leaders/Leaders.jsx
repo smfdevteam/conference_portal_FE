@@ -24,10 +24,10 @@ const Leaders = () => {
   if (isLoading) return <Full_Screen_Skeleton_Loader />;
   return leaders && leaders.count > 0 ? (
     <>
-    <p className="text-center text-5xl text-purple-700 capitalize">our Leaders</p>
+    <p className="text-center text-5xl text-purple-700 capitalize">الخدام</p>
     <p>هنا هتلاقي 
       <span className="mx-2 text-purple-800 text-4xl">{leaders.count}</span>
-       قادة يقدروا يساعدوك في أي حاجة انت محتاجها</p>
+       خدام يقدروا يساعدوك في أي حاجة انت محتاجها</p>
       <div className="flex flex-col gap-4">
         {leaders.leaders.map((leader) => {
           return (
