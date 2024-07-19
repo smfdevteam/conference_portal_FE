@@ -18,6 +18,7 @@ import susanna from "../images/team/susanna.png";
 import youstina from "../images/team/youstina.png";
 import samaan from "../images/team/samaan.png";
 import sandra from "../images/team/sandra.png"
+import mariam_melad from '../images/team/mariam_melad.jpg'
 export const SmfTechTeam = [
   {
     name: "Abanoub Kamel",
@@ -26,6 +27,14 @@ export const SmfTechTeam = [
     description:
       "Abanoub is a skilled Software Engineer serving as a Team Lead at Huawei. In this role, he leads a team of engineers in the development and implementation of software solutions, ensuring projects are completed efficiently and to the highest standards of quality.",
     image: aikb,
+  },
+  {
+    name: "Mariam Melad",
+    position: "Project Coordinator",
+    unit: "Operations Unit",
+    description:
+      "",
+    image: mariam_melad,
   },
   {
     name: "Beshoy Botros",
