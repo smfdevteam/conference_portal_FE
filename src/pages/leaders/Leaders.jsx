@@ -28,7 +28,7 @@ const Leaders = () => {
       <p>
         هنا هتلاقي
         <span className="mx-2 text-purple-800 text-4xl">{leaders.count}</span>
-        خدام يقدروا يساعدوك في أي حاجة انت محتاجها
+        خادم يقدروا يساعدوك في أي حاجة انت محتاجها
       </p>
       <div className="flex flex-col gap-4">
         {leaders.leaders.map((leader) => {

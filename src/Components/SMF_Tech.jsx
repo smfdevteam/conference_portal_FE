@@ -22,6 +22,7 @@ import img6 from "../assets/images/archieve/6.jpg";
 import img7 from "../assets/images/archieve/7.jpg";
 import img8 from "../assets/images/archieve/8.jpg";
 import img9 from "../assets/images/archieve/9.jpg";
+import facebookIcon from "../assets/images/icons/facebook.svg";
 
 const images = [img1, img2, img6, img4, img5, img3, img7, img8, img9];
 const gradient = {
@@ -68,7 +69,11 @@ const SMF_Tech = ({ show = true }) => {
                   />
                 </div>
 
-                <div className={`grid ${show ? ' grid-cols-2 ' : ' grid-cols-1 '} gap-5`}>
+                <div
+                  className={`grid ${
+                    show ? " grid-cols-2 " : " grid-cols-1 "
+                  } gap-5`}
+                >
                   {show && (
                     <div
                       onClick={() => navigate("/team")}
@@ -104,7 +109,18 @@ const SMF_Tech = ({ show = true }) => {
                       developing people from a technological perspective
                     </p>
                   </header>
-
+                  <div onClick={()=>window.open("https://www.facebook.com/people/SMF-Tech/61561332751601/" , '_blank')} className="flex items-center p-2 rounded-lg animate-fly my-3 border-blue-600 justify-between m-auto border-3">
+                    <div className="w-[20%]">
+                      <img
+                        src={facebookIcon}
+                        className="w-full m-auto inline-block"
+                        alt=""
+                      />
+                    </div>
+                    <div className="text-center w-[80%]">
+                    <p className="text-blue-600 capitalize font-bold">join us on Social Media</p>
+                    </div>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
                       <h2 className="text-2xl font-semibold text-blue-600">
