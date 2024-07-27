@@ -48,18 +48,18 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA(manifestForPlugIn),
-    obfuscatorPlugin({
-      include: ["src/firebase/firebase.config.js"],
-      exclude: [/node_modules/],
-      apply: "build",
-      debugger: true,
-      options: {
-        debugProtection: true,
-        disableConsoleOutput: true,
-        renameGlobals: true,
-      },
-    }),
-    compression(),  
+    // obfuscatorPlugin({
+    //   include: ["src/firebase/firebase.config.js"],
+    //   exclude: [/node_modules/],
+    //   apply: "build",
+    //   debugger: true,
+    //   options: {
+    //     debugProtection: true,
+    //     disableConsoleOutput: true,
+    //     renameGlobals: true,
+    //   },
+    // }),
+    // compression(),  
   ],
   server: {
     open: true,
