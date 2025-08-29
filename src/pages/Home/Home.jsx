@@ -95,7 +95,7 @@ export default function Home() {
       <User_Card />
       <Basic_Navigator />
       <Request_Help />
-      <div className="text-center  rounded-lg border-1 border-purple-600 shadow-lg">
+      {/* <div className="text-center  rounded-lg border-1 border-purple-600 shadow-lg">
         <div className="text-center  flex items-center justify-center ">
           <Image
             radius="lg"
@@ -120,7 +120,7 @@ export default function Home() {
           </p>
           <Image radius="lg" alt={""} className="w-[30px]" src={SMFTech2} />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
