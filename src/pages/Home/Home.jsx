@@ -90,7 +90,8 @@ export default function Home() {
           </div>
         </>
       )}
-      <SMF_Tech />
+      {/* <SMF_Tech /> */}
+      <div className="my-3"></div>
       <User_Card />
       <Basic_Navigator />
       <Request_Help />
