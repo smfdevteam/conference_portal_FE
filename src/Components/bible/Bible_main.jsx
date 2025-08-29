@@ -1,4 +1,4 @@
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import { BIBLES } from "./bible_constants";
 import { useContext } from "react";

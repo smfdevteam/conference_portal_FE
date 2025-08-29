@@ -5,7 +5,7 @@ import {
   Divider,
   Image,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { Suspense, lazy, useState } from "react";
 const Note_Card_Modal = lazy(() => import("./Note_Card_Modal"));
 const Note_Card = ({ note , getAllNotes }) => {

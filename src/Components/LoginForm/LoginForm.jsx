@@ -1,4 +1,4 @@
-import { Input, Button, Image, Avatar } from "@nextui-org/react";
+import { Input, Button, Image, Avatar } from "@heroui/react";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../Icons/EyeSlashFilledIcon";
 import logo from "/smf.png";

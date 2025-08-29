@@ -1,4 +1,4 @@
-import { Switch } from "@nextui-org/react";
+import { Switch } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {

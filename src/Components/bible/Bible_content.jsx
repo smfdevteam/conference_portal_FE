@@ -1,4 +1,4 @@
-import { Progress } from "@nextui-org/react";
+import { Progress } from "@heroui/react";
 import { Suspense, lazy, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BibleStateProvider } from "../../Context/Bible_context";

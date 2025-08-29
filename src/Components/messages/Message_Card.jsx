@@ -9,7 +9,7 @@ import {
   CardHeader,
   Divider,
   Link,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import { stateProvider } from "../../Context/App_Context";
 const Message_Card = ({ userMessage }) => {

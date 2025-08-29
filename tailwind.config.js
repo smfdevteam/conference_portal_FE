@@ -1,4 +1,4 @@
-const {nextui} = require("@nextui-org/react");
+const {heroui} = require("@heroui/react");
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -10,6 +10,6 @@ export default {
     extend: {},
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [heroui()],
 
 }

@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { changeTeamOrder, controlTeamPoints } from "../../../Api/team.service";

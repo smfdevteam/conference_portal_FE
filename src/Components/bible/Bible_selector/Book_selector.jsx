@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useContext, useEffect, useState } from "react";
 import { newBooks, oldBooks, BOOK_TYPES } from "../bible_constants";
 import Books_Types from "./Books_Types";

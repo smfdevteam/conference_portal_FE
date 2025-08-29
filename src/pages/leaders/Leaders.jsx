@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getConferenceLeaders } from "../../Api/conference_meta.service";
 import toast from "react-hot-toast";
 import Full_Screen_Skeleton_Loader from "../../Components/shared/Full_Screen_Skeleton_Loader";
-import { Avatar } from "@nextui-org/react";
+import { Avatar } from "@heroui/react";
 import callIcon from "../../assets/images/icons/call.png";
 const Leaders = () => {
   const [leaders, setLeaders] = useState(null);

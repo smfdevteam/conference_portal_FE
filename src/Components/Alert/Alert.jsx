@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalHeader,
   useDisclosure
-} from "@nextui-org/react";
+} from "@heroui/react";
 const Alert = ({ alert }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (

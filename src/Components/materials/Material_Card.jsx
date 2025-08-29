@@ -1,8 +1,8 @@
 import fileIcon from "../../assets/images/icons/fileIcon.png";
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@heroui/react";
 import smfTechLogo from "../../assets/images/brand/smftecttypo.png";
 import smfLogo from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
-import { Link } from "@nextui-org/react";
+import { Link } from "@heroui/react";
 const Material_Card = ({ url, fileSize, name }) => {
   return (
     <div

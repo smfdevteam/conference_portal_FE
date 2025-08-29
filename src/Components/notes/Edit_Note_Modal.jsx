@@ -6,7 +6,7 @@ import {
   ModalHeader,
   Textarea,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import editIcon from "../../assets/images/icons/edit_note.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";

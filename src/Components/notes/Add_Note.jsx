@@ -5,7 +5,7 @@ import {
     ModalHeader,
     Textarea,
     useDisclosure
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { createNote } from "../../Api/notes.service";

@@ -7,7 +7,7 @@ import {
   Button,
   useDisclosure,
   Image,
-} from "@nextui-org/react";
+} from "@heroui/react";
 const Smf_Modal = ({
   btnTitle,
   isAction,

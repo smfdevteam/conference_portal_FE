@@ -1,4 +1,4 @@
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@heroui/react";
 import { useId } from "react";
 
 const Lyrics = ({ hymn_lyrics }) => {

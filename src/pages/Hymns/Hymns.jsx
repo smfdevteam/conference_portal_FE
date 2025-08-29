@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { getHymnLyrics, getHymnsTitles } from "../../Api/hymns.service";

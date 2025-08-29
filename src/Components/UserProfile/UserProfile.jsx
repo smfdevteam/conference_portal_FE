@@ -2,7 +2,7 @@ import React from "react";
 
 import { stateProvider } from "../../Context/App_Context";
 import { useContext } from "react";
-import { Checkbox, Button } from "@nextui-org/react";
+import { Checkbox, Button } from "@heroui/react";
 import { useState } from "react";
 import WavySvg from "./UserProfileAnimation/WavySvg";
 import PersonalInformation from "./PersonalInformation/PersonalInformation";

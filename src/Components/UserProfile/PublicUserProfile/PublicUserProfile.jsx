@@ -22,7 +22,7 @@ import {
   Link,
   Image,
   Input,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import GradientSvg from "../UserProfileAnimation/GradientSvg";
 import { useFormik } from "formik";
 

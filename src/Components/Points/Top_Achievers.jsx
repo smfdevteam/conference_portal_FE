@@ -1,8 +1,8 @@
-import { User } from "@nextui-org/react";
+import { User } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTheTop } from "../../Api/team.service";
-import { CircularProgress } from "@nextui-org/react";
+import { CircularProgress } from "@heroui/react";
 import toast from "react-hot-toast";
 const Top_Achievers = () => {
   const [top, setTop] = useState({

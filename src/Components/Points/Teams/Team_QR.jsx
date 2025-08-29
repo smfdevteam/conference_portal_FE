@@ -4,7 +4,7 @@ import {
   ModalContent,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import SMF_QR from "../../QR/SMF_QR";
 import qrIcon from "../../../assets/images/icons/qr_code_icon.png";
 const Team_QR = ({ teamId, teamName }) => {

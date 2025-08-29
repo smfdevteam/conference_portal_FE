@@ -1,6 +1,6 @@
 import React from "react";
 import ShareIcon from "./ShareIcon";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 const ShareProfile = ({ userId }) => {
   const handleShare = () => {
     if (navigator.share) {

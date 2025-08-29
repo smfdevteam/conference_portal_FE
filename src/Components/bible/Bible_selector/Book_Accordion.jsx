@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { Accordion, AccordionItem } from "@heroui/react";
 import axios from "axios";
 import { useContext } from "react";
 import { BibleStateProvider } from "../../../Context/Bible_context";

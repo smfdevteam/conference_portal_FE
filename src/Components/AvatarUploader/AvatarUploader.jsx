@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Avatar, Image } from "@nextui-org/react";
+import { Avatar, Image } from "@heroui/react";
 const AvatarUploader = ({ avatarImage, setAvatarImage }) => {
   const inputRef = useRef(null);
 

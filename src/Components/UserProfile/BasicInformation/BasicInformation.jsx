@@ -5,7 +5,7 @@ import {
   Checkbox,
   Select,
   SelectItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import "./BasicInformation.css";
 import {
   BirthplaceIcon,

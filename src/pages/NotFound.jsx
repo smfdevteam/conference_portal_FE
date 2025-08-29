@@ -1,4 +1,4 @@
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import notFound from "../assets/images/notfound.jpg";
 const NotFound = () => {
   return (

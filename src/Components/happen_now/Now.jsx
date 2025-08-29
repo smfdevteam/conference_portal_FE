@@ -6,7 +6,7 @@ import {
   ModalContent,
   ModalHeader,
   useDisclosure
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import alarmIcon from "../../assets/images/icons/alarm.png";
 import timetable from "../../assets/images/icons/timetable.png";

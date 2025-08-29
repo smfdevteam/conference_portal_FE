@@ -8,7 +8,7 @@ import {
   ModalBody,
   ModalContent,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import smfTechLogo from "../assets/images/brand/smftech.png";
 import smfTechTypo from "../assets/images/brand/smftecttypo.png";

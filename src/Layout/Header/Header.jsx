@@ -1,7 +1,7 @@
-import { Avatar, Image, Navbar, NavbarBrand } from "@nextui-org/react";
+import { Avatar, Image, Navbar, NavbarBrand } from "@heroui/react";
 import { useContext } from "react";
 import { stateProvider } from "../../Context/App_Context";
-import { Badge } from "@nextui-org/react";
+import { Badge } from "@heroui/react";
 import messageIcon from "../../assets/images/icons/message.png";
 import { useNavigate } from "react-router-dom";
 export default function Header() {

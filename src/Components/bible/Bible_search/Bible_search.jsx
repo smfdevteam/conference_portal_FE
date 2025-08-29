@@ -1,4 +1,4 @@
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Input, Select, SelectItem } from "@heroui/react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";

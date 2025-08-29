@@ -1,4 +1,4 @@
-import { Avatar, Input } from "@nextui-org/react";
+import { Avatar, Input } from "@heroui/react";
 import React, { useEffect, useRef, useState } from "react";
 import {
   controlGuestPoints,

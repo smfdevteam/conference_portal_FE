@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Avatar, Button } from "@nextui-org/react";
+import { Avatar, Button } from "@heroui/react";
 import { CameraIcon } from "../UserIcon";
 import toast from "react-hot-toast";
 

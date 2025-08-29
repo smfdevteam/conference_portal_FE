@@ -12,8 +12,8 @@ import SMFTech1 from "../../assets/images/brand/smftech.png";
 import SMFTechTypo from "../../assets/images/brand/smftecttypo.png";
 import SMFTech2 from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
 import leadersBadge from "../../assets/images/icons/badge.png";
-import { Divider, Image } from "@nextui-org/react";
-import { Avatar } from "@nextui-org/react";
+import { Divider, Image } from "@heroui/react";
+import { Avatar } from "@heroui/react";
 import toast from "react-hot-toast";
 export default function Home() {
   const {
@@ -90,7 +90,7 @@ export default function Home() {
           </div>
         </>
       )}
-      <SMF_Tech />
+      {/* <SMF_Tech /> */}
       <User_Card />
       <Basic_Navigator />
       <Request_Help />

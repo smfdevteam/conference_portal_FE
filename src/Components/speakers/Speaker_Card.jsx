@@ -1,4 +1,4 @@
-import { Card, CardFooter, CardHeader, Image } from "@nextui-org/react";
+import { Card, CardFooter, CardHeader, Image } from "@heroui/react";
 import React from "react";
 import smfLogo from "../../assets/images/brand/familyLogo-removebg-preview (1).png";
 const Speaker_Card = ({ speaker }) => {

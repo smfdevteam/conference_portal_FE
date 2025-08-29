@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Input, Button,Avatar } from "@nextui-org/react";
+import { Input, Button,Avatar } from "@heroui/react";
 import logo from "/smf.png";
 import { resetClientPassword } from "../../Api/auth.service";
 import { useNavigate } from "react-router-dom";

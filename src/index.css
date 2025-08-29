@@ -1,8 +1,18 @@
+/* external imports first */
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
 @import url("./assets/styles/fonts.css");
+
+/* tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* tailwind plugin system (must be after) */
+@plugin './hero.js';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+
 
 body {
   font-family: "arabic-regular";

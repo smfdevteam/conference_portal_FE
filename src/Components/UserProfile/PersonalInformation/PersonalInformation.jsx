@@ -1,4 +1,4 @@
-import { Checkbox, Input } from "@nextui-org/react";
+import { Checkbox, Input } from "@heroui/react";
 import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import ar from "react-phone-number-input/locale/ar";

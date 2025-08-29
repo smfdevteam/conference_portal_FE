@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { stateProvider } from "../../../Context/App_Context";
 import { getTeambyId } from "../../../Api/team.service";
 import toast from "react-hot-toast";
-import { Divider, Spinner } from "@nextui-org/react";
-import { User, Link } from "@nextui-org/react";
+import { Divider, Spinner } from "@heroui/react";
+import { User, Link } from "@heroui/react";
 const Guest_Home = () => {
   const {
     app_state: {

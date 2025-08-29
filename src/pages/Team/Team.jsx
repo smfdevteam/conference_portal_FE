@@ -1,4 +1,4 @@
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import { SmfTechTeam } from "../../assets/data/team";
 import smf_tech_logo from "../../assets/images/brand/smftech.png";
 import smf_tech_logo_type from "../../assets/images/brand/smftecttypo.png";

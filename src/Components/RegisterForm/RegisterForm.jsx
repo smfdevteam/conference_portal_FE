@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button } from "@heroui/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { EyeFilledIcon } from "../Icons/EyeFilledIcon";

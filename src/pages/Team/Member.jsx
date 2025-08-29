@@ -1,4 +1,4 @@
-import { Card, CardHeader, Image, CardBody } from "@nextui-org/react";
+import { Card, CardHeader, Image, CardBody } from "@heroui/react";
 import "./member.css";
 const Member = ({ member }) => {
   const { image, name, position, unit, description } = member;
